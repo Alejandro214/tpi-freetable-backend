@@ -100,5 +100,6 @@
     <orderEntry type="library" name="Maven: org.modelmapper:modelmapper:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.4.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok-mapstruct-binding:0.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:7.2.0" level="project" />
   </component>
 </module>
