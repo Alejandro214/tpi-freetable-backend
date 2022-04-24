@@ -22,4 +22,12 @@ public class ProductServiceImpl implements IProductService{
         ProductResponse  productResponse = this.iProductMapper.productToProductResponse(product1);
         return productResponse;
     }
+
+    @Override
+    public ProductResponse searchProduct(String name) {
+        Product product = this.iProductRepo.findByName(name);
+        ProductResponse  productResponse = this.iProductMapper.productToProductResponse(product);
+        return productResponse;
+
+    }
 }
