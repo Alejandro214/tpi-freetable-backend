@@ -14,7 +14,14 @@ public class Order {
     @OneToMany
     private List<Product> products;
 
+    private Double totalPrice;
+
     public Double getTotalPriceProducts(){
         return this.products.stream().mapToDouble(p -> p.getPrice()).sum();
+    }
+
+    public void addProduct(Product product){
+        this.products.add(product);
+        this.totalPrice = this.getTotalPriceProducts();
     }
 }
