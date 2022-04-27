@@ -7,6 +7,8 @@ import com.restaurant.restaurantApi.repo.IProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements IProductService{
 
@@ -29,5 +31,13 @@ public class ProductServiceImpl implements IProductService{
         ProductResponse  productResponse = this.iProductMapper.productToProductResponse(product);
         return productResponse;
 
+    }
+
+    @Override
+    public List<ProductResponse> getAllProducts() {
+        System.out.println(this.iProductRepo.findAll());
+        List<Product> listProduct                 = (List<Product>) this.iProductRepo.findAll();
+        List<ProductResponse> listProductResponse = this.iProductMapper.listProductsToListProductResponse(listProduct);
+        return  listProductResponse;
     }
 }

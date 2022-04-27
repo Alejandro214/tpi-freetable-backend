@@ -5,6 +5,8 @@ import com.restaurant.restaurantApi.model.Product;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 
 public interface IProductMapper {
     @Mappings({
@@ -15,6 +17,7 @@ public interface IProductMapper {
     })
     ProductResponse productToProductResponse(Product product);
     Product         productResponseToProduct(ProductResponse productResponse);
+    List<ProductResponse>   listProductsToListProductResponse(List<Product> productList);
 
 
 

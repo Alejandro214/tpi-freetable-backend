@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idProduct")
     private Integer idProduct;
     private String name;
     private String image;

@@ -4,6 +4,9 @@ import com.restaurant.restaurantApi.dto.ProductResponse;
 import com.restaurant.restaurantApi.model.Product;
 import org.mapstruct.Mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public class ProductMapperImpl implements IProductMapper{
 
@@ -18,6 +21,16 @@ public class ProductMapperImpl implements IProductMapper{
         product.setPrice(productResponse.getPrice());
         product.setName(productResponse.getName());
         return product;
+    }
+
+    @Override
+    public List<ProductResponse> listProductsToListProductResponse(List<Product> productList) {
+        List<ProductResponse> productResponseList = new ArrayList<>();
+        for(Product p:productList){
+            ProductResponse productResponse = this.productToProductResponse(p);
+            productResponseList.add(productResponse);
+        }
+        return productResponseList;
     }
 
     @Override

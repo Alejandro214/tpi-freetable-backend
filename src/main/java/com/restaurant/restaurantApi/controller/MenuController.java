@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("menu")
 @Api
@@ -39,5 +41,12 @@ public class MenuController {
     public ResponseEntity<ProductResponse> searchProduct(@PathVariable("name") String name){
         return new ResponseEntity<ProductResponse>(this.iProductService.searchProduct(name),HttpStatus.OK);
 
+
+    }
+
+    @ApiOperation(value = "Retorna todos los productos", notes = "Retorna todos los productos que es restaurante tiene")
+    @GetMapping("getAllProducts")
+    public ResponseEntity<List<ProductResponse>> getAllProducts(){
+        return new ResponseEntity<>(this.iProductService.getAllProducts(),HttpStatus.OK);
     }
 }
