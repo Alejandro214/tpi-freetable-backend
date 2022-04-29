@@ -6,6 +6,7 @@ import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -35,7 +36,6 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public List<ProductResponse> getAllProducts() {
-        System.out.println(this.iProductRepo.findAll());
         List<Product> listProduct                 = (List<Product>) this.iProductRepo.findAll();
         List<ProductResponse> listProductResponse = this.iProductMapper.listProductsToListProductResponse(listProduct);
         return  listProductResponse;
