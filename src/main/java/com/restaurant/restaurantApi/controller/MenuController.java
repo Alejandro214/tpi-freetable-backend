@@ -8,10 +8,15 @@ import com.restaurant.restaurantApi.service.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,5 +54,14 @@ public class MenuController {
     @GetMapping("getAllProducts")
     public ResponseEntity<List<ProductResponse>> getAllProducts(){
         return new ResponseEntity<>(this.iProductService.getAllProducts(),HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "Retorna paginas que tengan esa palabra en su nombre", notes = "Retorna todos los productos que contengan al menos esa letra o palabra en su nombre")
+    @GetMapping("getFilterProductByName/{name}")
+    public ResponseEntity<List<ProductResponse>> filterProductByName(
+            @PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC)Pageable pageable,
+            @PathVariable("name") String name){
+        return new ResponseEntity<>(this.iProductService.filterProductByName(pageable, name),HttpStatus.OK);
     }
 }

@@ -5,6 +5,8 @@ import com.restaurant.restaurantApi.mapper.IProductMapper;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -40,4 +42,13 @@ public class ProductServiceImpl implements IProductService{
         List<ProductResponse> listProductResponse = this.iProductMapper.listProductsToListProductResponse(listProduct);
         return  listProductResponse;
     }
+
+    @Override
+    public List<ProductResponse> filterProductByName(Pageable pageable, String name) {
+        List<Product>         listProduct         = this.iProductRepo.filterProductByName(pageable,name).getContent();
+        List<ProductResponse> listProductResponse = this.iProductMapper.listProductsToListProductResponse(listProduct);
+
+        return listProductResponse;
+    }
+
 }
