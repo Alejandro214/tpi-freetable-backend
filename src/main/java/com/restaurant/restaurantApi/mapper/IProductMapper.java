@@ -14,6 +14,8 @@ public interface IProductMapper {
             @Mapping(target="image", source="productResponse.image"),
             @Mapping(target="price", source="productResponse.price"),
             @Mapping(target="description", source="productResponse.description"),
+            @Mapping(target="category", source="productResponse.category"),
+
     })
     ProductResponse productToProductResponse(Product product);
     Product         productResponseToProduct(ProductResponse productResponse);

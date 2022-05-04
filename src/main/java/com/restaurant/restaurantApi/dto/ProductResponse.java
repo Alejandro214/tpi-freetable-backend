@@ -8,4 +8,5 @@ public class ProductResponse {
     private String image;
     private Double price;
     private String  description;
+    private Integer category;
 }

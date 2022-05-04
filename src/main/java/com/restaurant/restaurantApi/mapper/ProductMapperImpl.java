@@ -20,6 +20,7 @@ public class ProductMapperImpl implements IProductMapper{
         product.setImage(productResponse.getImage());
         product.setPrice(productResponse.getPrice());
         product.setName(productResponse.getName());
+        product.setCategory(productResponse.getCategory());
         return product;
     }
 
@@ -42,6 +43,7 @@ public class ProductMapperImpl implements IProductMapper{
         productResponse.setImage(product.getImage());
         productResponse.setPrice(product.getPrice());
         productResponse.setName(product.getName());
+        productResponse.setCategory(product.getCategory());
         return productResponse;
     }
 }
