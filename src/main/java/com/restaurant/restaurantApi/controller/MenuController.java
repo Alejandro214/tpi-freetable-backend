@@ -1,14 +1,15 @@
 package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.dto.ProductResponse;
+import com.restaurant.restaurantApi.model.Category;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
+import com.restaurant.restaurantApi.service.ICategoryService;
 import com.restaurant.restaurantApi.service.IOrderService;
 import com.restaurant.restaurantApi.service.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -16,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +30,9 @@ public class MenuController {
 
     @Autowired
     private IProductService iProductService;
+
+    @Autowired
+    private ICategoryService iCategoryService;
 
     @ApiOperation(value = "Create a new order",notes = "Retorna el pedido que se creo y guardo en la base")
     @PostMapping("saveOrder")
@@ -63,5 +66,11 @@ public class MenuController {
             @PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC)Pageable pageable,
             @PathVariable("name") String name){
         return new ResponseEntity<>(this.iProductService.filterProductByName(pageable, name),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Retorna la categoria que pertence a ese numero",notes = "Retorna la categoria perteneciente a ese numero" )
+    @GetMapping("getCategoryByCategory/{category}")
+    public ResponseEntity<Category> getCategoryByCategory(@PathVariable("category") Integer category){
+        return new ResponseEntity<>(this.iCategoryService.findByCategory(category),HttpStatus.OK);
     }
 }
