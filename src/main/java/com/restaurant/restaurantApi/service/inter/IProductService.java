@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.service;
+package com.restaurant.restaurantApi.service.inter;
 
 import com.restaurant.restaurantApi.dto.ProductResponse;
 import com.restaurant.restaurantApi.model.Product;

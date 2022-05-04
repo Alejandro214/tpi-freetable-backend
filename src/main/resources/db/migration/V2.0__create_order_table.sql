@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
+DROP TABLE IF EXISTS `table_order`;
+CREATE TABLE `table_order` (
   `idOrder` int NOT NULL AUTO_INCREMENT,
-  `products` varchar(45) NOT NULL,
+  `totalPrice` double NOT NULL,
   PRIMARY KEY (`idOrder`)
 )
 

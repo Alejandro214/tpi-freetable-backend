@@ -1,19 +1,18 @@
-package com.restaurant.restaurantApi.service;
+package com.restaurant.restaurantApi.service.impl;
 
 import com.restaurant.restaurantApi.dto.ProductResponse;
 import com.restaurant.restaurantApi.mapper.IProductMapper;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;
+import com.restaurant.restaurantApi.service.inter.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements IProductService{
+public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private IProductRepo iProductRepo;

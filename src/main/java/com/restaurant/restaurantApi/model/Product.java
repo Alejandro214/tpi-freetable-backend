@@ -17,4 +17,8 @@ public class Product {
     private Double price;
     private String  description;
     private Integer category;
+
+    @JoinColumn(name="idOrder",referencedColumnName = "idOrder")
+    @ManyToOne
+    private Order order;
 }
