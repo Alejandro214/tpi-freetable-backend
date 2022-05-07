@@ -15,7 +15,7 @@ public class Order {
     @Column(name="idOrder")
     private Integer idOrder;
 
-    @OneToMany(mappedBy = "order")
+    @ManyToMany(mappedBy = "listPedidos",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Product> products;
 
     @Column(name = "totalPrice")
@@ -28,5 +28,6 @@ public class Order {
 
     public void addProduct(Product product){
         this.products.add(product);
+        product.addPedido(this);
     }
 }

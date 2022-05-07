@@ -1,9 +1,13 @@
 package com.restaurant.restaurantApi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,7 +22,18 @@ public class Product {
     private String  description;
     private Integer category;
 
-    @JoinColumn(name="idOrder",referencedColumnName = "idOrder")
-    @ManyToOne
-    private Order order;
+    //@JoinColumn(name="idOrder",referencedColumnName = "idOrder")
+    //@ManyToOne
+    //@JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "productos_pedidos",
+            joinColumns = @JoinColumn(name = "product",referencedColumnName = "idProduct"),
+            inverseJoinColumns = @JoinColumn(name = "table_order",referencedColumnName = "idOrder"))
+    @JsonIgnore
+    private List<Order> listPedidos;
+
+    public void addPedido(Order pedido){
+        this.listPedidos.add(pedido);
+    }
 }

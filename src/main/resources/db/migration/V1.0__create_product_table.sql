@@ -7,7 +7,7 @@ CREATE TABLE `product` (
   `price` double NOT NULL,
   `description` varchar(500) NOT NULL,
   `category` INT NOT NULL default 0,
-  `idOrder` INT ,
+
   PRIMARY KEY (`idProduct`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

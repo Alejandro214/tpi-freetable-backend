@@ -73,4 +73,9 @@ public class MenuController {
     public ResponseEntity<Category> getCategoryByCategory(@PathVariable("category") Integer category){
         return new ResponseEntity<>(this.iCategoryService.findByCategory(category),HttpStatus.OK);
     }
+
+    @GetMapping("getAllOrders")
+    public ResponseEntity<List<Order>> getAllOrders(){
+        return new ResponseEntity<>(this.iOrderService.getAllOrders(),HttpStatus.OK);
+    }
 }
