@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 
 
 public interface IProductRepo extends CrudRepository<Product, Integer> {
@@ -14,4 +15,6 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
     @Query(value = "Select * from product p " +
             "where p.name LIKE %:name% ", nativeQuery = true)
     Page<Product> filterProductByName(Pageable pageable, String name);
+
+    List<Product> findAllByCategory(Integer category);
 }

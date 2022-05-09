@@ -1,5 +1,6 @@
 package com.restaurant.restaurantApi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,10 +22,13 @@ public class Order {
     @Column(name = "totalPrice")
     private Double totalPrice;
 
+    @JoinColumn(name="idMesa",referencedColumnName = "idMesa")
+    @JsonIgnore
+    @ManyToOne
+    private Mesa mesa;
 
-    public Double getTotalPriceProducts(){
-        return this.products.stream().mapToDouble(p -> p.getPrice()).sum();
-    }
+
+
 
     public void addProduct(Product product){
         this.products.add(product);

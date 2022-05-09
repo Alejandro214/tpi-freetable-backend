@@ -74,8 +74,15 @@ public class MenuController {
         return new ResponseEntity<>(this.iCategoryService.findByCategory(category),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Retorna los todos pedidos",notes = "Retorna todos los pedidos que se realizaron hasta el momento")
     @GetMapping("getAllOrders")
     public ResponseEntity<List<Order>> getAllOrders(){
         return new ResponseEntity<>(this.iOrderService.getAllOrders(),HttpStatus.OK);
+    }
+
+    @ApiOperation(value= "Retornas los productos que pertenece a esa categoria")
+    @GetMapping("getProductsByCategory/{category}")
+    public ResponseEntity<List<ProductResponse>> getProductsByCategory(@PathVariable("category") Integer category){
+        return new ResponseEntity<>(this.iProductService.getProductsByCategory(category),HttpStatus.OK);
     }
 }

@@ -16,4 +16,6 @@ public interface IProductService {
     List<ProductResponse> getAllProducts();
 
     List<ProductResponse> filterProductByName(Pageable pageable, String name);
+
+    List<ProductResponse> getProductsByCategory(Integer category);
 }

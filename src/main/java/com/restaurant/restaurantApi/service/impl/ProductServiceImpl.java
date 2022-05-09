@@ -50,4 +50,11 @@ public class ProductServiceImpl implements IProductService {
         return listProductResponse;
     }
 
+    @Override
+    public List<ProductResponse> getProductsByCategory(Integer category) {
+        List<Product>         listProduct         = this.iProductRepo.findAllByCategory(category);
+        List<ProductResponse> listProductResponse = this.iProductMapper.listProductsToListProductResponse(listProduct);
+        return listProductResponse;
+    }
+
 }
