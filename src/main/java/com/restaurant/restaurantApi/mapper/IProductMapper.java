@@ -20,6 +20,7 @@ public interface IProductMapper {
     ProductResponse productToProductResponse(Product product);
     Product         productResponseToProduct(ProductResponse productResponse);
     List<ProductResponse>   listProductsToListProductResponse(List<Product> productList);
+    List<Product>  listProductsResponseToListProduct(List<ProductResponse> productResponseList);
 
 
 

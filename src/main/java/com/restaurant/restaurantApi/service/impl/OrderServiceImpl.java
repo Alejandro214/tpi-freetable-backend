@@ -1,5 +1,7 @@
 package com.restaurant.restaurantApi.service.impl;
 
+import com.restaurant.restaurantApi.dto.ProductResponse;
+import com.restaurant.restaurantApi.mapper.IProductMapper;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
@@ -19,14 +21,15 @@ public class OrderServiceImpl implements IOrderService {
     private IOrderRepo iOrderRepo;
 
     @Autowired
-    private IProductRepo iProductRepo;
+    private IProductMapper iProductMapper;
 
     @Override
     public Order saveOrder(Order order) {
-        Product product = this.iProductRepo.findByName(order.getProducts().get(0).getName());
+        List<Product> productList = order.getProducts();
         order.setProducts(new ArrayList<>());
-        order.addProduct(product);
-        order.setTotalPrice(new Double(0));
+        List<ProductResponse> responseList = this.iProductMapper.listProductsToListProductResponse(productList);
+        List<Product> products    = iProductMapper.listProductsResponseToListProduct(responseList);
+        order.addAllProducts(products);
         return this.iOrderRepo.save(order);
     }
 
@@ -34,4 +37,7 @@ public class OrderServiceImpl implements IOrderService {
     public List<Order> getAllOrders() {
         return (List<Order>) this.iOrderRepo.findAll();
     }
+
+
+
 }

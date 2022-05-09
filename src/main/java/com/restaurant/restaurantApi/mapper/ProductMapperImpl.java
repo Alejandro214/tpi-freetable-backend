@@ -2,7 +2,9 @@ package com.restaurant.restaurantApi.mapper;
 
 import com.restaurant.restaurantApi.dto.ProductResponse;
 import com.restaurant.restaurantApi.model.Product;
+import com.restaurant.restaurantApi.repo.IProductRepo;
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +12,15 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public class ProductMapperImpl implements IProductMapper{
 
+    @Autowired
+    private IProductRepo iProductRepo;
+
 
     @Override
     public Product productResponseToProduct(ProductResponse productResponse) {
         if(productResponse == null)
             return null;
-        Product product = new Product();
-        product.setDescription(productResponse.getDescription());
-        product.setImage(productResponse.getImage());
-        product.setPrice(productResponse.getPrice());
-        product.setName(productResponse.getName());
-        product.setCategory(productResponse.getCategory());
+        Product product = iProductRepo.findByName(productResponse.getName());
         return product;
     }
 
@@ -32,6 +32,16 @@ public class ProductMapperImpl implements IProductMapper{
             productResponseList.add(productResponse);
         }
         return productResponseList;
+    }
+
+    @Override
+    public List<Product> listProductsResponseToListProduct(List<ProductResponse> productResponseList) {
+        List<Product> productList = new ArrayList<>();
+        for(ProductResponse p:productResponseList){
+            Product product = this.productResponseToProduct(p);
+            productList.add(product);
+        }
+        return productList;
     }
 
     @Override

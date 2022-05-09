@@ -24,7 +24,7 @@ public class Order {
 
     @JoinColumn(name="idMesa",referencedColumnName = "idMesa")
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Mesa mesa;
 
 
@@ -33,5 +33,12 @@ public class Order {
     public void addProduct(Product product){
         this.products.add(product);
         product.addPedido(this);
+    }
+
+    public void addAllProducts(List<Product> productList){
+        for(Product p: productList){
+            p.addPedido(this);
+        }
+        this.products.addAll(productList);
     }
 }

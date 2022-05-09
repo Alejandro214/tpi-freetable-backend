@@ -2,9 +2,11 @@ package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.dto.ProductResponse;
 import com.restaurant.restaurantApi.model.Category;
+import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.service.inter.ICategoryService;
+import com.restaurant.restaurantApi.service.inter.IMesaService;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import com.restaurant.restaurantApi.service.inter.IProductService;
 import io.swagger.annotations.Api;
@@ -33,6 +35,9 @@ public class MenuController {
 
     @Autowired
     private ICategoryService iCategoryService;
+
+    @Autowired
+    private IMesaService iMesaService;
 
     @ApiOperation(value = "Create a new order",notes = "Retorna el pedido que se creo y guardo en la base")
     @PostMapping("saveOrder")
@@ -84,5 +89,12 @@ public class MenuController {
     @GetMapping("getProductsByCategory/{category}")
     public ResponseEntity<List<ProductResponse>> getProductsByCategory(@PathVariable("category") Integer category){
         return new ResponseEntity<>(this.iProductService.getProductsByCategory(category),HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "Retorna la mesa guardada")
+    @PostMapping("saveMesa")
+    public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
+        return new ResponseEntity<>(this.iMesaService.saveMesa(mesa),HttpStatus.OK);
     }
 }
