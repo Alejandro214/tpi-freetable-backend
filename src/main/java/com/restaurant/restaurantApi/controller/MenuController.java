@@ -97,4 +97,16 @@ public class MenuController {
     public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
         return new ResponseEntity<>(this.iMesaService.saveMesa(mesa),HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Retorna la mesa con el idMesa")
+    @GetMapping("getMesaById/{idMesa}")
+    public  ResponseEntity<Mesa> getMesaById(@PathVariable("idMesa") Integer idMesa){
+        return new ResponseEntity<>(this.iMesaService.getMesaById(idMesa),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Retorna una lista de mesas")
+    @GetMapping("findAllMesas")
+    public ResponseEntity<List<Mesa>> findAllMesa(){
+        return new ResponseEntity<>(this.iMesaService.findAllMesas(),HttpStatus.OK);
+    }
 }

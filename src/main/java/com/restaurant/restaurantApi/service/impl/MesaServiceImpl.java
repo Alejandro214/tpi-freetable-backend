@@ -38,6 +38,16 @@ public class MesaServiceImpl implements IMesaService {
         return this.iMesaRepo.save(mesa1);
     }
 
+    @Override
+    public Mesa getMesaById(Integer idMesa) {
+        return this.iMesaRepo.findById(idMesa).get();
+    }
+
+    @Override
+    public List<Mesa> findAllMesas() {
+        return (List<Mesa>) this.iMesaRepo.findAll();
+    }
+
     public void agregarMesaAPedidos(List<Order> orderList,Mesa mesa){
         for (Order order:orderList){
             order.setMesa(mesa);
