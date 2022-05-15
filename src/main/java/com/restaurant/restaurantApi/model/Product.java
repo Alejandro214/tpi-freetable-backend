@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,16 +23,13 @@ public class Product {
     private String  description;
     private Integer category;
 
-    //@JoinColumn(name="idOrder",referencedColumnName = "idOrder")
-    //@ManyToOne
-    //@JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "productos_pedidos",
             joinColumns = @JoinColumn(name = "product",referencedColumnName = "idProduct"),
             inverseJoinColumns = @JoinColumn(name = "table_order",referencedColumnName = "idOrder"))
     @JsonIgnore
-    private List<Order> listPedidos;
+    private List<Order> listPedidos = new ArrayList<>();
 
     public void addPedido(Order pedido){
         this.listPedidos.add(pedido);

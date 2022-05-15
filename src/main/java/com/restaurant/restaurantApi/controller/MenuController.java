@@ -42,32 +42,32 @@ public class MenuController {
     @ApiOperation(value = "Create a new order",notes = "Retorna el pedido que se creo y guardo en la base")
     @PostMapping("saveOrder")
     public ResponseEntity<Order> saveOrder(@RequestBody Order order){
-        return new ResponseEntity<Order>(this.iOrderService.saveOrder(order), HttpStatus.OK);
+        return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Create a new product",notes = "Retorna el producto que se creo y guardo en la base")
     @PostMapping("saveProduct")
-    public ResponseEntity<ProductResponse> saveProduct(@RequestBody Product product){
-        return new ResponseEntity<ProductResponse>(this.iProductService.saveProduct(product),HttpStatus.OK);
+    public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+        return new ResponseEntity<>(this.iProductService.saveProduct(product),HttpStatus.OK);
     }
     @ApiOperation(value = "Busca el producto con ese nombre",notes = "Retorna el producto con el nombre que se pasa por la url")
     @GetMapping("searchProduct/{name}")
-    public ResponseEntity<ProductResponse> searchProduct(@PathVariable("name") String name){
-        return new ResponseEntity<ProductResponse>(this.iProductService.searchProduct(name),HttpStatus.OK);
+    public ResponseEntity<Product> searchProduct(@PathVariable("name") String name){
+        return new ResponseEntity<>(this.iProductService.searchProduct(name),HttpStatus.OK);
 
 
     }
 
     @ApiOperation(value = "Retorna todos los productos", notes = "Retorna todos los productos que es restaurante tiene")
     @GetMapping("getAllProducts")
-    public ResponseEntity<List<ProductResponse>> getAllProducts(){
+    public ResponseEntity<List<Product>> getAllProducts(){
         return new ResponseEntity<>(this.iProductService.getAllProducts(),HttpStatus.OK);
     }
 
 
     @ApiOperation(value = "Retorna paginas que tengan esa palabra en su nombre", notes = "Retorna todos los productos que contengan al menos esa letra o palabra en su nombre")
     @GetMapping("getFilterProductByName/{name}")
-    public ResponseEntity<List<ProductResponse>> filterProductByName(
+    public ResponseEntity<List<Product>> filterProductByName(
             @PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC)Pageable pageable,
             @PathVariable("name") String name){
         return new ResponseEntity<>(this.iProductService.filterProductByName(pageable, name),HttpStatus.OK);
@@ -87,7 +87,7 @@ public class MenuController {
 
     @ApiOperation(value= "Retornas los productos que pertenece a esa categoria",notes = "Dada una categoria, retornas todos los productos que perenezcan a esa categoria")
     @GetMapping("getProductsByCategory/{category}")
-    public ResponseEntity<List<ProductResponse>> getProductsByCategory(@PathVariable("category") Integer category){
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable("category") Integer category){
         return new ResponseEntity<>(this.iProductService.getProductsByCategory(category),HttpStatus.OK);
     }
 

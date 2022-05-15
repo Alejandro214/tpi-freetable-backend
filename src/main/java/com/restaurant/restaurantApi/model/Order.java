@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,8 +17,8 @@ public class Order {
     @Column(name="idOrder")
     private Integer idOrder;
 
-    @ManyToMany(mappedBy = "listPedidos",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Product> products;
+    @ManyToMany(mappedBy = "listPedidos",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    private List<Product> products = new ArrayList<>();
 
     @Column(name = "totalPrice")
     private Double totalPrice;
@@ -27,13 +28,6 @@ public class Order {
     @ManyToOne(cascade = CascadeType.ALL)
     private Mesa mesa;
 
-
-
-
-    public void addProduct(Product product){
-        this.products.add(product);
-        product.addPedido(this);
-    }
 
     public void addAllProducts(List<Product> productList){
         for(Product p: productList){

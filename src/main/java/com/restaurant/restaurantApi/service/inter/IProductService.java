@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface IProductService {
 
-    ProductResponse saveProduct(Product product);
+    Product saveProduct(Product product);
 
-    ProductResponse searchProduct(String name);
+    Product searchProduct(String name);
 
-    List<ProductResponse> getAllProducts();
+    List<Product> getAllProducts();
 
-    List<ProductResponse> filterProductByName(Pageable pageable, String name);
+    List<Product> filterProductByName(Pageable pageable, String name);
 
-    List<ProductResponse> getProductsByCategory(Integer category);
+    List<Product> getProductsByCategory(Integer category);
 }
