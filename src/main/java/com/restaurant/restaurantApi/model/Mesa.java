@@ -15,4 +15,10 @@ public class Mesa {
 
     @OneToMany(mappedBy = "mesa")
     private List<Order> listPedidos;
+
+
+
+    public void addOrder(Order order){
+        this.listPedidos.add(order);
+    }
 }
