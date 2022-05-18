@@ -33,6 +33,11 @@ public class OrderServiceImpl implements IOrderService {
         return (List<Order>) this.iOrderRepo.findAll();
     }
 
+    @Override
+    public void deleteOrder(Order order) {
+        this.iOrderRepo.delete(order);
+    }
+
     private void updateProductosPedidos(Order order){
         for(Product p: order.getProducts()){
             this.iOrderRepo.updateProductosPedidos(p.getIdProduct(),order.getIdOrder());

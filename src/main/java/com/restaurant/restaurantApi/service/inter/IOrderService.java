@@ -9,4 +9,6 @@ public interface IOrderService {
      Order saveOrder(Order order);
 
      List<Order> getAllOrders();
+
+     void deleteOrder(Order order);
 }

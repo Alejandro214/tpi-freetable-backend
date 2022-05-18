@@ -109,4 +109,11 @@ public class MenuController {
     public ResponseEntity<List<Mesa>> findAllMesa(){
         return new ResponseEntity<>(this.iMesaService.findAllMesas(),HttpStatus.OK);
     }
+
+    @ApiOperation(value= "Elimina la orden")
+    @DeleteMapping("deleteOrder")
+    public ResponseEntity<String> deleteOrder(@RequestBody Order order){
+        this.iOrderService.deleteOrder(order);;
+        return new ResponseEntity<>("Se a eliminado el pedido",HttpStatus.OK);
+    }
 }
