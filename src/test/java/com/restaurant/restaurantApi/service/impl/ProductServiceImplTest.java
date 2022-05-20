@@ -1,8 +1,7 @@
-package com.restaurant.restaurantApi;
+package com.restaurant.restaurantApi.service.impl;
 
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;
-import com.restaurant.restaurantApi.service.impl.ProductServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -86,6 +85,7 @@ public class ProductServiceImplTest {
     @Test
     void get_All_Products(){
         when(iProductRepo.findAll()).thenReturn(asList(pizza,fanta));
+
         List<Product> products = this.productService.getAllProducts();
         assertNotNull(products);
         assertTrue(products.size() >= 1);

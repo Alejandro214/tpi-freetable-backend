@@ -35,4 +35,8 @@ public class Order {
         }
         this.products.addAll(productList);
     }
+
+    public void  addProduct(Product product){
+        this.products.add(product);
+    }
 }
