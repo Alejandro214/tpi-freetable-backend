@@ -3,6 +3,7 @@ package com.restaurant.restaurantApi.service.impl;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import com.restaurant.restaurantApi.service.inter.IProductService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Data
 public class ProductServiceImpl implements IProductService {
 
     @Autowired
