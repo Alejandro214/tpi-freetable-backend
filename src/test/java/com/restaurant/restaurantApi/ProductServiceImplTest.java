@@ -3,7 +3,6 @@ package com.restaurant.restaurantApi;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import com.restaurant.restaurantApi.service.impl.ProductServiceImpl;
-import com.restaurant.restaurantApi.service.inter.IProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
