@@ -108,7 +108,7 @@ public class ProductServiceImplTest {
         PageRequest pageable = PageRequest.of(2,20);
         List<Product> products = this.productService.filterProductByName(pageable,"Fa");
         assertNotNull(products);
-        assertTrue(products.size() == 1);
+        assertEquals(1, products.size());
         System.out.println(products.get(0));
         assertTrue(products.get(0).getName().contains("Fa"));
 
