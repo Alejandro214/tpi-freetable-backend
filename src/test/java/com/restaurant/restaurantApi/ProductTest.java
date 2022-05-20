@@ -8,6 +8,10 @@ import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +23,6 @@ public class ProductTest {
     @Autowired
     private IProductService productService;
 
-    @Autowired
-    private IMesaService mesaService;
-
-    @Autowired
-    private IOrderService orderService;
 
     private Product pizaa = new Product();
 
@@ -74,6 +73,26 @@ public class ProductTest {
         assertNotNull(product.getName());
         assertNotNull(product.getPrice());
         assertNotNull(product.getIdProduct());
+    }
 
+    @Test
+    void filter_Product_By_Name(){
+       /* PageRequest pageable = PageRequest.of(2,20);
+        List<Product> products = this.productService.filterProductByName(pageable,"Pa");
+        assertNotNull(products);
+        //assertTrue(products.size() >= 1);
+        System.out.println(products.get(0));
+        assertTrue(products.get(0).getName().contains("Pa"));
+        */
+
+
+    }
+
+    @Test
+    void get_Products_By_Category(){
+        List<Product> products = this.productService.getProductsByCategory(3);
+        assertNotNull(products);
+        assertTrue(products.size() >= 1);
+        assertEquals(products.get(0).getCategory(),3);
     }
 }
