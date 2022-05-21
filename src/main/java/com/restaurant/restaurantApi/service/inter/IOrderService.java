@@ -8,7 +8,7 @@ public interface IOrderService {
 
      Order saveOrder(Order order);
 
-     List<Order> getAllOrders();
+     List<Order> getAllOrders(Integer idMesa);
 
      void deleteOrder(Integer idOrder);
 

@@ -1,7 +1,9 @@
 package com.restaurant.restaurantApi.service.impl;
 
+import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
+import com.restaurant.restaurantApi.repo.IMesaRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private IOrderRepo iOrderRepo;
 
+    @Autowired
+    private IMesaRepo iMesaRepo;
+
 
     @Override
     public Order saveOrder(Order order) {
@@ -29,8 +34,9 @@ public class OrderServiceImpl implements IOrderService {
 
 
     @Override
-    public List<Order> getAllOrders() {
-        return (List<Order>) this.iOrderRepo.findAll();
+    public List<Order> getAllOrders(Integer idMesa) {
+        Mesa mesa = this.iMesaRepo.findById(idMesa).get();
+        return (List<Order>) this.iOrderRepo.findAllByMesa(mesa);
     }
 
     @Override

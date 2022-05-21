@@ -80,9 +80,9 @@ public class MenuController {
     }
 
     @ApiOperation(value = "Retorna los todos pedidos",notes = "Retorna todos los pedidos que se realizaron hasta el momento")
-    @GetMapping("getAllOrders")
-    public ResponseEntity<List<Order>> getAllOrders(){
-        return new ResponseEntity<>(this.iOrderService.getAllOrders(),HttpStatus.OK);
+    @GetMapping("getAllOrders/{idMesa}")
+    public ResponseEntity<List<Order>> getAllOrders(@PathVariable("idMesa") Integer idMesa){
+        return new ResponseEntity<>(this.iOrderService.getAllOrders(idMesa),HttpStatus.OK);
     }
 
     @ApiOperation(value= "Retornas los productos que pertenece a esa categoria",notes = "Dada una categoria, retornas todos los productos que perenezcan a esa categoria")

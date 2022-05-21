@@ -72,7 +72,7 @@ class OrderServiceImplTest {
     @Test
     void get_All_Orders() {
         when(iOrderRepo.findAll()).thenReturn(asList(pedidoPizza,pedidoFanta));
-        List<Order> orders = this.orderService.getAllOrders();
+        List<Order> orders = this.orderService.getAllOrders(1);
         assertTrue(orders.size() >= 1);
         Order order = orders.get(0);
         assertNotNull(order.getIdOrder());
