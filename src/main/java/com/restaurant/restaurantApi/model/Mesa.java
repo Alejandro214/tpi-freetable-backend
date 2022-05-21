@@ -3,6 +3,7 @@ package com.restaurant.restaurantApi.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class Mesa {
     private Integer idMesa;
 
     @OneToMany(mappedBy = "mesa")
-    private List<Order> listPedidos;
+    private List<Order> listPedidos = new ArrayList<>();
 
 
 
