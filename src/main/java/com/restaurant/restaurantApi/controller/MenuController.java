@@ -111,9 +111,9 @@ public class MenuController {
     }
 
     @ApiOperation(value= "Elimina la orden")
-    @DeleteMapping("deleteOrder")
-    public ResponseEntity<String> deleteOrder(@RequestBody Order order){
-        this.iOrderService.deleteOrder(order);;
+    @DeleteMapping("deleteOrder/{idOrder}")
+    public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
+        this.iOrderService.deleteOrder(idOrder);;
         return new ResponseEntity<>("Se a eliminado el pedido",HttpStatus.OK);
     }
 }

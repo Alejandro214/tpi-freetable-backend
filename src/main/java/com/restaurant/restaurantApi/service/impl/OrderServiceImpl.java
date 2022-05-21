@@ -34,8 +34,9 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public void deleteOrder(Order order) {
-        this.iOrderRepo.delete(order);
+    public void deleteOrder(Integer idOrder) {
+
+        this.iOrderRepo.deleteById(idOrder);
     }
 
     @Override

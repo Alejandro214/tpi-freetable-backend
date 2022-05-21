@@ -10,7 +10,7 @@ public interface IOrderService {
 
      List<Order> getAllOrders();
 
-     void deleteOrder(Order order);
+     void deleteOrder(Integer idOrder);
 
      void updateProductosPedidos(Order order);
 }
