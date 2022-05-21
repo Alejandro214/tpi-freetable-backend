@@ -11,4 +11,6 @@ public interface IOrderService {
      List<Order> getAllOrders();
 
      void deleteOrder(Order order);
+
+     void updateProductosPedidos(Order order);
 }

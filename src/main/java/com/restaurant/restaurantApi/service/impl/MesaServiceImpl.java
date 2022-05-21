@@ -27,13 +27,17 @@ public class MesaServiceImpl implements IMesaService {
     @Autowired
     private IOrderRepo iOrderRepo;
 
+    @Autowired
+    private IOrderService orderService;
+
     @Override
     public Mesa saveMesa(Mesa mesa) {
         List<Order> orderList = mesa.getListPedidos();
         mesa.setListPedidos(new ArrayList<>());
         Mesa mesa1 = this.iMesaRepo.save(mesa);
         this.agregarMesaAPedidos(orderList,mesa1);
-        this.iOrderRepo.saveAll(orderList);
+        List<Order> orders = (List<Order>) this.iOrderRepo.saveAll(orderList);;
+        this.updateProductosPedidos(orders);
         mesa1.setListPedidos(orderList);
         return this.iMesaRepo.save(mesa1);
     }
@@ -51,6 +55,12 @@ public class MesaServiceImpl implements IMesaService {
     public void agregarMesaAPedidos(List<Order> orderList,Mesa mesa){
         for (Order order:orderList){
             order.setMesa(mesa);
+        }
+    }
+
+    private void updateProductosPedidos(List<Order> orderList){
+        for (Order order: orderList){
+            this.orderService.updateProductosPedidos(order);
         }
     }
 }

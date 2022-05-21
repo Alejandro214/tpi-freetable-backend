@@ -19,11 +19,11 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order saveOrder(Order order) {
+        this.updateProductosPedidos(order);
         List<Product> productList = order.getProducts();
         order.setProducts(new ArrayList<>());
         order.addAllProducts(productList);
         Order order1 = this.iOrderRepo.save(order);
-        this.updateProductosPedidos(order1);
         return order1;
     }
 
@@ -38,7 +38,8 @@ public class OrderServiceImpl implements IOrderService {
         this.iOrderRepo.delete(order);
     }
 
-    private void updateProductosPedidos(Order order){
+    @Override
+    public void updateProductosPedidos(Order order){
         for(Product p: order.getProducts()){
             this.iOrderRepo.updateProductosPedidos(p.getIdProduct(),order.getIdOrder());
         }
