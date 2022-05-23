@@ -36,7 +36,7 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<Order> getAllOrders(Integer idMesa) {
         Mesa mesa = this.iMesaRepo.findById(idMesa).get();
-        return (List<Order>) this.iOrderRepo.findAllByMesa(mesa);
+        return  this.iOrderRepo.findAllByMesa(mesa);
     }
 
     @Override

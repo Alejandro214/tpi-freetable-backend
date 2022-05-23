@@ -1,8 +1,11 @@
 package com.restaurant.restaurantApi.service.impl;
 
+import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
+import com.restaurant.restaurantApi.repo.IMesaRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
+import org.apache.catalina.startup.ListenerCreateRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +29,9 @@ class OrderServiceImplTest {
 
     @InjectMocks
     private OrderServiceImpl orderService;
+
+    @Mock
+    private IMesaRepo mesaRepo;
 
 
     private Product pizza = new Product();
@@ -71,8 +78,10 @@ class OrderServiceImplTest {
 
     @Test
     void get_All_Orders() {
-        when(iOrderRepo.findAll()).thenReturn(asList(pedidoPizza,pedidoFanta));
-        List<Order> orders = this.orderService.getAllOrders(1);
+        Mesa mesa = new Mesa();
+        when(this.mesaRepo.findById(any(Integer.class))).thenReturn(Optional.of(mesa));
+        when(iOrderRepo.findAllByMesa(any(Mesa.class))).thenReturn(asList(pedidoPizza,pedidoFanta));
+        List<Order> orders = this.orderService.getAllOrders(0);
         assertTrue(orders.size() >= 1);
         Order order = orders.get(0);
         assertNotNull(order.getIdOrder());
