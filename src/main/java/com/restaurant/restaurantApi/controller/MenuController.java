@@ -1,5 +1,7 @@
 package com.restaurant.restaurantApi.controller;
 
+import com.restaurant.restaurantApi.common.ExceptionMessage;
+import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
 import com.restaurant.restaurantApi.model.*;
 import com.restaurant.restaurantApi.service.inter.*;
 import io.swagger.annotations.Api;
@@ -38,7 +40,12 @@ public class MenuController {
     @ApiOperation(value = "Create a new order",notes = "Retorna el pedido que se creo y guardo en la base")
     @PostMapping("saveOrder")
     public ResponseEntity<Order> saveOrder(@RequestBody Order order){
-        return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
+        }catch (Exception e){
+            throw new SaveOrderBadRequestException(ExceptionMessage.INCORRECT_ACCOUNT_INFO.getValue());
+
+        }
     }
 
     @ApiOperation(value = "Create a new product",notes = "Retorna el producto que se creo y guardo en la base")
