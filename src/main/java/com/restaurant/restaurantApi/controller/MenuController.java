@@ -1,14 +1,7 @@
 package com.restaurant.restaurantApi.controller;
 
-import com.restaurant.restaurantApi.dto.ProductResponse;
-import com.restaurant.restaurantApi.model.Category;
-import com.restaurant.restaurantApi.model.Mesa;
-import com.restaurant.restaurantApi.model.Order;
-import com.restaurant.restaurantApi.model.Product;
-import com.restaurant.restaurantApi.service.inter.ICategoryService;
-import com.restaurant.restaurantApi.service.inter.IMesaService;
-import com.restaurant.restaurantApi.service.inter.IOrderService;
-import com.restaurant.restaurantApi.service.inter.IProductService;
+import com.restaurant.restaurantApi.model.*;
+import com.restaurant.restaurantApi.service.inter.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +31,9 @@ public class MenuController {
 
     @Autowired
     private IMesaService iMesaService;
+
+    @Autowired
+    private IComboService comboService;
 
     @ApiOperation(value = "Create a new order",notes = "Retorna el pedido que se creo y guardo en la base")
     @PostMapping("saveOrder")
@@ -115,5 +111,21 @@ public class MenuController {
     public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
         this.iOrderService.deleteOrder(idOrder);;
         return new ResponseEntity<>("Se a eliminado el pedido",HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "Retorna el producto de la categoria seleccionada")
+    @GetMapping("categoryById/{idCategory}")
+    public ResponseEntity<List<Product>> getProductByCategory(@PathVariable("idCategory") Integer idCategory){
+        List<Product> categories = this.iProductService.productsByCategory(idCategory);
+        return new ResponseEntity<>(categories,HttpStatus.OK);
+
+    }
+
+    @ApiOperation(value = "asdsadas")
+    @GetMapping("getAllCombos")
+    public ResponseEntity<List<Combo>> getAllCombos(){
+        List<Combo> combos = comboService.getAllCombos();
+        return new ResponseEntity<>(combos,HttpStatus.OK);
     }
 }

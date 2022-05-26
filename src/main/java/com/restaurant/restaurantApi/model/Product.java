@@ -31,7 +31,17 @@ public class Product {
     @JsonIgnore
     private List<Order> listPedidos = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "productos_category",
+            joinColumns = @JoinColumn(name = "product",referencedColumnName = "idProduct"),
+            inverseJoinColumns = @JoinColumn(name = "category",referencedColumnName = "idCategory")
+    )
+    @JsonIgnore
+    private List<Category> listCategory;
+
     public void addPedido(Order pedido){
         this.listPedidos.add(pedido);
     }
+
 }
