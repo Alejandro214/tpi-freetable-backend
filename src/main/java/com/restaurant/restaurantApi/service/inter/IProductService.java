@@ -22,4 +22,6 @@ public interface IProductService {
     List<Product> productsByCategory(Integer idCategory);
 
     List<Product> productscategoryByNameCategory(String nameCategory);
+
+    Integer cantProductosByNameCategory(String nameCategory);
 }

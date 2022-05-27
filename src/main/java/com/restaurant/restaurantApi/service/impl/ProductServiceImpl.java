@@ -64,4 +64,9 @@ public class ProductServiceImpl implements IProductService {
        return category.getProducts();
     }
 
+    @Override
+    public Integer cantProductosByNameCategory(String nameCategory) {
+        return this.categoryRepo.cantProductosByNameCategory(nameCategory);
+    }
+
 }

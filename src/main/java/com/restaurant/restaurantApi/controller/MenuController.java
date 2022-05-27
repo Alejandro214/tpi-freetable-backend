@@ -129,7 +129,7 @@ public class MenuController {
 
     }
 
-    @ApiOperation(value = "asdsadas")
+    @ApiOperation(value = "Retorna todos lo combos del restaurante")
     @GetMapping("getAllCombos")
     public ResponseEntity<List<Combo>> getAllCombos(){
         List<Combo> combos = comboService.getAllCombos();
@@ -143,5 +143,11 @@ public class MenuController {
         List<Product> categories = this.iProductService.productscategoryByNameCategory(nameCategory);
         return new ResponseEntity<>(categories,HttpStatus.OK);
 
+    }
+
+    @ApiOperation(value = "Retorna la cantida de productos segun la categoria")
+    @GetMapping("cantProductosByNameCategory/{nameCategory}")
+    public ResponseEntity<Integer> getCantProductosByNameCategory(@PathVariable("nameCategory") String nameCategory) {
+        return new ResponseEntity<>(this.iProductService.cantProductosByNameCategory(nameCategory),HttpStatus.OK);
     }
 }
