@@ -58,4 +58,10 @@ public class ProductServiceImpl implements IProductService {
         return category.getProducts();
     }
 
+    @Override
+    public List<Product> productscategoryByNameCategory(String nameCategory) {
+       Category category = this.categoryRepo.findByNameCategory(nameCategory);
+       return category.getProducts();
+    }
+
 }

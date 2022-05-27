@@ -135,4 +135,13 @@ public class MenuController {
         List<Combo> combos = comboService.getAllCombos();
         return new ResponseEntity<>(combos,HttpStatus.OK);
     }
+
+
+    @ApiOperation(value = "Retorna el producto de la categoria seleccionada")
+    @GetMapping("categoryByNameCategory/{nameCategory}")
+    public ResponseEntity<List<Product>> getProductByNameCategory(@PathVariable("nameCategory") String nameCategory){
+        List<Product> categories = this.iProductService.productscategoryByNameCategory(nameCategory);
+        return new ResponseEntity<>(categories,HttpStatus.OK);
+
+    }
 }

@@ -20,4 +20,6 @@ public interface IProductService {
     List<Product> getProductsByCategory(Integer category);
 
     List<Product> productsByCategory(Integer idCategory);
+
+    List<Product> productscategoryByNameCategory(String nameCategory);
 }
