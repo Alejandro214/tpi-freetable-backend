@@ -52,7 +52,6 @@ public class MesaServiceImpl implements IMesaService {
         return (List<Mesa>)
                 this.iMesaRepo.findAll();
     }
-
     public void agregarMesaAPedidos(List<Order> orderList,Mesa mesa){
         for (Order order:orderList){
             order.setMesa(mesa);
@@ -63,5 +62,14 @@ public class MesaServiceImpl implements IMesaService {
         for (Order order: orderList){
             this.orderService.updateProductosPedidos(order);
         }
+    }
+
+    @Override
+    public Mesa addOrderByIdMesa(Integer idMesa, Order order) {
+        Mesa mesa = this.getMesaById(idMesa);
+        order.setMesa(mesa);
+        Order order1 = this.orderService.saveOrder(order);
+        mesa.addOrder(order1);
+        return this.iMesaRepo.save(mesa);
     }
 }
