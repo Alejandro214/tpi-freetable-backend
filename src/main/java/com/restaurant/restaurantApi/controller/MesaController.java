@@ -12,27 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("menu")
+@RequestMapping("mesa")
 @Api
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class MenuController {
-
-    @Autowired
-    private ICategoryService iCategoryService;
-
+public class MesaController {
     @Autowired
     private IMesaService iMesaService;
 
     @Autowired
     private IComboService comboService;
 
-
-
-    @ApiOperation(value = "Retorna la categoria que pertence a ese numero",notes = "Retorna la categoria perteneciente a ese numero" )
-    @GetMapping("getCategoryByCategory/{category}")
-    public ResponseEntity<Category> getCategoryByCategory(@PathVariable("category") Integer category){
-        return new ResponseEntity<>(this.iCategoryService.findByCategory(category),HttpStatus.OK);
-    }
 
     @ApiOperation(value = "Retorna la mesa guardada")
     @PostMapping("saveMesa")
