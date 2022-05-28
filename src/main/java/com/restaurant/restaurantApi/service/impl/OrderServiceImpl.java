@@ -9,7 +9,6 @@ import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,7 +40,10 @@ public class OrderServiceImpl implements IOrderService {
         Order order = this.iOrderRepo.findById(idOrder).get();
         order.setMesa(null);
         this.iOrderRepo.delete(order);
+        this.iOrderRepo.deleteOrderProductosPedidos(idOrder);
     }
+
+
 
     @Override
     public void updateProductosPedidos(Order order){

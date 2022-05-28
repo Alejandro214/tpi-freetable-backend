@@ -15,5 +15,11 @@ public interface IOrderRepo extends CrudRepository<Order, Integer> {
         , nativeQuery = true)
     void updateProductosPedidos(Integer idProduct, Integer idPedido);
 
+    @Modifying
+    @Transactional
+    @Query(value = " DELETE FROM productos_pedidos " +
+            " WHERE table_order = :idOrder ",nativeQuery = true)
+    void deleteOrderProductosPedidos(Integer idOrder);
+
     List<Order> findAllByMesa(Mesa idMesa);
 }
