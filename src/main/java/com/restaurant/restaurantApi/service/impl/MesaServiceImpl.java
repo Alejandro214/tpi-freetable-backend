@@ -11,7 +11,6 @@ import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,14 +31,7 @@ public class MesaServiceImpl implements IMesaService {
 
     @Override
     public Mesa saveMesa(Mesa mesa) {
-        List<Order> orderList = mesa.getListPedidos();
-        mesa.setListPedidos(new ArrayList<>());
-        Mesa mesa1 = this.iMesaRepo.save(mesa);
-        this.agregarMesaAPedidos(orderList,mesa1);
-        List<Order> orders = (List<Order>) this.iOrderRepo.saveAll(orderList);;
-        this.updateProductosPedidos(orders);
-        mesa1.setListPedidos(orderList);
-        return this.iMesaRepo.save(mesa1);
+        return this.iMesaRepo.save(mesa);
     }
 
     @Override
@@ -51,17 +43,6 @@ public class MesaServiceImpl implements IMesaService {
     public List<Mesa> findAllMesas() {
         return (List<Mesa>)
                 this.iMesaRepo.findAll();
-    }
-    public void agregarMesaAPedidos(List<Order> orderList,Mesa mesa){
-        for (Order order:orderList){
-            order.setMesa(mesa);
-        }
-    }
-
-    private void updateProductosPedidos(List<Order> orderList){
-        for (Order order: orderList){
-            this.orderService.updateProductosPedidos(order);
-        }
     }
 
     @Override

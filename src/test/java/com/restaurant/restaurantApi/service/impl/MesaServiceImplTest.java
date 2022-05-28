@@ -38,11 +38,10 @@ class MesaServiceImplTest {
 
     @Test
     void saveMesa() {
-       /* when(this.mesaRepo.save(any(Mesa.class))).thenReturn(mesa);
-        when(this.mesaRepo.saveAll(any())).thenReturn(asList(mesa));
+        when(this.mesaRepo.save(any(Mesa.class))).thenReturn(mesa);
         Mesa mesa = this.mesaService.saveMesa(this.mesa);
         assertEquals(1,mesa.getIdMesa());
-        assertNotNull(mesa.getListPedidos());*/
+        assertNotNull(mesa.getListPedidos());
     }
 
     @Test
