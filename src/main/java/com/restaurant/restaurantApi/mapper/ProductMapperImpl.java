@@ -47,7 +47,6 @@ public class ProductMapperImpl {
         productResponse.setImage(product.getImage());
         productResponse.setPrice(product.getPrice());
         productResponse.setName(product.getName());
-        productResponse.setCategory(product.getCategory());
         return productResponse;
     }
 }

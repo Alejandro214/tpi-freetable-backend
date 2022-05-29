@@ -38,7 +38,6 @@ public class ProductServiceImplTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        pizza.setCategory(1);
         pizza.setIdProduct(1);
         pizza.setName("Pizza");
         pizza.setImage("Una imagen");
@@ -47,7 +46,6 @@ public class ProductServiceImplTest {
         pizza.setListPedidos(new ArrayList<>());
 
         fanta.setIdProduct(2);
-        fanta.setCategory(2);
         fanta.setImage("https://superlago.com.ar/wp-content/uploads/2021/01/7790895000454.jpg");
         fanta.setDescription("Gaseosa fanta mediana");
         fanta.setName("Fanta");
@@ -61,7 +59,6 @@ public class ProductServiceImplTest {
     void save_product_pizza() {
         when(iProductRepo.save(any(Product.class))).thenReturn(pizza);
         Product product = this.productService.saveProduct(this.pizza);
-        assertEquals(product.getCategory(),this.pizza.getCategory());
         assertEquals(product.getImage(),this.pizza.getImage());
         assertEquals(product.getDescription(),this.pizza.getDescription());
         assertEquals(product.getName(),this.pizza.getName());
@@ -74,7 +71,6 @@ public class ProductServiceImplTest {
     void search_product_fanta(){
         when(iProductRepo.findByName(any(String.class))).thenReturn(fanta);
         Product fanta = this.productService.searchProduct("Fanta");
-        assertEquals(fanta.getCategory(),2);
         assertEquals(fanta.getImage(),"https://superlago.com.ar/wp-content/uploads/2021/01/7790895000454.jpg");
         assertEquals(fanta.getDescription(),"Gaseosa fanta mediana");
         assertEquals(fanta.getName(),"Fanta");
@@ -90,7 +86,6 @@ public class ProductServiceImplTest {
         assertNotNull(products);
         assertTrue(products.size() >= 1);
         Product product = products.get(0);
-        assertNotNull(product.getCategory());
         assertNotNull(product.getImage());
         assertNotNull(product.getDescription());
         assertNotNull(product.getName());
@@ -116,12 +111,5 @@ public class ProductServiceImplTest {
 
     }
 
-    @Test
-    void get_Products_By_Category(){
-        when(iProductRepo.findAllByCategory(any(Integer.class))).thenReturn(asList(fanta));
-        List<Product> products = this.productService.getProductsByCategory(2);
-        assertNotNull(products);
-        assertTrue(products.size() >= 1);
-        assertEquals(products.get(0).getCategory(),2);
-    }
+
 }

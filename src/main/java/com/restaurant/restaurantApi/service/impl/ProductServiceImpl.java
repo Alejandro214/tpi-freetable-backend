@@ -45,10 +45,7 @@ public class ProductServiceImpl implements IProductService {
         return  this.iProductRepo.filterProductByName(pageable,name).getContent();
     }
 
-    @Override
-    public List<Product> getProductsByCategory(Integer category) {
-        return this.iProductRepo.findAllByCategory(category);
-    }
+
 
     @Override
     public List<Product> productsByCategory(Integer idCategory) {

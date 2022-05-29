@@ -46,7 +46,6 @@ class OrderServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        pizza.setCategory(1);
         pizza.setIdProduct(1);
         pizza.setName("Pizza");
         pizza.setImage("Una imagen");
@@ -60,7 +59,6 @@ class OrderServiceImplTest {
         pedidoFanta.setIdOrder(2);
         pedidoFanta.setTotalPrice(200d);
         fanta.setIdProduct(2);
-        fanta.setCategory(2);
         fanta.setImage("https://superlago.com.ar/wp-content/uploads/2021/01/7790895000454.jpg");
         fanta.setDescription("Gaseosa fanta mediana");
         fanta.setName("Fanta");

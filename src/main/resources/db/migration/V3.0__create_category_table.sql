@@ -9,5 +9,5 @@ CREATE TABLE `category` (
 
 
 LOCK TABLES `category` WRITE;
-INSERT INTO `category` VALUES (1,1,'Comidas'),(2,2,'Bebidas'),(3,3,'Postres'),(4,4,'Vinos'),(5,5,'Gaseosas'),(6,6,'Helado'),(7,7,'Dulces'),(8,10,'Clasicos'),(9,9,'Cervezas');
+INSERT INTO `category` VALUES (1,1,'Platos'),(2,2,'Bebidas'),(3,3,'Postres'),(4,4,'Vinos'),(5,5,'Gaseosas'),(6,6,'Helado'),(7,7,'Dulces'),(8,10,'Clasicos'),(9,9,'Cervezas');
 UNLOCK TABLES;

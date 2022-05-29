@@ -17,5 +17,4 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
             "where p.name LIKE %:name% or g.nameCategory LIKE %:name% ", nativeQuery = true)
     Page<Product> filterProductByName(Pageable pageable, String name);
 
-    List<Product> findAllByCategory(Integer category);
 }

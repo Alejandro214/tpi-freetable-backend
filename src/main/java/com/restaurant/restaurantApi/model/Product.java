@@ -21,7 +21,6 @@ public class Product {
     private String image;
     private Double price;
     private String  description;
-    private Integer category;
 
     @ManyToMany
     @JoinTable(
