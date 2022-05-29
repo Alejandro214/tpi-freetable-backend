@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -41,8 +43,8 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public List<Product> filterProductByName(Pageable pageable, String name) {
-        return  this.iProductRepo.filterProductByName(pageable,name).getContent();
+    public Set<Product> filterProductByName(Pageable pageable, String name) {
+        return  this.iProductRepo.filterProductByName(pageable,name).getContent().stream().collect(Collectors.toSet());
     }
 
 

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("product")
@@ -61,7 +62,7 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna paginas que tengan esa palabra en su nombre", notes = "Retorna todos los productos que contengan al menos esa letra o palabra en su nombre")
     @GetMapping("getFilterProductByName/{name}")
-    public ResponseEntity<List<Product>> filterProductByName(
+    public ResponseEntity<Set<Product>> filterProductByName(
             @PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable,
             @PathVariable("name") String name){
         try {

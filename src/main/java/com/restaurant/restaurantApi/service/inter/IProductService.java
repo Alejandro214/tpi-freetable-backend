@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IProductService {
 
@@ -15,7 +16,7 @@ public interface IProductService {
 
     List<Product> getAllProducts();
 
-    List<Product> filterProductByName(Pageable pageable, String name);
+    Set<Product> filterProductByName(Pageable pageable, String name);
 
 
     List<Product> productsByCategory(Integer idCategory);
