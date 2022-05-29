@@ -19,11 +19,8 @@ public class MesaController {
     @Autowired
     private IMesaService iMesaService;
 
-    @Autowired
-    private IComboService comboService;
 
-
-    @ApiOperation(value = "Retorna la mesa guardada")
+    @ApiOperation(value = "Guarda la mesa que recibe y retorna la misma ya guardada")
     @PostMapping("saveMesa")
     public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
         return new ResponseEntity<>(this.iMesaService.saveMesa(mesa),HttpStatus.OK);
@@ -41,20 +38,15 @@ public class MesaController {
         return new ResponseEntity<>(this.iMesaService.findAllMesas(),HttpStatus.OK);
     }
 
-
-    @ApiOperation(value = "Retorna todos lo combos del restaurante")
-    @GetMapping("getAllCombos")
-    public ResponseEntity<List<Combo>> getAllCombos(){
-        List<Combo> combos = comboService.getAllCombos();
-        return new ResponseEntity<>(combos,HttpStatus.OK);
-    }
-
     @ApiOperation(value = "Retorna la mesa a la que se le agrego el pedido")
     @PutMapping("addOrderMesa/{idMesa}")
     public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa,@RequestBody Order order){
         Mesa mesa = this.iMesaService.addOrderByIdMesa(idMesa,order);
         return new ResponseEntity<>(mesa,HttpStatus.OK);
     }
+
+
+
 
 
 
