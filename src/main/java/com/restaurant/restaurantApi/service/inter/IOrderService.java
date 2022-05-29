@@ -15,4 +15,8 @@ public interface IOrderService {
      void updateProductosPedidos(Order order);
 
      Order getOrderById(Integer idOrder);
+
+     Order updateOrder(Order order);
+
+
 }

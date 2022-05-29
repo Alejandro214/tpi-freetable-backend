@@ -5,7 +5,6 @@ import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IMesaRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
-import com.restaurant.restaurantApi.service.inter.IMesaService;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +55,12 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Order getOrderById(Integer idOrder) {
         return this.iOrderRepo.findById(idOrder).get();
+    }
+
+    @Override
+    public Order updateOrder(Order order) {
+         this.deleteOrder(order.getIdOrder());
+         return this.saveOrder(order);
     }
 
 

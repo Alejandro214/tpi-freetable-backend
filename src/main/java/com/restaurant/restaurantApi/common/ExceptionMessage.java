@@ -16,7 +16,9 @@ public enum ExceptionMessage {
     SAVE_MESA_EXCEPTION("Ocurrio un error al intentar guardar la mesa!"),
     GET_MESA_BY_ID_EXCEPTION("¡Ocurrio un error al intentar buscar la mesa con dicho id!"),
     FIND_ALL_MESAS_EXCEPTION("¡Ocurrio un error al intentar buscar todas las mesas"),
-    ADD_ORDER_BY_ID_MESA_EXCEPTION("¡Ocurrio un error al intentar agregar el pedido al la mesa con dicho id!");
+    ADD_ORDER_BY_ID_MESA_EXCEPTION("¡Ocurrio un error al intentar agregar el pedido al la mesa con dicho id!"),
+    UPDATE_ORDER_EXCEPTION("¡Ocurrio un error al intentar updatear el pedido!");
+
 
     ExceptionMessage(String message){value = message;}
 

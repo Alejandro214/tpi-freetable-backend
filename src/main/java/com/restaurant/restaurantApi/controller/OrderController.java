@@ -5,6 +5,7 @@ import com.restaurant.restaurantApi.common.ExceptionMessage;
 import com.restaurant.restaurantApi.exception.DeleteOrderException;
 import com.restaurant.restaurantApi.exception.GetAllOrdersByIdMesaException;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
+import com.restaurant.restaurantApi.exception.UpdateOrderException;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import io.swagger.annotations.Api;
@@ -53,6 +54,16 @@ public class OrderController {
         }catch (Exception e){
             throw new DeleteOrderException(ExceptionMessage.DELETE_ORDER_EXCEPTION.getValue());
 
+        }
+    }
+
+    @ApiOperation(value = "Retorna el pedido actualizado")
+    @PutMapping("updateOrder")
+    public ResponseEntity<Order> updateOrder(@RequestBody Order order){
+        try{
+            return new ResponseEntity<>(this.iOrderService.updateOrder(order),HttpStatus.OK);
+        }catch (Exception e){
+             throw new UpdateOrderException(ExceptionMessage.UPDATE_ORDER_EXCEPTION.getValue());
         }
     }
 }
