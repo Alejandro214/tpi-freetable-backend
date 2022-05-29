@@ -5,6 +5,7 @@ import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IMesaRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
+import com.restaurant.restaurantApi.service.inter.IMesaService;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,13 +33,13 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<Order> getAllOrders(Integer idMesa) {
         Mesa mesa = this.iMesaRepo.findById(idMesa).get();
-        return  this.iOrderRepo.findAllByMesa(mesa);
+        return this.iOrderRepo.findAllByMesa(mesa);
     }
 
     @Override
     public void deleteOrder(Integer idOrder) {
-        Order order = this.iOrderRepo.findById(idOrder).get();
-        order.setMesa(null);
+        Order order = this.getOrderById(idOrder);
+        order.deleteMesa();
         this.iOrderRepo.delete(order);
         this.iOrderRepo.deleteOrderProductosPedidos(idOrder);
     }
@@ -50,6 +51,11 @@ public class OrderServiceImpl implements IOrderService {
         for(Product p: order.getProducts()){
             this.iOrderRepo.updateProductosPedidos(p.getIdProduct(),order.getIdOrder());
         }
+    }
+
+    @Override
+    public Order getOrderById(Integer idOrder) {
+        return this.iOrderRepo.findById(idOrder).get();
     }
 
 

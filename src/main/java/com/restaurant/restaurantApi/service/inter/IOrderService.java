@@ -13,4 +13,6 @@ public interface IOrderService {
      void deleteOrder(Integer idOrder);
 
      void updateProductosPedidos(Order order);
+
+     Order getOrderById(Integer idOrder);
 }

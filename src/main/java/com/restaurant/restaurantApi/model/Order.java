@@ -29,14 +29,10 @@ public class Order {
     private Mesa mesa;
 
 
-    public void addAllProducts(List<Product> productList){
-        for(Product p: productList){
-            p.addPedido(this);
-        }
-        this.products.addAll(productList);
+    public void deleteMesa(){
+        this.mesa = null;
     }
 
-    public void  addProduct(Product product){
-        this.products.add(product);
-    }
+
+
 }
