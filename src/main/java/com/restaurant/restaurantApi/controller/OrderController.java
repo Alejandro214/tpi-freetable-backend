@@ -2,6 +2,8 @@ package com.restaurant.restaurantApi.controller;
 
 
 import com.restaurant.restaurantApi.common.ExceptionMessage;
+import com.restaurant.restaurantApi.exception.DeleteOrderException;
+import com.restaurant.restaurantApi.exception.GetAllOrdersByIdMesaException;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
@@ -29,20 +31,28 @@ public class OrderController {
         try {
             return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
         }catch (Exception e){
-            throw new SaveOrderBadRequestException(ExceptionMessage.INCORRECT_ACCOUNT_INFO.getValue());
-
+            throw new SaveOrderBadRequestException(ExceptionMessage.SAVE_ORDER_ERROR.getValue());
         }
     }
     @ApiOperation(value = "Retorna los todos pedidos",notes = "Retorna todos los pedidos que se realizaron hasta el momento")
     @GetMapping("getAllOrders/{idMesa}")
     public ResponseEntity<List<Order>> getAllOrders(@PathVariable("idMesa") Integer idMesa){
-        return new ResponseEntity<>(this.iOrderService.getAllOrders(idMesa),HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(this.iOrderService.getAllOrders(idMesa), HttpStatus.OK);
+        }catch (Exception e){
+            throw new GetAllOrdersByIdMesaException(ExceptionMessage.GER_ALL_ORDERS_BY_MESA_EXCEPTION_.getValue());
+        }
     }
 
     @ApiOperation(value= "Elimina la orden")
     @DeleteMapping("deleteOrder/{idOrder}")
     public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
-        this.iOrderService.deleteOrder(idOrder);;
-        return new ResponseEntity<>("Se a eliminado el pedido",HttpStatus.OK);
+        try {
+            this.iOrderService.deleteOrder(idOrder);
+            return new ResponseEntity<>("Se a eliminado el pedido", HttpStatus.OK);
+        }catch (Exception e){
+            throw new DeleteOrderException(ExceptionMessage.DELETE_ORDER_EXCEPTION.getValue());
+
+        }
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class MenuHandlerExceptionResponse {
+public class ControllerHandlerExceptionResponse {
     private String message;
     private String details;
     private HttpStatus status;

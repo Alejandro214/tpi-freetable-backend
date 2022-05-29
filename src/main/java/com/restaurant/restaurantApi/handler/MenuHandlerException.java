@@ -1,6 +1,6 @@
 package com.restaurant.restaurantApi.handler;
 
-import com.restaurant.restaurantApi.exception.MenuHandlerExceptionResponse;
+import com.restaurant.restaurantApi.exception.ControllerHandlerExceptionResponse;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
 import com.restaurant.restaurantApi.exception.SaveProductBadResquestException;
 import com.restaurant.restaurantApi.exception.SearchProductException;
@@ -19,25 +19,25 @@ public class MenuHandlerException {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception e, WebRequest request){
-        MenuHandlerExceptionResponse response = new MenuHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.INTERNAL_SERVER_ERROR, LocalDateTime.now());
+        ControllerHandlerExceptionResponse response = new ControllerHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.INTERNAL_SERVER_ERROR, LocalDateTime.now());
         return new ResponseEntity<>(response, response.getStatus());
     }
 
     @ExceptionHandler(SaveOrderBadRequestException.class)
     public ResponseEntity<Object> handleSaveOrderBadRequestException(Exception e,WebRequest request){
-        MenuHandlerExceptionResponse response = new MenuHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.BAD_REQUEST, LocalDateTime.now());
+        ControllerHandlerExceptionResponse response = new ControllerHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.BAD_REQUEST, LocalDateTime.now());
         return new ResponseEntity<>(response, response.getStatus());
     }
 
     @ExceptionHandler(SaveProductBadResquestException.class)
     public ResponseEntity<Object> handleSaveProductBadResquestException(Exception e,WebRequest request){
-        MenuHandlerExceptionResponse response = new MenuHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.NOT_FOUND, LocalDateTime.now());
+        ControllerHandlerExceptionResponse response = new ControllerHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.NOT_FOUND, LocalDateTime.now());
         return new ResponseEntity<>(response, response.getStatus());
     }
 
     @ExceptionHandler(SearchProductException.class)
     public ResponseEntity<Object> handleSearchProductException(Exception e,WebRequest request){
-        MenuHandlerExceptionResponse response = new MenuHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.NOT_FOUND, LocalDateTime.now());
+        ControllerHandlerExceptionResponse response = new ControllerHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.NOT_FOUND, LocalDateTime.now());
         return new ResponseEntity<>(response, response.getStatus());
     }
 
