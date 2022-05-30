@@ -95,5 +95,12 @@ public class ProductController {
         }
     }
 
+    @ApiOperation(value = "Elimina el producto de la ordern que tiene dicho id")
+    @DeleteMapping("deleteProduct/{idOrder}")
+    public ResponseEntity<String> deleteProductDeOrder(@PathVariable("idOrder") Integer idOrder,@RequestBody Product product){
+        this.iProductService.deleteProductOrder(idOrder,product);
+        return new ResponseEntity<>("Se ha eliminado el producto con existo",HttpStatus.OK);
+    }
+
 
 }

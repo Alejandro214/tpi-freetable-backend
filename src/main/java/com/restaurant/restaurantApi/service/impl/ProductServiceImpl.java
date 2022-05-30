@@ -1,8 +1,10 @@
 package com.restaurant.restaurantApi.service.impl;
 
 import com.restaurant.restaurantApi.model.Category;
+import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.ICategoryRepo;
+import com.restaurant.restaurantApi.repo.IOrderRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import com.restaurant.restaurantApi.service.inter.IProductService;
 import lombok.Data;
@@ -24,6 +26,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private ICategoryRepo categoryRepo;
+
+    @Autowired
+    private IOrderRepo iOrderRepo;
 
 
     @Override
@@ -66,6 +71,15 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public Integer cantProductosByNameCategory(String nameCategory) {
         return this.categoryRepo.cantProductosByNameCategory(nameCategory);
+    }
+
+    @Override
+    public void deleteProductOrder(Integer idOrder, Product product) {
+        Order order = this.iOrderRepo.findById(idOrder).get();
+        this.iProductRepo.deleteProductDeOrder(product.getIdProduct(),idOrder);
+        order.deleteProduct(product);
+        System.out.println(order.getTotalPrice());
+        this.iOrderRepo.save(order);
     }
 
 }

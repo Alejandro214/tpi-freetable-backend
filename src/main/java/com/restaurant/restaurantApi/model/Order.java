@@ -33,6 +33,11 @@ public class Order {
         this.mesa = null;
     }
 
+    public void deleteProduct(Product product){
+        this.products.remove(product);
+        this.totalPrice -=product.getPrice();
+    }
+
 
 
 }

@@ -18,10 +18,11 @@ public interface IProductService {
 
     Set<Product> filterProductByName(Pageable pageable, String name);
 
-
     List<Product> productsByCategory(Integer idCategory);
 
     List<Product> productscategoryByNameCategory(String nameCategory);
 
     Integer cantProductosByNameCategory(String nameCategory);
+
+    void deleteProductOrder(Integer idOrder,Product product);
 }
