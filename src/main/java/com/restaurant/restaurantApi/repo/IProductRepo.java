@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 public interface IProductRepo extends CrudRepository<Product, Integer> {
     Product findByName(String name);
@@ -24,5 +26,8 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
     @Query(value = " DELETE FROM restaurant_db.productos_pedidos " +
             " WHERE product = :idProduct and table_order = :idOrder ",nativeQuery = true)
     void deleteProductDeOrder(Integer idProduct,Integer idOrder);
+
+    @Query(value = "SELECT p.idProduct,p.name,p.image,p.price,p.description,0 AS clazz_ FROM Product as p ", nativeQuery = true)
+    List<Product> findAllProducts();
 
 }

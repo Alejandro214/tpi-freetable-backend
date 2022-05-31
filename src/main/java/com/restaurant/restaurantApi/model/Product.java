@@ -3,8 +3,7 @@ package com.restaurant.restaurantApi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,15 +11,18 @@ import java.util.List;
 
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorValue("product")
+@Table(name = "product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "idProduct")
     private Integer idProduct;
     private String name;
     private String image;
     private Double price;
-    private String  description;
+    private String description;
 
     @ManyToMany
     @JoinTable(
