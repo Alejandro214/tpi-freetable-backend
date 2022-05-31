@@ -81,11 +81,11 @@ public class ProductServiceImplTest {
 
     @Test
     void get_All_Products(){
-        when(iProductRepo.findAll()).thenReturn(asList(pizza,fanta));
+        when(iProductRepo.findAllProducts()).thenReturn(asList(pizza,fanta));
 
         List<Product> products = this.productService.getAllProducts();
         assertNotNull(products);
-        assertTrue(products.size() >= 1);
+       assertTrue(products.size() >= 1);
         Product product = products.get(0);
         assertNotNull(product.getImage());
         assertNotNull(product.getDescription());
