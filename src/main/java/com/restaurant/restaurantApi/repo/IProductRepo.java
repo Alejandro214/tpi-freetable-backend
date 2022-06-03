@@ -15,7 +15,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
     Product findByName(String name);
 
 
-    @Query(value = "Select   p.idProduct,p.name,p.image,p.price,p.description from product AS p  " +
+    @Query(value = "Select   p.idProduct,p.name,p.image,p.price,p.description,0 AS clazz_ from product AS p  " +
             " join productos_category as pg on pg.product = p.idProduct " +
             " join category as g on pg.category = g.category " +
             " where name LIKE %:name% xor g.nameCategory LIKE %:name% ",nativeQuery = true)
