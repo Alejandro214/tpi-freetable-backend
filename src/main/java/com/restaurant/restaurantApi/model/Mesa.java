@@ -17,7 +17,7 @@ public class Mesa {
     @OneToMany(mappedBy = "mesa")
     private List<Order> listPedidos = new ArrayList<>();
 
-
+    private String estadoMesa = "disponible";
 
     public void addOrder(Order order){
         this.listPedidos.add(order);

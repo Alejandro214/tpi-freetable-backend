@@ -65,6 +65,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public List<Product> productscategoryByNameCategory(String nameCategory) {
+        if(nameCategory.equals("Todos"))
+            return this.getAllProducts();
        Category category = this.categoryRepo.findByNameCategory(nameCategory);
        return category.getProducts();
     }
