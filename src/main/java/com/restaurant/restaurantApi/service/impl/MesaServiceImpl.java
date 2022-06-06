@@ -43,4 +43,11 @@ public class MesaServiceImpl implements IMesaService {
         mesa.addOrder(order1);
         return this.iMesaRepo.save(mesa);
     }
+
+    @Override
+    public Mesa changeEstadoMesa(Integer idMesa,String newEstadoMesa) {
+        Mesa mesa = this.getMesaById(idMesa);
+        mesa.setEstadoMesa(newEstadoMesa);
+        return this.saveMesa(mesa);
+    }
 }

@@ -62,6 +62,12 @@ public class MesaController {
             throw new AddOrderByIdMesaException(ExceptionMessage.ADD_ORDER_BY_ID_MESA_EXCEPTION.getValue());
         }
     }
+    @PutMapping("changeEstadoMensa/{idMesa}/{newEstadoMesa}")
+    public ResponseEntity<Mesa> changeEstadoMesa(@PathVariable("idMesa") Integer idMesa,
+                                                 @PathVariable("newEstadoMesa") String newEstadoMesa) {
+        Mesa mesa = this.iMesaService.changeEstadoMesa(idMesa,newEstadoMesa);
+        return new ResponseEntity<>(mesa,HttpStatus.OK);
+    }
 
 
 
