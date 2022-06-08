@@ -3,6 +3,7 @@ CREATE TABLE `table_order` (
   `idOrder` int NOT NULL AUTO_INCREMENT,
   `totalPrice` double NOT NULL,
   `idMesa` int,
+  `dateOrder` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idOrder`)
 )
 

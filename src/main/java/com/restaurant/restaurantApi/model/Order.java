@@ -28,6 +28,8 @@ public class Order {
     @ManyToOne(cascade = CascadeType.ALL)
     private Mesa mesa;
 
+    private String dateOrder;
+
 
     public void deleteMesa(){
         this.mesa = null;
