@@ -25,4 +25,6 @@ public interface IProductService {
     Integer cantProductosByNameCategory(String nameCategory);
 
     void deleteProductOrder(Integer idOrder,Product product);
+
+    Product updateProduct(Product product);
 }

@@ -5,6 +5,7 @@ CREATE TABLE `product` (
   `image` varchar(500) NOT NULL,
   `price` double NOT NULL,
   `description` varchar(500) NOT NULL,
+  `cantProduct` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`idProduct`)
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

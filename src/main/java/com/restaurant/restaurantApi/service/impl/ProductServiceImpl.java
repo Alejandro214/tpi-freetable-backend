@@ -84,4 +84,10 @@ public class ProductServiceImpl implements IProductService {
         this.iOrderRepo.save(order);
     }
 
+    @Override
+    public Product updateProduct(Product product) {
+        product.incrementCantProduct();
+        return this.saveProduct(product);
+    }
+
 }

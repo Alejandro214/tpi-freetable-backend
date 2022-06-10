@@ -41,8 +41,14 @@ public class Product {
     @JsonIgnore
     private List<Category> listCategory;
 
+    private Integer cantProduct = 1;
+
     public void addPedido(Order pedido){
         this.listPedidos.add(pedido);
+    }
+
+    public void incrementCantProduct() {
+        this.cantProduct +=1;
     }
 
 }
