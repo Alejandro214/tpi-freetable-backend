@@ -15,7 +15,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
     Product findByName(String name);
 
 
-    @Query(value = "Select   p.idProduct,p.name,p.image,p.price,p.description,0 AS clazz_ from product AS p  " +
+    @Query(value = "Select   p.idProduct,p.name,p.image,p.price,p.description,p.cantProduct,0 AS clazz_ from product AS p  " +
             " join productos_category as pg on pg.product = p.idProduct " +
             " join category as g on pg.category = g.category " +
             " where name LIKE %:name% xor g.nameCategory LIKE %:name% ",nativeQuery = true)
@@ -27,7 +27,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
             " WHERE product = :idProduct and table_order = :idOrder ",nativeQuery = true)
     void deleteProductDeOrder(Integer idProduct,Integer idOrder);
 
-    @Query(value = "SELECT p.idProduct,p.name,p.image,p.price,p.description,0 AS clazz_ FROM Product as p ", nativeQuery = true)
+    @Query(value = "SELECT p.idProduct,p.name,p.image,p.price,p.description,p.cantProduct,0 AS clazz_ FROM Product as p ", nativeQuery = true)
     List<Product> findAllProducts();
 
 }

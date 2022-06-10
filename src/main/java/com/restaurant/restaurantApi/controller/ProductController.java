@@ -102,7 +102,7 @@ public class ProductController {
         return new ResponseEntity<>("Se ha eliminado el producto con existo",HttpStatus.OK);
     }
 
-    @PutMapping("uptadteProduct")
+    @PutMapping("updateProduct")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product){
          return new ResponseEntity<>(this.iProductService.updateProduct(product),HttpStatus.OK);
     }
