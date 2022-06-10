@@ -1,14 +1,14 @@
 package com.restaurant.restaurantApi.service.impl;
 
+import com.restaurant.restaurantApi.model.Category;
 import com.restaurant.restaurantApi.model.Product;
+import com.restaurant.restaurantApi.repo.ICategoryRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestComponent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +31,8 @@ public class ProductServiceImplTest {
     @InjectMocks
     private ProductServiceImpl productService;
 
+    @Mock
+    private ICategoryRepo categoryRepo;
 
     private Product pizza = new Product();
 
@@ -95,22 +97,20 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void filter_Product_By_Name(){
+    void filter_Product_By_Name() {
         List<Product> array = new ArrayList<>();
         array.add(fanta);
         Page<Product> page = new PageImpl<>(array);
-        when(iProductRepo.filterProductByName(any(Pageable.class),any(String.class)))
+        when(iProductRepo.filterProductByName(any(Pageable.class), any(String.class)))
                 .thenReturn(page);
-        PageRequest pageable = PageRequest.of(2,20);
-        Set<Product> products = this.productService.filterProductByName(pageable,"Fa");
+        PageRequest pageable = PageRequest.of(2, 20);
+        Set<Product> products = this.productService.filterProductByName(pageable, "Fa");
         assertNotNull(products);
         assertEquals(1, products.size());
-        //System.out.println(products.);
-      //  assertTrue(products.get(0).getName().contains("Fa"));
-
-
-
+        assertTrue(products.iterator().next().getName().contains("Fa"));
     }
+
+
 
 
 }

@@ -10,4 +10,11 @@ public interface IComboRepo  extends CrudRepository<Combo, Integer> {
     @Query(value = "SELECT * FROM restaurant_db.combo ", nativeQuery = true)
     List<Combo> findAllCombos();
 
+
+    @Query(value = " select c.idProduct,c.name,c.image,c.price,c.description,c.from,c.to from table_order o " +
+            "INNER JOIN productos_pedidos pp on pp.table_order = o.idOrder " +
+            "INNer Join combo c on c.idProduct  = pp.product " +
+            "where idMesa = :idMesa ",nativeQuery = true)
+    List<Combo> findAllCombosByIdMesa(Integer idMesa);
+
 }

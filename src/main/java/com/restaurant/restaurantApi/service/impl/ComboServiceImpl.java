@@ -22,4 +22,9 @@ public class ComboServiceImpl implements IComboService {
     public List<Combo> getAllCombos() {
         return  this.iComboRepo.findAllCombos();
     }
+
+    @Override
+    public List<Combo> findAllCombosByIdMesa(Integer idMesa) {
+        return this.iComboRepo.findAllCombosByIdMesa(idMesa);
+    }
 }

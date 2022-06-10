@@ -7,4 +7,5 @@ import java.util.List;
 public interface IComboService {
     Combo save(Combo combo);
     List<Combo> getAllCombos();
+    List<Combo> findAllCombosByIdMesa(Integer idMesa);
 }

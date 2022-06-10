@@ -81,7 +81,6 @@ public class ProductServiceImpl implements IProductService {
         Order order = this.iOrderRepo.findById(idOrder).get();
         this.iProductRepo.deleteProductDeOrder(product.getIdProduct(),idOrder);
         order.deleteProduct(product);
-        System.out.println(order.getTotalPrice());
         this.iOrderRepo.save(order);
     }
 
