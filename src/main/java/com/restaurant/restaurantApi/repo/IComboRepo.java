@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface IComboRepo  extends CrudRepository<Combo, Integer> {
-    @Query(value = "SELECT * FROM restaurant_db.combo ", nativeQuery = true)
+    @Query(value = "SELECT c.idProduct,c.name,c.image,c.price,c.description,c.from,c.to, c.cantProduct FROM restaurant_db.combo c ", nativeQuery = true)
     List<Combo> findAllCombos();
 
 
