@@ -71,6 +71,13 @@ public class MesaController {
     }
 
 
+    @DeleteMapping("deleteMesaById/{idMesa}")
+    public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
+        this.iMesaService.deleteMesaById(idMesa);
+        return new ResponseEntity<>("Se ha eliminado la mesa con dicho id",HttpStatus.OK);
+    }
+
+
 
 
 

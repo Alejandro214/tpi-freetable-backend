@@ -50,4 +50,9 @@ public class MesaServiceImpl implements IMesaService {
         mesa.setEstadoMesa(newEstadoMesa);
         return this.saveMesa(mesa);
     }
+
+    @Override
+    public void deleteMesaById(Integer idMesa) {
+        this.iMesaRepo.deleteById(idMesa);
+    }
 }
