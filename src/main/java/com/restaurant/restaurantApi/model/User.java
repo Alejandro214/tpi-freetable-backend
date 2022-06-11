@@ -20,6 +20,6 @@ public class User {
 
     private String password;
 
-    private String rol;
+    private String rol = "user";
 
 }

@@ -33,4 +33,9 @@ public class UserServiceImpl implements IUserService {
         user.setRol(newRol);
         return this.saveUser(user);
     }
+
+    @Override
+    public User findUserByEmailAndPassword(String email, String password) {
+        return this.iUserRepo.findByEmailAndPassword(email,password);
+    }
 }

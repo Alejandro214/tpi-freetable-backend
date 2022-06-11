@@ -38,4 +38,9 @@ public class UserController {
     public ResponseEntity<User> changeRolUserById(@PathVariable Integer idUser,@PathVariable String newRol){
         return new ResponseEntity<>(this.iUserService.changeRolUserById(idUser,newRol),HttpStatus.OK);
     }
+
+    @GetMapping("findUserByEmailAndPassword/{email}/{password}")
+    public ResponseEntity<User> findUserByEmailAndPassword(@PathVariable String email,@PathVariable String password) {
+        return new ResponseEntity<>(this.iUserService.findUserByEmailAndPassword(email,password), HttpStatus.OK);
+    }
 }
