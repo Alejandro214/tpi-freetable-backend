@@ -30,4 +30,20 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
     @Query(value = "SELECT p.idProduct,p.name,p.image,p.price,p.description,p.cantProduct,0 AS clazz_ FROM Product as p ", nativeQuery = true)
     List<Product> findAllProducts();
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE `restaurant_db`.`product` SET `cantProduct` = :newCant WHERE (`idProduct` = :idProduct)", nativeQuery = true)
+    void updateCantProductById(Integer idProduct,Integer newCant);
+
+    @Query(value = " SELECT cantProduct FROM restaurant_db.table_order o " +
+            " INNER JOIN productos_pedidos pp ON   pp.table_order = o.idOrder  " +
+            " where idOrder = :idOrder and idMesa = :idMesa and product = :idProduct ", nativeQuery = true)
+    Integer getCantProductByIdMesaAndIdOrder(Integer idProduct, Integer idMesa, Integer idOrder);
+
+    @Transactional
+    @Modifying
+    @Query(value = " UPDATE `restaurant_db`.`productos_pedidos` SET `product` = :idProductACambiar " +
+            "WHERE (`product` = :idProductAReemplazar) and (`table_order` = :idOrder);",nativeQuery = true)
+    void reemplazarProductOrder(Integer idProductAReemplazar, Integer idOrder, Integer idProductACambiar);
+
 }

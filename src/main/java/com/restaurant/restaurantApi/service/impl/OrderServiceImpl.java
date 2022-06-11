@@ -65,7 +65,8 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public void updateProductosPedidos(Order order){
         for(Product p: order.getProducts()){
-            this.iOrderRepo.updateProductosPedidos(p.getIdProduct(),order.getIdOrder());
+            this.iOrderRepo.updateProductosPedidos(p.getIdProduct(),order.getIdOrder(),p.getCantProduct());
+            p.addPedido(order);
         }
     }
 

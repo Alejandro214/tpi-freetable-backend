@@ -1,8 +1,6 @@
 package com.restaurant.restaurantApi.service.inter;
 
-import com.restaurant.restaurantApi.dto.ProductResponse;
 import com.restaurant.restaurantApi.model.Product;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -18,13 +16,15 @@ public interface IProductService {
 
     Set<Product> filterProductByName(Pageable pageable, String name);
 
-    List<Product> productsByCategory(Integer idCategory);
-
     List<Product> productscategoryByNameCategory(String nameCategory);
 
     Integer cantProductosByNameCategory(String nameCategory);
 
     void deleteProductOrder(Integer idOrder,Product product);
 
-    Product updateProduct(Product product);
+    void updateProduct(Integer idProduct,Integer newCant);
+
+    Integer getCantProductByIdMesaAndIdOrder(Integer idProduct,Integer idMesa,Integer idOrder);
+
+    void reemplazarProductOrder(Integer idProductAReemplazar,Integer idOrder,Integer idProductACambiar);
 }

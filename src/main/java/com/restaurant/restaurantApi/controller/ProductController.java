@@ -6,6 +6,7 @@ import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.service.inter.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -102,9 +103,26 @@ public class ProductController {
         return new ResponseEntity<>("Se ha eliminado el producto con existo",HttpStatus.OK);
     }
 
-    @PutMapping("updateProduct")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product){
-         return new ResponseEntity<>(this.iProductService.updateProduct(product),HttpStatus.OK);
+    @PutMapping("updateCantProductById/{idProduct}/{newCant}")
+    public ResponseEntity<String> updateProduct(@PathVariable("idProduct") Integer idProduct,@PathVariable("newCant") Integer newCant){
+        this.iProductService.updateProduct(idProduct,newCant);
+         return new ResponseEntity<>("Se ha actualizado la cantidad del producto con existo",HttpStatus.OK);
+    }
+
+    @GetMapping("getCantProductByIdMesaAndIdOrder/{idProduct}/{idMesa}/{idOrder}")
+    public  ResponseEntity<Integer> getCantProductByIdMesaAndIdOrder(@PathVariable("idProduct") Integer idProduct,
+                                                                     @PathVariable("idMesa") Integer idMesa,
+                                                                     @PathVariable("idOrder") Integer idOrder){
+        return new ResponseEntity<>(this.iProductService.getCantProductByIdMesaAndIdOrder(idProduct,idMesa,idOrder),HttpStatus.OK);
+    }
+
+    @PutMapping("reemplazarProductOrder/{idProductAReemplazar}/{idOrder}/{idProductACambiar}")
+    public ResponseEntity<String> reemplazarProductOrder(@PathVariable("idProductAReemplazar") Integer idProductAReemplazar,
+                                                         @PathVariable("idOrder") Integer idOrder,
+                                                         @PathVariable("idProductACambiar") Integer idProductACambiar){
+        this.iProductService.reemplazarProductOrder(idProductAReemplazar,idOrder,idProductACambiar);
+        return new ResponseEntity<>("Se ha reemplazado el producto con existo",HttpStatus.OK);
+
     }
 
 

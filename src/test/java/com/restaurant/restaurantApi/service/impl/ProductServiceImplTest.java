@@ -53,6 +53,12 @@ public class ProductServiceImplTest {
         fanta.setDescription("Gaseosa fanta mediana");
         fanta.setName("Fanta");
         fanta.setPrice(200d);
+        List<Category> categories = new ArrayList<>();
+        Category gaseosaCategory  = new Category();
+        gaseosaCategory.setNameCategory("Gaseosas");
+        categories.add(gaseosaCategory);
+
+        fanta.setListCategory(categories);
 
 
 
@@ -108,6 +114,20 @@ public class ProductServiceImplTest {
         assertNotNull(products);
         assertEquals(1, products.size());
         assertTrue(products.iterator().next().getName().contains("Fa"));
+    }
+
+
+    @Test
+    void products_category_By_Name_Category(){
+        Category category = new Category();
+        List<Product> products = new ArrayList<>();
+        products.add(fanta);
+        category.setProducts(products);
+        when(categoryRepo.findByNameCategory("Gaseosas")).thenReturn(category);
+        List<Product> productList = this.productService.productscategoryByNameCategory("Gaseosas");
+        assertNotNull(products);
+        assertEquals(1, products.size());
+        assertTrue(products.get(0).getListCategory().stream().anyMatch(category1 -> category1.getNameCategory().equals("Gaseosas")));
     }
 
 

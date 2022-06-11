@@ -55,13 +55,7 @@ public class ProductServiceImpl implements IProductService {
 
 
 
-    @Override
-    public List<Product> productsByCategory(Integer idCategory) {
-        Category category = this.categoryRepo.findById(idCategory).orElse(null);
-        if (category == null)
-            return new ArrayList<>();
-        return category.getProducts();
-    }
+
 
     @Override
     public List<Product> productscategoryByNameCategory(String nameCategory) {
@@ -85,8 +79,18 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Product updateProduct(Product product) {
-        return this.saveProduct(product);
+    public void updateProduct(Integer idProduct,Integer newCant) {
+         this.iProductRepo.updateCantProductById(idProduct,newCant);
+    }
+
+    @Override
+    public Integer getCantProductByIdMesaAndIdOrder(Integer idProduct, Integer idMesa, Integer idOrder) {
+        return this.iProductRepo.getCantProductByIdMesaAndIdOrder(idProduct, idMesa, idOrder);
+    }
+
+    @Override
+    public void reemplazarProductOrder(Integer idProductAReemplazar, Integer idOrder, Integer idProductACambiar) {
+        this.iProductRepo.reemplazarProductOrder(idProductAReemplazar,idOrder,idProductACambiar);
     }
 
 }
