@@ -69,8 +69,6 @@ public class MesaController {
         Mesa mesa = this.iMesaService.changeEstadoMesa(idMesa,newEstadoMesa);
         return new ResponseEntity<>(mesa,HttpStatus.OK);
     }
-
-
     @DeleteMapping("deleteMesaById/{idMesa}")
     public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
         this.iMesaService.deleteMesaById(idMesa);

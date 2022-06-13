@@ -41,6 +41,7 @@ public class OrderController {
         try {
             return new ResponseEntity<>(this.iOrderService.getAllOrders(idMesa), HttpStatus.OK);
         }catch (Exception e){
+            System.out.println(e.getMessage());
             throw new GetAllOrdersByIdMesaException(ExceptionMessage.GER_ALL_ORDERS_BY_MESA_EXCEPTION_.getValue());
         }
     }

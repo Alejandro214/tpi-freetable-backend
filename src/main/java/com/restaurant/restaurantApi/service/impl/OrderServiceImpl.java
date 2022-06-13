@@ -40,17 +40,19 @@ public class OrderServiceImpl implements IOrderService {
         List<Combo> combos = iComboRepo.findAllCombosByIdMesa(idMesa);
         List<Order> orders = this.iOrderRepo.findAllByMesa(mesa);
         agregarCombosOrder(orders,combos);
-        return this.iOrderRepo.findAllByMesa(mesa);
+        return orders;
     }
 
     private void agregarCombosOrder(List<Order> orders, List<Combo> combos){
-        orders.stream().forEach(order -> combos.stream().forEach(combo -> this.addComboOrder(combo,order)) );  ;
+        orders.forEach(order -> combos.forEach(combo -> this.addComboOrder(combo,order)) );  ;
     }
 
     private void addComboOrder(Combo combo,Order order){
-        if(combo.getListPedidos().contains(order))
+        if(combo.containsOrder(order))
             order.addProduct(combo);
     }
+
+
 
     @Override
     public void deleteOrder(Integer idOrder) {

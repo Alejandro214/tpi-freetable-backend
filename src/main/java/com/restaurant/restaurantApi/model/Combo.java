@@ -1,6 +1,6 @@
 package com.restaurant.restaurantApi.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -10,7 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @DiscriminatorValue("combo")
 @Table(name = "combo")
 public class Combo extends Product {
@@ -24,4 +27,6 @@ public class Combo extends Product {
         Date date = new Date();
         this.from = dateFormat.format(date);
     }
+
+
 }

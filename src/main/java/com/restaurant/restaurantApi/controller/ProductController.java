@@ -6,7 +6,6 @@ import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.service.inter.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -53,9 +52,9 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna todos los productos", notes = "Retorna todos los productos que es restaurante tiene")
     @GetMapping("getAllProducts")
-    public ResponseEntity<List<Product>> getAllProducts(){
+    public ResponseEntity<List<Product>> getAllProducts(@PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable){
         try {
-        return new ResponseEntity<>(this.iProductService.getAllProducts(),HttpStatus.OK);
+        return new ResponseEntity<>(this.iProductService.getAllProducts(pageable),HttpStatus.OK);
         }catch (Exception e){
             throw new GetAllProducts(ExceptionMessage.GET_ALL_PRODUCTS_EXCEPTION.getValue());
         }
@@ -75,9 +74,10 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna el producto de la categoria seleccionada")
     @GetMapping("categoryByNameCategory/{nameCategory}")
-    public ResponseEntity<List<Product>> getProductByNameCategory(@PathVariable("nameCategory") String nameCategory){
+    public ResponseEntity<List<Product>> getProductByNameCategory(@PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable
+                                                                  ,@PathVariable("nameCategory") String nameCategory){
         try {
-            List<Product> categories = this.iProductService.productscategoryByNameCategory(nameCategory);
+            List<Product> categories = this.iProductService.productscategoryByNameCategory(nameCategory,pageable);
             return new ResponseEntity<>(categories,HttpStatus.OK);
         }catch (Exception e){
             throw new GetProductByNameCategory(ExceptionMessage.GET_PRODUCT_BY_NAME_CATEGORY.getValue());

@@ -2,14 +2,18 @@ package com.restaurant.restaurantApi.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorValue("product")
@@ -30,6 +34,7 @@ public class Product {
             joinColumns = @JoinColumn(name = "product",referencedColumnName = "idProduct"),
             inverseJoinColumns = @JoinColumn(name = "table_order",referencedColumnName = "idOrder"))
     @JsonIgnore
+    @ToString.Exclude
     private List<Order> listPedidos = new ArrayList<>();
 
     @ManyToMany
@@ -39,6 +44,7 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category",referencedColumnName = "idCategory")
     )
     @JsonIgnore
+    @ToString.Exclude
     private List<Category> listCategory;
 
     private Integer cantProduct = 1;
@@ -51,4 +57,20 @@ public class Product {
         this.cantProduct +=1;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Product product = (Product) o;
+        return idProduct != null && Objects.equals(idProduct, product.idProduct);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+    public boolean containsOrder(Order order){
+        System.out.println(this.getListPedidos());
+        return this.getListPedidos().contains(order);
+    }
 }

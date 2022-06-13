@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,24 +44,24 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProducts(Pageable pageable) {
 
-        return   this.iProductRepo.findAllProducts();
+        return   this.iProductRepo.findAll(pageable).getContent();
     }
 
     @Override
     public Set<Product> filterProductByName(Pageable pageable, String name) {
-        return  this.iProductRepo.filterProductByName(pageable,name).getContent().stream().collect(Collectors.toSet());
+        List<Product> products = this.getAllProducts(pageable);
+        Set<Product> resultProductsFilter = products.stream().filter(product -> product.getName().toLowerCase().contains(name.toLowerCase())
+                || product.getListCategory().stream().anyMatch(category -> category.getNameCategory().toLowerCase().contains(name.toLowerCase()))).collect(Collectors.toSet());
+        return resultProductsFilter;
     }
 
 
-
-
-
     @Override
-    public List<Product> productscategoryByNameCategory(String nameCategory) {
+    public List<Product> productscategoryByNameCategory(String nameCategory,Pageable pageable) {
         if(nameCategory.equals("Todos"))
-            return this.getAllProducts();
+            return this.getAllProducts(pageable);
        Category category = this.categoryRepo.findByNameCategory(nameCategory);
        return category.getProducts();
     }

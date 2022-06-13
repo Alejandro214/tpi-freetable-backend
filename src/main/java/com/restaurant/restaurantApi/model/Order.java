@@ -1,14 +1,18 @@
 package com.restaurant.restaurantApi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "table_order")
 public class Order {
@@ -18,6 +22,7 @@ public class Order {
     private Integer idOrder;
 
     @ManyToMany(mappedBy = "listPedidos",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Product> products = new ArrayList<>();
 
     @Column(name = "totalPrice")
@@ -26,6 +31,7 @@ public class Order {
     @JoinColumn(name="idMesa",referencedColumnName = "idMesa")
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Mesa mesa;
 
     private String dateOrder;
@@ -45,5 +51,16 @@ public class Order {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Order order = (Order) o;
+        return idOrder != null && Objects.equals(idOrder, order.idOrder);
+    }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

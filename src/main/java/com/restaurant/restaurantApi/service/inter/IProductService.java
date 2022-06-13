@@ -12,11 +12,11 @@ public interface IProductService {
 
     Product searchProduct(String name);
 
-    List<Product> getAllProducts();
+    List<Product> getAllProducts(Pageable pageable);
 
     Set<Product> filterProductByName(Pageable pageable, String name);
 
-    List<Product> productscategoryByNameCategory(String nameCategory);
+    List<Product> productscategoryByNameCategory(String nameCategory,Pageable pageable);
 
     Integer cantProductosByNameCategory(String nameCategory);
 
