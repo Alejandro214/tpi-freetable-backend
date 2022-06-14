@@ -18,5 +18,7 @@ public interface IOrderService {
 
      Order updateOrder(Order order);
 
+     Order addProductOrder(Integer idProduct,Integer idOrder,Integer cant);
+
 
 }

@@ -67,4 +67,13 @@ public class OrderController {
              throw new UpdateOrderException(ExceptionMessage.UPDATE_ORDER_EXCEPTION.getValue());
         }
     }
+
+    @ApiOperation("Agrega un nuevo producto a la order con dicho id")
+    @PostMapping("addProductOrder/{idProduct}/{idOrder}/{cant}")
+    public ResponseEntity<Order> addProductOrder(@PathVariable("idProduct") Integer idProduct,
+                                                  @PathVariable("idOrder") Integer idOrder,
+                                                  @PathVariable("cant") Integer cant){
+        return new ResponseEntity(this.iOrderService.addProductOrder(idProduct,idOrder,cant),HttpStatus.OK);
+
+    }
 }
