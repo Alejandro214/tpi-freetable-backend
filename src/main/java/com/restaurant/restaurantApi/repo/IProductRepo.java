@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -42,8 +43,17 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = " UPDATE `restaurant_db`.`productos_pedidos` SET `product` = :idProductACambiar " +
-            "WHERE (`product` = :idProductAReemplazar) and (`table_order` = :idOrder);",nativeQuery = true)
+    @Query(value = " UPDATE productos_pedidos SET product = :idProductACambiar ,cantProduct = 1 " +
+            " WHERE (product = :idProductAReemplazar) and (table_order = :idOrder) ",nativeQuery = true)
     void reemplazarProductOrder(Integer idProductAReemplazar, Integer idOrder, Integer idProductACambiar);
 
+
+    @Query(value = " SELECT ((SELECT COUNT(*) FROM productos_pedidos where product = :idProductACambiar and `table_order` = :idOrder ) > 0) ",nativeQuery = true)
+    BigInteger existeProductoInPedidosProductos(Integer idOrder, Integer idProductACambiar);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE `restaurant_db`.`productos_pedidos` SET `cantProduct` = cantProduct + 1 " +
+            "WHERE (`product` = :idProduct) and (`table_order` = :idOrder) ",nativeQuery = true)
+    void incrementarCantidadProductByIdProductAndIdOrder(Integer idProduct,Integer idOrder);
 }

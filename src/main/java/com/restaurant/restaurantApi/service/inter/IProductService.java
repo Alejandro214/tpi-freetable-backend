@@ -27,4 +27,6 @@ public interface IProductService {
     Integer getCantProductByIdMesaAndIdOrder(Integer idProduct,Integer idMesa,Integer idOrder);
 
     void reemplazarProductOrder(Integer idProductAReemplazar,Integer idOrder,Integer idProductACambiar);
+
+    Integer getCantProducts();
 }

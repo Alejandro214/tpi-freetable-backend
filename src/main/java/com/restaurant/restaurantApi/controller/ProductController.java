@@ -125,5 +125,10 @@ public class ProductController {
 
     }
 
+    @GetMapping("getCantProducts")
+    public ResponseEntity<Integer> getCantProducts(){
+        return new ResponseEntity<>(this.iProductService.getCantProducts(),HttpStatus.OK);
+    }
+
 
 }

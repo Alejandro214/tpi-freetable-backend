@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -52,9 +53,8 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public Set<Product> filterProductByName(Pageable pageable, String name) {
         List<Product> products = this.getAllProducts(pageable);
-        Set<Product> resultProductsFilter = products.stream().filter(product -> product.getName().toLowerCase().contains(name.toLowerCase())
+        return products.stream().filter(product -> product.getName().toLowerCase().contains(name.toLowerCase())
                 || product.getListCategory().stream().anyMatch(category -> category.getNameCategory().toLowerCase().contains(name.toLowerCase()))).collect(Collectors.toSet());
-        return resultProductsFilter;
     }
 
 
@@ -91,7 +91,22 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void reemplazarProductOrder(Integer idProductAReemplazar, Integer idOrder, Integer idProductACambiar) {
-        this.iProductRepo.reemplazarProductOrder(idProductAReemplazar,idOrder,idProductACambiar);
+        BigInteger bigInteger = this.iProductRepo.existeProductoInPedidosProductos(idOrder,idProductACambiar);
+        if(bigInteger.intValue() == 0) {
+            this.iProductRepo.reemplazarProductOrder(idProductAReemplazar, idOrder, idProductACambiar);
+        }else {
+            if(!idProductAReemplazar.equals(idProductACambiar)) {
+                Product product = this.iProductRepo.findById(idProductAReemplazar).get();
+                this.deleteProductOrder(idOrder,product);
+            }
+            this.iProductRepo.incrementarCantidadProductByIdProductAndIdOrder(idProductACambiar,idOrder);
+        }
+    }
+
+    @Override
+    public Integer getCantProducts() {
+        List<Product> products = (List<Product>) this.iProductRepo.findAll();
+        return products.size();
     }
 
 }
