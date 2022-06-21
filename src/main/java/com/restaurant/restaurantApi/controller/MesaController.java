@@ -76,6 +76,14 @@ public class MesaController {
     }
 
 
+    @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
+    public ResponseEntity<String> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
+                                                     @PathVariable("newPosition") Integer position){
+        this.iMesaService.updatePositionMesa( idMesa, position);
+        return new ResponseEntity<>("Se ha actualizado la posicion de la mesa",HttpStatus.OK);
+    }
+
+
 
 
 
