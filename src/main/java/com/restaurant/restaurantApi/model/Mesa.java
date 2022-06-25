@@ -25,6 +25,8 @@ public class Mesa {
 
     private String estadoMesa = "Disponible";
 
+    private Integer positionMesa;
+
     public void addOrder(Order order){
         this.listPedidos.add(order);
     }

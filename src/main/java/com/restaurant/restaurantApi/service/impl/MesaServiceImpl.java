@@ -57,4 +57,11 @@ public class MesaServiceImpl implements IMesaService {
     public void deleteMesaById(Integer idMesa) {
         this.iMesaRepo.deleteById(idMesa);
     }
+
+    @Override
+    public Mesa updatePositionMesa(Integer idMesa,Integer position) {
+        Mesa mesa = this.getMesaById(idMesa);
+        mesa.setPositionMesa(position);
+        return this.saveMesa(mesa);
+    }
 }
