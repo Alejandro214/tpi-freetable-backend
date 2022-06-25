@@ -15,7 +15,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User saveUser(User user) {
         User user1 = this.iUserRepo.findByEmail(user.getEmail());
-        if(user1 != null) {
+        if(user1 == null) {
             return this.iUserRepo.save(user);
         }else {
             return null;
