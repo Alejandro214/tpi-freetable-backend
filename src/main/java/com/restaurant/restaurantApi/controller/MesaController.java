@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class MesaController {
     @Autowired
     private IMesaService iMesaService;
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Guarda la mesa que recibe y retorna la misma ya guardada")
     @PostMapping("saveMesa")
     public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
@@ -69,13 +70,14 @@ public class MesaController {
         Mesa mesa = this.iMesaService.changeEstadoMesa(idMesa,newEstadoMesa);
         return new ResponseEntity<>(mesa,HttpStatus.OK);
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("deleteMesaById/{idMesa}")
     public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
         this.iMesaService.deleteMesaById(idMesa);
         return new ResponseEntity<>("Se ha eliminado la mesa con dicho id",HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
     public ResponseEntity<String> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
                                                      @PathVariable("newPosition") Integer position){

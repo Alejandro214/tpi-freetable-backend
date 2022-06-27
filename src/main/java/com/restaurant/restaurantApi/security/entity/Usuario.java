@@ -26,8 +26,7 @@ public class Usuario {
     @NotNull
     private String password;
     @NotNull
-    @ManyToMany
-
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
