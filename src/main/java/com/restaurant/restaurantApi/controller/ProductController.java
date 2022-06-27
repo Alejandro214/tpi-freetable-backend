@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +49,7 @@ public class ProductController {
         }
 
     }
+
     @ApiOperation(value = "Retorna todos los productos", notes = "Retorna todos los productos que es restaurante tiene")
     @GetMapping("getAllProducts")
     public ResponseEntity<List<Product>> getAllProducts(@PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable){
