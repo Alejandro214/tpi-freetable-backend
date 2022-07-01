@@ -68,6 +68,10 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Integer cantProductosByNameCategory(String nameCategory) {
+        if(nameCategory.equals("Todos")) {
+            List<Product> products =  (List<Product>) this.iProductRepo.findAll();
+            return products.size();
+        }
         return this.categoryRepo.cantProductosByNameCategory(nameCategory);
     }
 
