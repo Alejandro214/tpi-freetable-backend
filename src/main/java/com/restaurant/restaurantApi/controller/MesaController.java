@@ -23,7 +23,7 @@ public class MesaController {
     @Autowired
     private IMesaService iMesaService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Guarda la mesa que recibe y retorna la misma ya guardada")
     @PostMapping("saveMesa")
     public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
@@ -70,14 +70,14 @@ public class MesaController {
         Mesa mesa = this.iMesaService.changeEstadoMesa(idMesa,newEstadoMesa);
         return new ResponseEntity<>(mesa,HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("deleteMesaById/{idMesa}")
     public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
         this.iMesaService.deleteMesaById(idMesa);
         return new ResponseEntity<>("Se ha eliminado la mesa con dicho id",HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
     public ResponseEntity<String> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
                                                      @PathVariable("newPosition") Integer position){

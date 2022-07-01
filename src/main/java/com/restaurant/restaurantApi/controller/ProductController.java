@@ -52,7 +52,7 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna todos los productos", notes = "Retorna todos los productos que es restaurante tiene")
     @GetMapping("getAllProducts")
-    public ResponseEntity<List<Product>> getAllProducts(@PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable){
+    public ResponseEntity<List<Product>> getAllProducts(@PageableDefault(size = 10000 , page = 0, direction = Sort.Direction.DESC) Pageable pageable){
         try {
         return new ResponseEntity<>(this.iProductService.getAllProducts(pageable),HttpStatus.OK);
         }catch (Exception e){
@@ -74,7 +74,7 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna el producto de la categoria seleccionada")
     @GetMapping("categoryByNameCategory/{nameCategory}")
-    public ResponseEntity<List<Product>> getProductByNameCategory(@PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable
+    public ResponseEntity<List<Product>> getProductByNameCategory(@PageableDefault(size = 10000 , page = 0, direction = Sort.Direction.DESC) Pageable pageable
                                                                   ,@PathVariable("nameCategory") String nameCategory){
         try {
             List<Product> categories = this.iProductService.productscategoryByNameCategory(nameCategory,pageable);
