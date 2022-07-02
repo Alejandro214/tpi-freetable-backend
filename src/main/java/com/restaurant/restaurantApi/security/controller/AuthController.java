@@ -59,8 +59,12 @@ public class AuthController {
                         passwordEncoder.encode(nuevoUsuario.getPassword()));
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
-                if(nuevoUsuario.getRoles().contains("ROLE_ADMIN"))
+        if(nuevoUsuario.getRoles().contains("ROLE_ADMIN")){
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
+        }
+        if(nuevoUsuario.getRoles().contains("ROLE_SOPORTE")){
+            roles.add(rolService.getByRolNombre(RolNombre.ROLE_SOPORTE).get());
+        }
         usuario.setRoles(roles);
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("usuario guardado"), HttpStatus.CREATED);

@@ -8,6 +8,7 @@ import com.restaurant.restaurantApi.repo.IOrderRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import com.restaurant.restaurantApi.service.inter.IProductService;
 import lombok.Data;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -98,6 +99,7 @@ public class ProductServiceImpl implements IProductService {
         BigInteger bigInteger = this.iProductRepo.existeProductoInPedidosProductos(idOrder,idProductACambiar);
         if(bigInteger.intValue() == 0) {
             this.iProductRepo.reemplazarProductOrder(idProductAReemplazar, idOrder, idProductACambiar);
+
         }else {
             if(!idProductAReemplazar.equals(idProductACambiar)) {
                 Product product = this.iProductRepo.findById(idProductAReemplazar).get();

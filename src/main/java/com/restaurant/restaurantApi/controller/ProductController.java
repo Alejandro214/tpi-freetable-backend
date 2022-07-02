@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -97,7 +98,8 @@ public class ProductController {
     }
 
     @ApiOperation(value = "Elimina el producto de la ordern que tiene dicho id")
-    @DeleteMapping("deleteProduct/{idOrder}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
+    @PostMapping("deleteProduct/{idOrder}")
     public ResponseEntity<String> deleteProductDeOrder(@PathVariable("idOrder") Integer idOrder,@RequestBody Product product){
         this.iProductService.deleteProductOrder(idOrder,product);
         return new ResponseEntity<>("Se ha eliminado el producto con existo",HttpStatus.OK);

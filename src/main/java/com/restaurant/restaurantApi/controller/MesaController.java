@@ -54,6 +54,7 @@ public class MesaController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
     @ApiOperation(value = "Retorna la mesa a la que se le agrego el pedido")
     @PutMapping("addOrderMesa/{idMesa}")
     public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa,@RequestBody Order order){
