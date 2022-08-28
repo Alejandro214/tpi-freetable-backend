@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna todos los productos", notes = "Retorna todos los productos que es restaurante tiene")
     @GetMapping("getAllProducts")
-    public ResponseEntity<List<Product>> getAllProducts(@PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable){
+    public ResponseEntity<List<Product>> getAllProducts(@PageableDefault(size = 10000 , page = 0, direction = Sort.Direction.DESC) Pageable pageable){
         try {
         return new ResponseEntity<>(this.iProductService.getAllProducts(pageable),HttpStatus.OK);
         }catch (Exception e){
@@ -74,7 +75,7 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna el producto de la categoria seleccionada")
     @GetMapping("categoryByNameCategory/{nameCategory}")
-    public ResponseEntity<List<Product>> getProductByNameCategory(@PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable
+    public ResponseEntity<List<Product>> getProductByNameCategory(@PageableDefault(size = 10000 , page = 0, direction = Sort.Direction.DESC) Pageable pageable
                                                                   ,@PathVariable("nameCategory") String nameCategory){
         try {
             List<Product> categories = this.iProductService.productscategoryByNameCategory(nameCategory,pageable);
@@ -97,7 +98,8 @@ public class ProductController {
     }
 
     @ApiOperation(value = "Elimina el producto de la ordern que tiene dicho id")
-    @DeleteMapping("deleteProduct/{idOrder}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
+    @PostMapping("deleteProduct/{idOrder}")
     public ResponseEntity<String> deleteProductDeOrder(@PathVariable("idOrder") Integer idOrder,@RequestBody Product product){
         this.iProductService.deleteProductOrder(idOrder,product);
         return new ResponseEntity<>("Se ha eliminado el producto con existo",HttpStatus.OK);

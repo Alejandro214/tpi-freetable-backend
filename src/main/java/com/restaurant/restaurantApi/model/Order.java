@@ -50,6 +50,9 @@ public class Order {
         this.products.add(product);
     }
 
+    public void addPrinceTotal (Double price) {
+        this.totalPrice += price;
+    }
 
     @Override
     public boolean equals(Object o) {

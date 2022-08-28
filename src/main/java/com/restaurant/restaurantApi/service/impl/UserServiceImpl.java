@@ -14,7 +14,12 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User saveUser(User user) {
-        return this.iUserRepo.save(user);
+        User user1 = this.iUserRepo.findByEmail(user.getEmail());
+        if(user1 == null) {
+            return this.iUserRepo.save(user);
+        }else {
+            return null;
+        }
     }
 
     @Override
@@ -36,6 +41,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User findUserByEmailAndPassword(String email, String password) {
-        return this.iUserRepo.findByEmailAndPassword(email,password);
+        User user = this.iUserRepo.findByEmailAndPassword(email,password);
+        return user;
     }
 }

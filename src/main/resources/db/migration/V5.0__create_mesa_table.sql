@@ -7,4 +7,4 @@ CREATE TABLE `mesa` (
   PRIMARY KEY (`idMesa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `mesa` VALUES (1,'Disponible',1),(2,'Disponible',2),(3,'Disponible',3),(4,'Disponible',4),(5,'Disponible',5),(6,'Disponible',6);
+INSERT INTO `mesa` VALUES (1,'Disponible',0),(2,'Disponible',1),(3,'Disponible',2),(4,'Disponible',3),(5,'Disponible',4),(6,'Disponible',5);

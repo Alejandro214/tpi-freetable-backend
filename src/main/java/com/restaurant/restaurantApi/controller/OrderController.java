@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class OrderController {
     }
 
     @ApiOperation(value= "Elimina la orden")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
     @DeleteMapping("deleteOrder/{idOrder}")
     public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
         try {

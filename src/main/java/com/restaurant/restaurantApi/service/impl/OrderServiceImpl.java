@@ -44,6 +44,7 @@ public class OrderServiceImpl implements IOrderService {
         List<Combo> combos = iComboRepo.findAllCombosByIdMesa(idMesa);
         List<Order> orders = this.iOrderRepo.findAllByMesa(mesa);
         agregarCombosOrder(orders, combos);
+
         return orders;
     }
 
@@ -88,11 +89,17 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order addProductOrder(Integer idProduct, Integer idOrder, Integer cant) {
+        Order order = this.iOrderRepo.findById(idOrder).get();
+        Product product = this.productRepo.findById(idProduct).get();
         if (this.productRepo.existeProductoInPedidosProductos(idOrder, idProduct).intValue() == 0) {
             this.iOrderRepo.updateProductosPedidos(idProduct, idOrder, cant);
+            order.addPrinceTotal(product.getPrice() * cant.doubleValue());
+            this.iOrderRepo.save(order);
 
         }else {
             this.productRepo.incrementarCantidadProductByIdProductAndIdOrder(idProduct,idOrder);
+            order.addPrinceTotal(product.getPrice());
+            this.iOrderRepo.save(order);
         }
         return this.getOrderById(idOrder);
     }
