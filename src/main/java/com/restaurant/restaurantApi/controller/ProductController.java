@@ -104,12 +104,14 @@ public class ProductController {
     }
 
     @PutMapping("updateCantProductById/{idProduct}/{newCant}")
+    @ApiOperation("Dada un idProduct y una cantidad actualiza la cantidad de dicho producto ")
     public ResponseEntity<String> updateProduct(@PathVariable("idProduct") Integer idProduct,@PathVariable("newCant") Integer newCant){
         this.iProductService.updateProduct(idProduct,newCant);
          return new ResponseEntity<>("Se ha actualizado la cantidad del producto con existo",HttpStatus.OK);
     }
 
     @GetMapping("getCantProductByIdMesaAndIdOrder/{idProduct}/{idMesa}/{idOrder}")
+    @ApiOperation("Dado un idProduct, idMesa y idOrder, retorna la cantidad de dicho producto que pertenece a una orden de una mesa en particular")
     public  ResponseEntity<Integer> getCantProductByIdMesaAndIdOrder(@PathVariable("idProduct") Integer idProduct,
                                                                      @PathVariable("idMesa") Integer idMesa,
                                                                      @PathVariable("idOrder") Integer idOrder){
@@ -117,6 +119,7 @@ public class ProductController {
     }
 
     @PutMapping("reemplazarProductOrder/{idProductAReemplazar}/{idOrder}/{idProductACambiar}")
+    @ApiOperation("Dado un idProductAReemplazar, un idOrder y un idProdcutACambiar, reemplaza el producto de dicha orden")
     public ResponseEntity<String> reemplazarProductOrder(@PathVariable("idProductAReemplazar") Integer idProductAReemplazar,
                                                          @PathVariable("idOrder") Integer idOrder,
                                                          @PathVariable("idProductACambiar") Integer idProductACambiar){
@@ -126,6 +129,7 @@ public class ProductController {
     }
 
     @GetMapping("getCantProducts")
+    @ApiOperation("Retorna el total de los productos que tiene el restaurant ")
     public ResponseEntity<Integer> getCantProducts(){
         return new ResponseEntity<>(this.iProductService.getCantProducts(),HttpStatus.OK);
     }

@@ -64,12 +64,14 @@ public class MesaController {
         }
     }
     @PutMapping("changeEstadoMensa/{idMesa}/{newEstadoMesa}")
+    @ApiOperation("Dada un idMesa y un newEstadoMesa, actualiza el estado de esta mesa, y retorna la mesa con el estado actualizado")
     public ResponseEntity<Mesa> changeEstadoMesa(@PathVariable("idMesa") Integer idMesa,
                                                  @PathVariable("newEstadoMesa") String newEstadoMesa) {
         Mesa mesa = this.iMesaService.changeEstadoMesa(idMesa,newEstadoMesa);
         return new ResponseEntity<>(mesa,HttpStatus.OK);
     }
     @DeleteMapping("deleteMesaById/{idMesa}")
+    @ApiOperation("Elimina la mesa con el idMesa dado")
     public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
         this.iMesaService.deleteMesaById(idMesa);
         return new ResponseEntity<>("Se ha eliminado la mesa con dicho id",HttpStatus.OK);
@@ -77,6 +79,7 @@ public class MesaController {
 
 
     @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
+    @ApiOperation("Actualiza la posicion de la mesa con el idMesa dado")
     public ResponseEntity<String> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
                                                      @PathVariable("newPosition") Integer position){
         this.iMesaService.updatePositionMesa( idMesa, position);
