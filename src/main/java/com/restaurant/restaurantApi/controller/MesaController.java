@@ -24,7 +24,7 @@ public class MesaController {
     private IMesaService iMesaService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @ApiOperation(value = "Guarda la mesa que recibe y retorna la misma ya guardada")
+    @ApiOperation(value = "Dada un mesa, la guarda en la base")
     @PostMapping("saveMesa")
     public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
         try {
@@ -34,7 +34,7 @@ public class MesaController {
         }
     }
 
-    @ApiOperation(value = "Retorna la mesa con el idMesa")
+    @ApiOperation(value = "Dado un idMesa, retorna la mesa con dicho idMesa")
     @GetMapping("getMesaById/{idMesa}")
     public  ResponseEntity<Mesa> getMesaById(@PathVariable("idMesa") Integer idMesa){
         try {
@@ -44,7 +44,7 @@ public class MesaController {
         }
     }
 
-    @ApiOperation(value = "Retorna una lista de mesas")
+    @ApiOperation(value = "Retorna todas las mesas actuales que tiene el restaurante")
     @GetMapping("findAllMesas")
     public ResponseEntity<List<Mesa>> findAllMesa(){
         try {
@@ -55,7 +55,7 @@ public class MesaController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
-    @ApiOperation(value = "Retorna la mesa a la que se le agrego el pedido")
+    @ApiOperation(value = "Dado un idMesa y un pedido, agrega el pedido a la mesa con dicho idMesa y retorna la mesa con el pedido agregado")
     @PutMapping("addOrderMesa/{idMesa}")
     public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa,@RequestBody Order order){
         try {
@@ -74,7 +74,7 @@ public class MesaController {
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("deleteMesaById/{idMesa}")
-    @ApiOperation("Elimina la mesa con el idMesa dado")
+    @ApiOperation("Dado un idMesa, elimmina la mesa con dicho idMesa")
     public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
         this.iMesaService.deleteMesaById(idMesa);
         return new ResponseEntity<>("Se ha eliminado la mesa con dicho id",HttpStatus.OK);
@@ -82,7 +82,7 @@ public class MesaController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
-    @ApiOperation("Actualiza la posicion de la mesa con el idMesa dado")
+    @ApiOperation("Dado un idMesa y una newPosition, actualiza la posicion de la mesa con dicho idMesa")
     public ResponseEntity<String> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
                                                      @PathVariable("newPosition") Integer position){
         this.iMesaService.updatePositionMesa( idMesa, position);

@@ -27,7 +27,7 @@ public class OrderController {
     @Autowired
     private IOrderService iOrderService;
 
-    @ApiOperation(value = "Create a new order",notes = "Retorna el pedido que se creo y guardo en la base")
+    @ApiOperation(value = "Create a new order",notes = "Dado un order, lo guarda en la base")
     @PostMapping("saveOrder")
     public ResponseEntity<Order> saveOrder(@RequestBody Order order){
         try {
@@ -36,7 +36,7 @@ public class OrderController {
             throw new SaveOrderBadRequestException(ExceptionMessage.SAVE_ORDER_ERROR.getValue());
         }
     }
-    @ApiOperation(value = "Retorna los todos pedidos",notes = "Retorna todos los pedidos que se realizaron hasta el momento")
+    @ApiOperation(value = "Retorna los todos pedidos",notes = "Dado un idMesa, retorna todos los pedidos que se realizaron en la mesa con dicho idMesa")
     @GetMapping("getAllOrders/{idMesa}")
     public ResponseEntity<List<Order>> getAllOrders(@PathVariable("idMesa") Integer idMesa){
         try {
@@ -47,7 +47,7 @@ public class OrderController {
         }
     }
 
-    @ApiOperation(value= "Elimina la orden")
+    @ApiOperation(value= "Dado un idOrder, elimina el pedido con dicho idOrder")
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
     @DeleteMapping("deleteOrder/{idOrder}")
     public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
@@ -60,7 +60,7 @@ public class OrderController {
         }
     }
 
-    @ApiOperation(value = "Retorna el pedido actualizado")
+    @ApiOperation(value = "Dado un pedido, lo actualiza con los nuevos campos cambiado, y retorna el pedido actualizado")
     @PutMapping("updateOrder")
     public ResponseEntity<Order> updateOrder(@RequestBody Order order){
         try{
@@ -70,7 +70,7 @@ public class OrderController {
         }
     }
 
-    @ApiOperation("Agrega un nuevo producto a la order con dicho id")
+    @ApiOperation("Dado un idProduct, idOrder y una cant, agrega el producto al pedido con idProduct y lo retorna")
     @PostMapping("addProductOrder/{idProduct}/{idOrder}/{cant}")
     public ResponseEntity<Order> addProductOrder(@PathVariable("idProduct") Integer idProduct,
                                                   @PathVariable("idOrder") Integer idOrder,
