@@ -31,8 +31,8 @@ public class Product {
     @ManyToMany
     @JoinTable(
             name = "productos_pedidos",
-            joinColumns = @JoinColumn(name = "product",referencedColumnName = "idProduct"),
-            inverseJoinColumns = @JoinColumn(name = "table_order",referencedColumnName = "idOrder"))
+            joinColumns = @JoinColumn(name = "id_product",referencedColumnName = "idProduct"),
+            inverseJoinColumns = @JoinColumn(name = "id_order",referencedColumnName = "idOrder"))
     @JsonIgnore
     @ToString.Exclude
     private List<Order> listPedidos = new ArrayList<>();
@@ -40,8 +40,8 @@ public class Product {
     @ManyToMany
     @JoinTable(
             name = "productos_category",
-            joinColumns = @JoinColumn(name = "product",referencedColumnName = "idProduct"),
-            inverseJoinColumns = @JoinColumn(name = "category",referencedColumnName = "idCategory")
+            joinColumns = @JoinColumn(name = "id_product",referencedColumnName = "idProduct"),
+            inverseJoinColumns = @JoinColumn(name = "id_category",referencedColumnName = "idCategory")
     )
     @JsonIgnore
     @ToString.Exclude

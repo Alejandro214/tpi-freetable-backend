@@ -34,8 +34,17 @@ INSERT INTO `product` VALUES (18,'Papas Fritas','https://cukme.com/wp-content/up
 (50,'Pastel de carne','https://t2.rg.ltmcdn.com/es/posts/5/1/9/pastel_de_carne_al_horno_32915_orig.jpg',1000,'Pastel de carne al horno con salsa inglesa',1),
 (60,'Salmon','https://www.comedera.com/wp-content/uploads/2022/04/salmon-con-salsa-de-champin%CC%83ones-500x500.jpg',700,'Plato grande de salmon con salsa de champiñones',1),
 (61,'Vino valentin','https://d3ugyf2ht6aenh.cloudfront.net/stores/001/170/454/products/don-valentin1-06aa70a3e033925bbe15930119294499-480-0.png',400,'Vino dulcen valentin',1),
-(66,'Ensalada rusa','https://cuk-it.com/wp-content/uploads/2020/11/ensalada-rusa-ig02.jpg',300,'Rica ensalada rusa con Papas, Zanahoria, Huevo, Morron y Arvejas',1);
-
+(66,'Ensalada rusa','https://cuk-it.com/wp-content/uploads/2020/11/ensalada-rusa-ig02.jpg',300,'Rica ensalada rusa con Papas, Zanahoria, Huevo, Morron y Arvejas',1),
+(67,'Extasiante cheesecake de chocolate','https://assets.kraftfoods.com/assets/recipe_images/Chocolate-Bliss-Cheesecake-4345.jpg',500,'Delicioso Extasiante cheesecake de chocolate',1),
+(68,'Quesadillas de pavo y salsa de arandanos','https://www.vvsupremo.com/wp-content/uploads/2016/02/Quesadillas-de-Pavo-y-Salsa-de-Ar%C3%A1ndanos.jpg',400,'Estas deliciosas quesadillas con queso derretido de seguro serán del agrado de toda la familia',1),
+(69,'Sándwich tostado de queso favorito de América','http://assets.kraftfoods.com/recipe_images/opendeploy/106866_MXM_K2526V16S_OR1_H_640x428.jpg',250,'Excelente tostado con queso cheddar',1),
+(70,'Medallones de cerdo con salsa de Jamaica','https://ranchera.com.co/wp-content/uploads/2022/04/medallones-de-cerdo.jpg',900,'Medallones de cerdo con salsa de Jamaica y papas fritas',1),
+(72,'Costillas con salsa chimichurri','https://estag.fimagenes.com/imagenesred/2240021_0.jpg?1?1',550,'Costillas de cerdo con salsa chimichurri',1),
+(73,'Champiñones rellenos con espinacas','https://cdn7.kiwilimon.com/recetaimagen/16021/8025.jpg',1250,'Ricos champiñones rellenos con espinacas',1),
+(74,'Cintas de pasta con goulash y champiñones','https://images.hola.com/imagenes/cocina/recetas/20190830148394/cintas-goulash-champinones/0-714-176/tallarines-goulash-m.jpg',350,'Cintas de pasta con goulash y champiñones',1),
+(75,'Solomillo wellington de cerdo con champiñones','https://images.hola.com/imagenes/cocina/recetas/20191111153728/solomillo-wellington-cerdo-champinones/0-744-395/wellington-cerdo-age-t.jpg',750,'Solomillo wellington de cerdo con champiñones',1),
+(76,'Sopa de Mariscos','https://www.mexicoenmicocina.com/wp-content/uploads/2019/05/caldo-de-mariscos-receta-8_1.jpg',650,'Rica sopa de mariscos',1),
+(77,'Atún a la Plancha','https://t2.rg.ltmcdn.com/es/posts/6/6/5/atun_a_la_plancha_con_ajo_y_perejil_59566_orig.jpg',200,'Atún a la plancha con ajo y perejil',1);
 
 
 

@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS `productos_category`;
 CREATE TABLE `productos_category` (
-  `product` int NOT NULL,
-  `category` int NOT NULL,
-  PRIMARY KEY (`product`,`category`)
+  `id_product` int NOT NULL,
+  `id_category` int NOT NULL,
+  PRIMARY KEY (`id_product`,`id_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 

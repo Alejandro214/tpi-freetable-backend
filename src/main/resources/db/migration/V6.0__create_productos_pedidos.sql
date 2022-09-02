@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS `productos_pedidos`;
 
 CREATE TABLE `productos_pedidos` (
-  `product` int NOT NULL,
-  `table_order` int NOT NULL,
+  `id_product` int NOT NULL,
+  `id_order` int NOT NULL,
   `cantProduct` INT NOT NULL DEFAULT 1,
-  PRIMARY KEY (`product`,`table_order`)
+  PRIMARY KEY (`id_product`,`id_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
