@@ -12,6 +12,7 @@ import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,7 +43,10 @@ public class OrderServiceImpl implements IOrderService {
     public List<Order> getAllOrders(Integer idMesa) {
         Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
         List<Order> orders = this.iOrderRepo.findAllByMesa(mesa);
-        orders.forEach(order -> order.setProducts(this.productRepo.findAllProductsByIdOrder(order.getIdOrder())));
+        orders.forEach(order -> {
+                     order.setProducts(this.productRepo.findAllProductsByIdOrder(order.getIdOrder()));
+                }
+        );
         return orders;
     }
 

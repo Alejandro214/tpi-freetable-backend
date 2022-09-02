@@ -4,6 +4,7 @@ package com.restaurant.restaurantApi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -67,5 +68,6 @@ public class Product {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 
 }
