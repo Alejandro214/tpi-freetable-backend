@@ -39,11 +39,7 @@ public class ProductServiceImpl implements IProductService {
         return this.iProductRepo.save(product);
     }
 
-    @Override
-    public Product searchProduct(String name) {
-        return this.iProductRepo.findByName(name);
 
-    }
 
     @Override
     public List<Product> getAllProducts(Pageable pageable) {

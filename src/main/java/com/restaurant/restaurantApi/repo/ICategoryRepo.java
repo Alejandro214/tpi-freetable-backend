@@ -11,7 +11,7 @@ public interface ICategoryRepo extends CrudRepository<Category, Integer>{
     List<Category> findAllByIdCategory(Integer idCategory);
     Category  findByNameCategory(String nameCategory);
     @Query(value ="    SELECT count(*) as cantidad_de_productos FROM restaurant_db.productos_category pc " +
-            "   INNER JOIN category c ON pc.category = c.idCategory " +
+            "   INNER JOIN category c ON pc.id_category = c.idCategory " +
             "   where c.nameCategory = :nameCategory ", nativeQuery = true)
     Integer cantProductosByNameCategory(String nameCategory);
 }

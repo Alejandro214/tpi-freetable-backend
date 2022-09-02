@@ -39,17 +39,6 @@ public class ProductController {
 
         }
     }
-    @ApiOperation(value = "Busca el producto con ese nombre",notes = "Retorna el producto con el nombre que se pasa por la url")
-    @GetMapping("searchProduct/{name}")
-    public ResponseEntity<Product> searchProduct(@PathVariable("name") String name){
-        try {
-            return new ResponseEntity<>(this.iProductService.searchProduct(name),HttpStatus.OK);
-        }catch (Exception e){
-            throw new SearchProductException(ExceptionMessage.SEARCH_PRODUCT_EXCEPTION.getValue());
-
-        }
-
-    }
 
     @ApiOperation(value = "Retorna todos los productos", notes = "Retorna todos los productos que es restaurante tiene")
     @GetMapping("getAllProducts")
@@ -98,7 +87,6 @@ public class ProductController {
     }
 
     @ApiOperation(value = "Elimina el producto de la ordern que tiene dicho id")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
     @PostMapping("deleteProduct/{idOrder}")
     public ResponseEntity<String> deleteProductDeOrder(@PathVariable("idOrder") Integer idOrder,@RequestBody Product product){
         this.iProductService.deleteProductOrder(idOrder,product);

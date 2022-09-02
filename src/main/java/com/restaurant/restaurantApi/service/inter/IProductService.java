@@ -10,7 +10,7 @@ public interface IProductService {
 
     Product saveProduct(Product product);
 
-    Product searchProduct(String name);
+
 
     List<Product> getAllProducts(Pageable pageable);
 

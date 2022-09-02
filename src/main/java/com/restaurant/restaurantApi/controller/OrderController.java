@@ -48,7 +48,6 @@ public class OrderController {
     }
 
     @ApiOperation(value= "Dado un idOrder, elimina el pedido con dicho idOrder")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
     @DeleteMapping("deleteOrder/{idOrder}")
     public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
         try {

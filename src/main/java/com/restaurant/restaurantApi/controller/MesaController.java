@@ -23,7 +23,6 @@ public class MesaController {
     @Autowired
     private IMesaService iMesaService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Dada un mesa, la guarda en la base")
     @PostMapping("saveMesa")
     public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
@@ -54,7 +53,6 @@ public class MesaController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SOPORTE')")
     @ApiOperation(value = "Dado un idMesa y un pedido, agrega el pedido a la mesa con dicho idMesa y retorna la mesa con el pedido agregado")
     @PutMapping("addOrderMesa/{idMesa}")
     public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa,@RequestBody Order order){
@@ -72,7 +70,6 @@ public class MesaController {
         Mesa mesa = this.iMesaService.changeEstadoMesa(idMesa,newEstadoMesa);
         return new ResponseEntity<>(mesa,HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("deleteMesaById/{idMesa}")
     @ApiOperation("Dado un idMesa, elimmina la mesa con dicho idMesa")
     public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
@@ -80,7 +77,6 @@ public class MesaController {
         return new ResponseEntity<>("Se ha eliminado la mesa con dicho id",HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
     @ApiOperation("Dado un idMesa y una newPosition, actualiza la posicion de la mesa con dicho idMesa")
     public ResponseEntity<String> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,

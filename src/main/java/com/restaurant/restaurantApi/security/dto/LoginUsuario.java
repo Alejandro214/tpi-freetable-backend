@@ -9,10 +9,8 @@ import javax.validation.constraints.NotNull;
 public class LoginUsuario {
 
     @NotBlank
-    @NotNull
     private String nombreUsuario;
 
     @NotBlank
-    @NotNull
     private String password;
 }

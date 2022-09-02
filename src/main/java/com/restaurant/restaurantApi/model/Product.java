@@ -27,6 +27,7 @@ public class Product {
     private String image;
     private Double price;
     private String description;
+    private Integer cantProduct;
 
     @ManyToMany
     @JoinTable(
@@ -47,15 +48,12 @@ public class Product {
     @ToString.Exclude
     private List<Category> listCategory;
 
-    private Integer cantProduct = 1;
+
 
     public void addPedido(Order pedido){
         this.listPedidos.add(pedido);
     }
 
-    public void incrementCantProduct() {
-        this.cantProduct +=1;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -69,8 +67,5 @@ public class Product {
     public int hashCode() {
         return getClass().hashCode();
     }
-    public boolean containsOrder(Order order){
-        System.out.println(this.getListPedidos());
-        return this.getListPedidos().contains(order);
-    }
+
 }

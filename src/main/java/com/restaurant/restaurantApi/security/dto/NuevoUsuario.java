@@ -11,16 +11,12 @@ import java.util.Set;
 @Data
 public class NuevoUsuario {
     @NotBlank
-    @NotNull
     private String nombre;
     @NotBlank
-    @NotNull
     private String nombreUsuario;
     @Email
-    @NotNull
     private String email;
     @NotBlank
-    @NotNull
     private String password;
 
     private String rol = "ROLE_USER";

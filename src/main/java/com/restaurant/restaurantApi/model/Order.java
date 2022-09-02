@@ -46,9 +46,6 @@ public class Order {
         this.totalPrice -=product.getPrice();
     }
 
-    public void addProduct(Product product){
-        this.products.add(product);
-    }
 
     public void addPrinceTotal (Double price) {
         this.totalPrice += price;
