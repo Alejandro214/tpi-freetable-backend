@@ -6,6 +6,7 @@ import com.restaurant.restaurantApi.security.dto.LoginUsuario;
 import com.restaurant.restaurantApi.security.dto.NuevoUsuario;
 import com.restaurant.restaurantApi.security.entity.Rol;
 import com.restaurant.restaurantApi.security.entity.Usuario;
+import com.restaurant.restaurantApi.security.entity.UsuarioPrincipal;
 import com.restaurant.restaurantApi.security.enums.RolNombre;
 import com.restaurant.restaurantApi.security.jwt.JwtProvider;
 import com.restaurant.restaurantApi.security.service.RolService;
@@ -57,15 +58,14 @@ public class AuthController {
         Usuario usuario =
                 new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(),
                         passwordEncoder.encode(nuevoUsuario.getPassword()));
-        Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
-        if(nuevoUsuario.getRoles().contains("ROLE_ADMIN")){
-            roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
+        Rol rol = rolService.getByRolNombre(RolNombre.ROLE_USER).get() ;
+        if(nuevoUsuario.getRol().equals("ROLE_ADMIN")){
+            rol = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();
         }
-        if(nuevoUsuario.getRoles().contains("ROLE_SOPORTE")){
-            roles.add(rolService.getByRolNombre(RolNombre.ROLE_SOPORTE).get());
+        if(nuevoUsuario.getRol().equals(("ROLE_SOPORTE"))){
+            rol = rolService.getByRolNombre(RolNombre.ROLE_SOPORTE).get();
         }
-        usuario.setRoles(roles);
+        usuario.setRol(rol);
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("usuario guardado"), HttpStatus.CREATED);
     }
@@ -78,8 +78,8 @@ public class AuthController {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateToken(authentication);
-        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-        JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+        UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
+        JwtDto jwtDto = new JwtDto(jwt, usuarioPrincipal.getUsername(), usuarioPrincipal.getRol().getRolNombre().toString());
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 }

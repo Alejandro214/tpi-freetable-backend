@@ -18,7 +18,7 @@ public class NuevoUsuario {
     private String email;
     @NotBlank
     private String password;
-    private Set<String> roles = new HashSet<>();
+    private String rol = "";
 
 
 }

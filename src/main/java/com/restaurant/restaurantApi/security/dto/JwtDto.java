@@ -1,5 +1,6 @@
 package com.restaurant.restaurantApi.security.dto;
 
+import com.restaurant.restaurantApi.security.entity.Rol;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -10,12 +11,12 @@ public class JwtDto {
     private String token;
     private String bearer = "Bearer";
     private String nombreUsuario;
-    private Collection<? extends GrantedAuthority> authorities;
+    private String rol;
 
-    public JwtDto(String token, String nombreUsuario, Collection<? extends GrantedAuthority> authorities) {
+    public JwtDto(String token, String nombreUsuario, String rol) {
         this.token = token;
         this.nombreUsuario = nombreUsuario;
-        this.authorities = authorities;
+        this.rol = rol;
     }
 
     public JwtDto() {
