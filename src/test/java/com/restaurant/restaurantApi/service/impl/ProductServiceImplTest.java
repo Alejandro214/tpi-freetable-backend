@@ -76,16 +76,7 @@ public class ProductServiceImplTest {
 
     }
 
-    @Test
-    void search_product_fanta(){
-        when(iProductRepo.findByName(any(String.class))).thenReturn(fanta);
-        Product fanta = this.productService.searchProduct("Fanta");
-        assertEquals(fanta.getImage(),"https://superlago.com.ar/wp-content/uploads/2021/01/7790895000454.jpg");
-        assertEquals(fanta.getDescription(),"Gaseosa fanta mediana");
-        assertEquals(fanta.getName(),"Fanta");
-        assertEquals(fanta.getPrice(),200d);
-        assertNotNull(fanta.getIdProduct());
-    }
+
 
     @Test
     void get_All_Products(){
