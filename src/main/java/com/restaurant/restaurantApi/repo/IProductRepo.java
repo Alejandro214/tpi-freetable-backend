@@ -36,7 +36,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
 
     @Query(value = " SELECT cantProduct FROM restaurant_db.table_order o " +
             " INNER JOIN productos_pedidos pp ON   pp.id_order = o.idOrder  " +
-            " where idOrder = :idOrder and idMesa = :idMesa and product = :idProduct ", nativeQuery = true)
+            " where idOrder = :idOrder and idMesa = :idMesa and id_product = :idProduct ", nativeQuery = true)
     Integer getCantProductByIdMesaAndIdOrder(Integer idProduct, Integer idMesa, Integer idOrder);
 
     @Transactional
