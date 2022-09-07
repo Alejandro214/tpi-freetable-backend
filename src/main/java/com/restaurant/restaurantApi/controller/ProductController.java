@@ -124,5 +124,11 @@ public class ProductController {
         return new ResponseEntity<>(this.iProductService.getCantProducts(),HttpStatus.OK);
     }
 
+    @GetMapping("getProductByName/{nameProduct}")
+    @ApiOperation("Retorna el producto con el nombre que recibe")
+    public ResponseEntity<Product> getProductByName(@PathVariable("nameProduct") String nameProduct){
+        return new ResponseEntity<>(this.iProductService.getProductByName(nameProduct),HttpStatus.OK);
+    }
+
 
 }

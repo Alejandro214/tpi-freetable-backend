@@ -111,4 +111,9 @@ public class ProductServiceImpl implements IProductService {
         return products.size();
     }
 
+    @Override
+    public Product getProductByName(String name) {
+        return this.iProductRepo.findByName(name);
+    }
+
 }

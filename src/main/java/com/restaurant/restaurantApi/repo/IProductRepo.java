@@ -60,4 +60,6 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
             " LEFT JOIN combo c on c.idProduct = pp.id_product " +
             " WHERE pp.id_order = :idOrder ",nativeQuery = true)
     List<Product> findAllProductsByIdOrder(Integer idOrder);
+
+    Product findByName(String name);
 }

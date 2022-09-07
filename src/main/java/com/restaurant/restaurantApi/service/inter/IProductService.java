@@ -29,4 +29,6 @@ public interface IProductService {
     void reemplazarProductOrder(Integer idProductAReemplazar,Integer idOrder,Integer idProductACambiar);
 
     Integer getCantProducts();
+
+    Product getProductByName(String name);
 }
