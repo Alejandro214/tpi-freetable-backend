@@ -47,36 +47,8 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public void deleteProductOrder(Integer idOrder, Product product) {
-        Order order = this.iOrderRepo.findById(idOrder).get();
-        this.iProductRepo.deleteProductDeOrder(product.getIdProduct(),idOrder);
-        order.deleteProduct(product);
-        this.iOrderRepo.save(order);
-    }
-
-    @Override
-    public void updateProduct(Integer idProduct,Integer newCant) {
-         this.iProductRepo.updateCantProductById(idProduct,newCant);
-    }
-
-    @Override
     public Integer getCantProductByIdMesaAndIdOrder(Integer idProduct, Integer idMesa, Integer idOrder) {
         return this.iProductRepo.getCantProductByIdMesaAndIdOrder(idProduct, idMesa, idOrder);
-    }
-
-    @Override
-    public void reemplazarProductOrder(Integer idProductAReemplazar, Integer idOrder, Integer idProductACambiar) {
-        BigInteger bigInteger = this.iProductRepo.existeProductoInPedidosProductos(idOrder,idProductACambiar);
-        if(bigInteger.intValue() == 0) {
-            this.iProductRepo.reemplazarProductOrder(idProductAReemplazar, idOrder, idProductACambiar);
-
-        }else {
-            if(!idProductAReemplazar.equals(idProductACambiar)) {
-                Product product = this.iProductRepo.findById(idProductAReemplazar).get();
-                this.deleteProductOrder(idOrder,product);
-            }
-            this.iProductRepo.incrementarCantidadProductByIdProductAndIdOrder(idProductACambiar,idOrder);
-        }
     }
 
     @Override

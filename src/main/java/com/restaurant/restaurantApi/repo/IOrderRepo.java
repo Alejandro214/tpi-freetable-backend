@@ -11,12 +11,6 @@ import java.util.List;
 public interface IOrderRepo extends CrudRepository<Order, Integer> {
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO restaurant_db.productos_pedidos(id_product, id_order,cantProduct) VALUES (:idProduct, :idPedido,:cantProduct)"
-        , nativeQuery = true)
-    void updateProductosPedidos(Integer idProduct, Integer idPedido,Integer cantProduct);
-
-    @Modifying
-    @Transactional
     @Query(value = " DELETE FROM productos_pedidos " +
             " WHERE id_order = :idOrder ",nativeQuery = true)
     void deleteOrderProductosPedidos(Integer idOrder);

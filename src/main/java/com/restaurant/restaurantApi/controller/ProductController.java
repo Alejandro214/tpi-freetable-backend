@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,36 +61,12 @@ public class ProductController {
         }
     }
 
-    @ApiOperation(value = "Elimina el producto de la ordern que tiene dicho id")
-    @PostMapping("deleteProduct/{idOrder}")
-    public ResponseEntity<String> deleteProductDeOrder(@PathVariable("idOrder") Integer idOrder,@RequestBody Product product){
-        this.iProductService.deleteProductOrder(idOrder,product);
-        return new ResponseEntity<>("Se ha eliminado el producto con existo",HttpStatus.OK);
-    }
-
-    @PutMapping("updateCantProductById/{idProduct}/{newCant}")
-    @ApiOperation("Dada un idProduct y una cantidad actualiza la cantidad de dicho producto ")
-    public ResponseEntity<String> updateProduct(@PathVariable("idProduct") Integer idProduct,@PathVariable("newCant") Integer newCant){
-        this.iProductService.updateProduct(idProduct,newCant);
-         return new ResponseEntity<>("Se ha actualizado la cantidad del producto con existo",HttpStatus.OK);
-    }
-
     @GetMapping("getCantProductByIdMesaAndIdOrder/{idProduct}/{idMesa}/{idOrder}")
     @ApiOperation("Dado un idProduct, idMesa y idOrder, retorna la cantidad de dicho producto que pertenece a una orden de una mesa en particular")
     public  ResponseEntity<Integer> getCantProductByIdMesaAndIdOrder(@PathVariable("idProduct") Integer idProduct,
                                                                      @PathVariable("idMesa") Integer idMesa,
                                                                      @PathVariable("idOrder") Integer idOrder){
         return new ResponseEntity<>(this.iProductService.getCantProductByIdMesaAndIdOrder(idProduct,idMesa,idOrder),HttpStatus.OK);
-    }
-
-    @PutMapping("reemplazarProductOrder/{idProductAReemplazar}/{idOrder}/{idProductACambiar}")
-    @ApiOperation("Dado un idProductAReemplazar, un idOrder y un idProdcutACambiar, reemplaza el producto de dicha orden")
-    public ResponseEntity<String> reemplazarProductOrder(@PathVariable("idProductAReemplazar") Integer idProductAReemplazar,
-                                                         @PathVariable("idOrder") Integer idOrder,
-                                                         @PathVariable("idProductACambiar") Integer idProductACambiar){
-        this.iProductService.reemplazarProductOrder(idProductAReemplazar,idOrder,idProductACambiar);
-        return new ResponseEntity<>("Se ha reemplazado el producto con existo",HttpStatus.OK);
-
     }
 
     @GetMapping("getCantProducts")

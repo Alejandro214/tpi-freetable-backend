@@ -12,13 +12,9 @@ public interface IOrderService {
 
      void deleteOrder(Integer idOrder);
 
-     void updateProductosPedidos(Order order);
-
      Order getOrderById(Integer idOrder);
 
-     Order updateOrder(Order order);
 
-     Order addProductOrder(Integer idProduct,Integer idOrder,Integer cant);
 
 
 }

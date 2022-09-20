@@ -5,7 +5,6 @@ import com.restaurant.restaurantApi.common.ExceptionMessage;
 import com.restaurant.restaurantApi.exception.DeleteOrderException;
 import com.restaurant.restaurantApi.exception.GetAllOrdersByIdMesaException;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
-import com.restaurant.restaurantApi.exception.UpdateOrderException;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import io.swagger.annotations.Api;
@@ -13,7 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,22 +57,4 @@ public class OrderController {
         }
     }
 
-    @ApiOperation(value = "Dado un pedido, lo actualiza con los nuevos campos cambiado, y retorna el pedido actualizado")
-    @PutMapping("updateOrder")
-    public ResponseEntity<Order> updateOrder(@RequestBody Order order){
-        try{
-            return new ResponseEntity<>(this.iOrderService.updateOrder(order),HttpStatus.OK);
-        }catch (Exception e){
-             throw new UpdateOrderException(ExceptionMessage.UPDATE_ORDER_EXCEPTION.getValue());
-        }
-    }
-
-    @ApiOperation("Dado un idProduct, idOrder y una cant, agrega el producto al pedido con idProduct y lo retorna")
-    @PostMapping("addProductOrder/{idProduct}/{idOrder}/{cant}")
-    public ResponseEntity<Order> addProductOrder(@PathVariable("idProduct") Integer idProduct,
-                                                  @PathVariable("idOrder") Integer idOrder,
-                                                  @PathVariable("cant") Integer cant){
-        return new ResponseEntity(this.iOrderService.addProductOrder(idProduct,idOrder,cant),HttpStatus.OK);
-
-    }
 }

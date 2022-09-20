@@ -10,19 +10,11 @@ public interface IProductService {
 
     Product saveProduct(Product product);
 
-
-
     List<Product> getAllProducts(Pageable pageable);
 
     Set<Product> filterProductByName(Pageable pageable, String name);
 
-    void deleteProductOrder(Integer idOrder,Product product);
-
-    void updateProduct(Integer idProduct,Integer newCant);
-
     Integer getCantProductByIdMesaAndIdOrder(Integer idProduct,Integer idMesa,Integer idOrder);
-
-    void reemplazarProductOrder(Integer idProductAReemplazar,Integer idOrder,Integer idProductACambiar);
 
     Integer getCantProducts();
 
