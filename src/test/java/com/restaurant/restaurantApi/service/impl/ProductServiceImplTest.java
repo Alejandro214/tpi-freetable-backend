@@ -60,35 +60,11 @@ public class ProductServiceImplTest {
 
     }
 
-
-
-    @Test
-    void get_All_Products(){
-       /*// when(iProductRepo.findAllProducts()).thenReturn(asList(pizza,fanta));
-
-        //List<Product> products = this.productService.getAllProducts();
-        assertNotNull(products);
-       assertTrue(products.size() >= 1);
-        Product product = products.get(0);
-        assertNotNull(product.getImage());
-        assertNotNull(product.getDescription());
-        assertNotNull(product.getName());
-        assertNotNull(product.getPrice());
-        assertNotNull(product.getIdProduct());*/
-    }
-
     @Test
     void filter_Product_By_Name() {
         List<Product> array = new ArrayList<>();
         array.add(fanta);
         Page<Product> page = new PageImpl<>(array);
-       /* when(iProductRepo.filterProductByName(any(Pageable.class), any(String.class)))
-                .thenReturn(page);
-        PageRequest pageable = PageRequest.of(2, 20);
-        Set<Product> products = this.productService.filterProductByName(pageable, "Fa");
-        assertNotNull(products);
-        assertEquals(1, products.size());
-        assertTrue(products.iterator().next().getName().contains("Fa"));*/
     }
 
 
