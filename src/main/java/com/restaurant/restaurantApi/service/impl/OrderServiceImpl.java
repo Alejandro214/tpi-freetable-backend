@@ -1,10 +1,8 @@
 package com.restaurant.restaurantApi.service.impl;
 
-import com.restaurant.restaurantApi.model.Combo;
 import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
-import com.restaurant.restaurantApi.repo.IComboRepo;
 import com.restaurant.restaurantApi.repo.IMesaRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
@@ -12,7 +10,6 @@ import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,9 +20,6 @@ public class OrderServiceImpl implements IOrderService {
 
     @Autowired
     private IMesaRepo iMesaRepo;
-
-    @Autowired
-    private IComboRepo iComboRepo;
 
     @Autowired
     private IProductRepo productRepo;

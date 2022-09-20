@@ -1,7 +1,5 @@
 package com.restaurant.restaurantApi.service.impl;
 
-import com.restaurant.restaurantApi.model.User;
-import com.restaurant.restaurantApi.repo.IUserRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
