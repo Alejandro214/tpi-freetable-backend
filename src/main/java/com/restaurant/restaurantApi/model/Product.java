@@ -39,18 +39,6 @@ public class Product {
     @ToString.Exclude
     private List<Order> listPedidos = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "productos_category",
-            joinColumns = @JoinColumn(name = "id_product",referencedColumnName = "idProduct"),
-            inverseJoinColumns = @JoinColumn(name = "id_category",referencedColumnName = "idCategory")
-    )
-    @JsonIgnore
-    @ToString.Exclude
-    private List<Category> listCategory;
-
-
-
     public void addPedido(Order pedido){
         this.listPedidos.add(pedido);
     }

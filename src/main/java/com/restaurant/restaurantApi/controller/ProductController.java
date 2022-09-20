@@ -62,30 +62,6 @@ public class ProductController {
         }
     }
 
-    @ApiOperation(value = "Retorna el producto de la categoria seleccionada")
-    @GetMapping("categoryByNameCategory/{nameCategory}")
-    public ResponseEntity<List<Product>> getProductByNameCategory(@PageableDefault(size = 10000 , page = 0, direction = Sort.Direction.DESC) Pageable pageable
-                                                                  ,@PathVariable("nameCategory") String nameCategory){
-        try {
-            List<Product> categories = this.iProductService.productscategoryByNameCategory(nameCategory,pageable);
-            return new ResponseEntity<>(categories,HttpStatus.OK);
-        }catch (Exception e){
-            throw new GetProductByNameCategory(ExceptionMessage.GET_PRODUCT_BY_NAME_CATEGORY.getValue());
-
-        }
-
-    }
-
-    @ApiOperation(value = "Retorna la cantida de productos segun la categoria")
-    @GetMapping("cantProductosByNameCategory/{nameCategory}")
-    public ResponseEntity<Integer> getCantProductosByNameCategory(@PathVariable("nameCategory") String nameCategory) {
-        try{
-            return new ResponseEntity<>(this.iProductService.cantProductosByNameCategory(nameCategory),HttpStatus.OK);
-        }catch (Exception e){
-            throw new GetCantProductosByNameCategory(ExceptionMessage.GET_CANT_PRODUCTOS_BY_NAME_CATEGORY.getValue());
-        }
-    }
-
     @ApiOperation(value = "Elimina el producto de la ordern que tiene dicho id")
     @PostMapping("deleteProduct/{idOrder}")
     public ResponseEntity<String> deleteProductDeOrder(@PathVariable("idOrder") Integer idOrder,@RequestBody Product product){

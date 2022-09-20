@@ -11,8 +11,6 @@ public enum ExceptionMessage {
     SEARCH_PRODUCT_EXCEPTION("¡Error al intentar el producto!"),
     GET_ALL_PRODUCTS_EXCEPTION("¡Error al intentar obtener todos las productos"),
     FILTER_PRODUCTS_BY_NAME("¡Ocurrio un error al intentar filtrar los productos por nombre!"),
-    GET_PRODUCT_BY_NAME_CATEGORY("¡Ocurrio un error al intentar obtener los productos de la categoria dada!"),
-    GET_CANT_PRODUCTOS_BY_NAME_CATEGORY("¡Ocurrio un error al intentar obtener la cantidad de productos de cierta categoria!"),
     SAVE_MESA_EXCEPTION("Ocurrio un error al intentar guardar la mesa!"),
     GET_MESA_BY_ID_EXCEPTION("¡Ocurrio un error al intentar buscar la mesa con dicho id!"),
     FIND_ALL_MESAS_EXCEPTION("¡Ocurrio un error al intentar buscar todas las mesas"),

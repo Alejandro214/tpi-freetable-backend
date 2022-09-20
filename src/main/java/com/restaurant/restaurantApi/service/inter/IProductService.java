@@ -16,10 +16,6 @@ public interface IProductService {
 
     Set<Product> filterProductByName(Pageable pageable, String name);
 
-    List<Product> productscategoryByNameCategory(String nameCategory,Pageable pageable);
-
-    Integer cantProductosByNameCategory(String nameCategory);
-
     void deleteProductOrder(Integer idOrder,Product product);
 
     void updateProduct(Integer idProduct,Integer newCant);

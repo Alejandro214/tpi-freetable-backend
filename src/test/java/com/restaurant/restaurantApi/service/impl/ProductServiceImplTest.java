@@ -1,8 +1,6 @@
 package com.restaurant.restaurantApi.service.impl;
 
-import com.restaurant.restaurantApi.model.Category;
 import com.restaurant.restaurantApi.model.Product;
-import com.restaurant.restaurantApi.repo.ICategoryRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,14 +9,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import static java.util.Arrays.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -30,10 +24,6 @@ public class ProductServiceImplTest {
 
     @InjectMocks
     private ProductServiceImpl productService;
-
-    @Mock
-    private ICategoryRepo categoryRepo;
-
     private Product pizza = new Product();
 
     private Product fanta = new Product();
@@ -53,12 +43,6 @@ public class ProductServiceImplTest {
         fanta.setDescription("Gaseosa fanta mediana");
         fanta.setName("Fanta");
         fanta.setPrice(200d);
-        List<Category> categories = new ArrayList<>();
-        Category gaseosaCategory  = new Category();
-        gaseosaCategory.setNameCategory("Gaseosas");
-        categories.add(gaseosaCategory);
-
-        fanta.setListCategory(categories);
 
 
 
@@ -106,22 +90,6 @@ public class ProductServiceImplTest {
         assertEquals(1, products.size());
         assertTrue(products.iterator().next().getName().contains("Fa"));*/
     }
-
-
-    @Test
-    void products_category_By_Name_Category(){
-        Category category = new Category();
-        List<Product> products = new ArrayList<>();
-        products.add(fanta);
-        category.setProducts(products);
-        when(categoryRepo.findByNameCategory("Gaseosas")).thenReturn(category);
-       /* List<Product> productList = this.productService.productscategoryByNameCategory("Gaseosas");
-        assertNotNull(products);
-        assertEquals(1, products.size());
-        assertTrue(products.get(0).getListCategory().stream().anyMatch(category1 -> category1.getNameCategory().equals("Gaseosas")));*/
-    }
-
-
 
 
 }

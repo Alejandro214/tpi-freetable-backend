@@ -1,21 +1,16 @@
 package com.restaurant.restaurantApi.service.impl;
 
-import com.restaurant.restaurantApi.model.Category;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
-import com.restaurant.restaurantApi.repo.ICategoryRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import com.restaurant.restaurantApi.service.inter.IProductService;
 import lombok.Data;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,8 +22,6 @@ public class ProductServiceImpl implements IProductService {
     @Autowired
     private IProductRepo iProductRepo;
 
-    @Autowired
-    private ICategoryRepo categoryRepo;
 
     @Autowired
     private IOrderRepo iOrderRepo;
@@ -50,26 +43,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public Set<Product> filterProductByName(Pageable pageable, String name) {
         List<Product> products = this.getAllProducts(pageable);
-        return products.stream().filter(product -> product.getName().toLowerCase().contains(name.toLowerCase())
-                || product.getListCategory().stream().anyMatch(category -> category.getNameCategory().toLowerCase().contains(name.toLowerCase()))).collect(Collectors.toSet());
-    }
-
-
-    @Override
-    public List<Product> productscategoryByNameCategory(String nameCategory,Pageable pageable) {
-        if(nameCategory.equals("Todos"))
-            return this.getAllProducts(pageable);
-       Category category = this.categoryRepo.findByNameCategory(nameCategory);
-       return category.getProducts();
-    }
-
-    @Override
-    public Integer cantProductosByNameCategory(String nameCategory) {
-        if(nameCategory.equals("Todos")) {
-            List<Product> products =  (List<Product>) this.iProductRepo.findAll();
-            return products.size();
-        }
-        return this.categoryRepo.cantProductosByNameCategory(nameCategory);
+        return products.stream().filter(product -> product.getName().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toSet());
     }
 
     @Override
