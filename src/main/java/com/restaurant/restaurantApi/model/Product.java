@@ -4,7 +4,6 @@ package com.restaurant.restaurantApi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,10 +37,6 @@ public class Product {
     @JsonIgnore
     @ToString.Exclude
     private List<Order> listPedidos = new ArrayList<>();
-
-    public void addPedido(Order pedido){
-        this.listPedidos.add(pedido);
-    }
 
 
     @Override

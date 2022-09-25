@@ -41,16 +41,6 @@ public class Order {
         this.mesa = null;
     }
 
-    public void deleteProduct(Product product){
-        this.products.remove(product);
-        this.totalPrice -=product.getPrice();
-    }
-
-
-    public void addPrinceTotal (Double price) {
-        this.totalPrice += price;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

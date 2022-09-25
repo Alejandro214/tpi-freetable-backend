@@ -14,9 +14,5 @@ public interface IProductService {
 
     Set<Product> filterProductByName(Pageable pageable, String name);
 
-    Integer getCantProductByIdMesaAndIdOrder(Integer idProduct,Integer idMesa,Integer idOrder);
-
-    Integer getCantProducts();
-
     Product getProductByName(String name);
 }

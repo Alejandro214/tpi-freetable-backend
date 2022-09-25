@@ -52,7 +52,7 @@ public class ProductController {
     @ApiOperation(value = "Retorna paginas que tengan esa palabra en su nombre", notes = "Retorna todos los productos que contengan al menos esa letra o palabra en su nombre")
     @GetMapping("getFilterProductByName/{name}")
     public ResponseEntity<Set<Product>> filterProductByName(
-            @PageableDefault(size = 10 , page = 0, direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(size = 5 , page = 0, direction = Sort.Direction.DESC) Pageable pageable,
             @PathVariable("name") String name){
         try {
             return new ResponseEntity<>(this.iProductService.filterProductByName(pageable, name),HttpStatus.OK);
@@ -61,25 +61,14 @@ public class ProductController {
         }
     }
 
-    @GetMapping("getCantProductByIdMesaAndIdOrder/{idProduct}/{idMesa}/{idOrder}")
-    @ApiOperation("Dado un idProduct, idMesa y idOrder, retorna la cantidad de dicho producto que pertenece a una orden de una mesa en particular")
-    public  ResponseEntity<Integer> getCantProductByIdMesaAndIdOrder(@PathVariable("idProduct") Integer idProduct,
-                                                                     @PathVariable("idMesa") Integer idMesa,
-                                                                     @PathVariable("idOrder") Integer idOrder){
-        return new ResponseEntity<>(this.iProductService.getCantProductByIdMesaAndIdOrder(idProduct,idMesa,idOrder),HttpStatus.OK);
-    }
-
-    @GetMapping("getCantProducts")
-    @ApiOperation("Retorna el total de los productos que tiene el restaurant ")
-    public ResponseEntity<Integer> getCantProducts(){
-        return new ResponseEntity<>(this.iProductService.getCantProducts(),HttpStatus.OK);
-    }
 
     @GetMapping("getProductByName/{nameProduct}")
     @ApiOperation("Retorna el producto con el nombre que recibe")
     public ResponseEntity<Product> getProductByName(@PathVariable("nameProduct") String nameProduct){
         return new ResponseEntity<>(this.iProductService.getProductByName(nameProduct),HttpStatus.OK);
     }
+
+
 
 
 }
