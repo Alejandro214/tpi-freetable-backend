@@ -26,7 +26,6 @@ public class Product {
     private String name;
     private String image;
     private Double price;
-    private String description;
     private Integer cantProduct;
 
     @ManyToMany
