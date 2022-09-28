@@ -12,7 +12,7 @@ public interface IProductService {
 
     List<Product> getAllProducts(Pageable pageable);
 
-    Set<Product> filterProductByName(Pageable pageable, String name);
+    List<Product> filterProductByName( String name);
 
     Product getProductByName(String name);
 }

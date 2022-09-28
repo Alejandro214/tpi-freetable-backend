@@ -28,9 +28,9 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> getAllProducts(Pageable pageable) {return   this.iProductRepo.findAll(pageable).getContent();}
 
     @Override
-    public Set<Product> filterProductByName(Pageable pageable, String name) {
-        List<Product> products = this.getAllProducts(pageable);
-        return products.stream().filter(product -> product.getName().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toSet());
+    public List<Product> filterProductByName(String name) {
+        List<Product> products = (List<Product>) this.iProductRepo.findAll();
+        return this.iProductRepo.findAllProducts(name);
     }
 
 

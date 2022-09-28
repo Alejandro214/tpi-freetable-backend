@@ -51,11 +51,10 @@ public class ProductController {
 
     @ApiOperation(value = "Retorna paginas que tengan esa palabra en su nombre", notes = "Retorna todos los productos que contengan al menos esa letra o palabra en su nombre")
     @GetMapping("getFilterProductByName/{name}")
-    public ResponseEntity<Set<Product>> filterProductByName(
-            @PageableDefault(size = 5 , page = 0, direction = Sort.Direction.DESC) Pageable pageable,
+    public ResponseEntity<List<Product>> filterProductByName(
             @PathVariable("name") String name){
         try {
-            return new ResponseEntity<>(this.iProductService.filterProductByName(pageable, name),HttpStatus.OK);
+            return new ResponseEntity<>(this.iProductService.filterProductByName(name),HttpStatus.OK);
         }catch (Exception e){
             throw new FilterProductByName(ExceptionMessage.FILTER_PRODUCTS_BY_NAME.getValue());
         }

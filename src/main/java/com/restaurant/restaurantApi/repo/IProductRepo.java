@@ -21,5 +21,12 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
             " INNER JOIN productos_pedidos pp on p.idProduct = pp.id_product " +
             " WHERE pp.id_order = :idOrder ",nativeQuery = true)
     List<Product> findAllProductsByIdOrder(Integer idOrder);
+
     Product findByName(String name);
+
+
+    @Query(value = "SELECT * FROM restaurant_db.product p " +
+            "   WHERE p.name LIKE %:nameProduct% " +
+            "   LIMIT 5 ",nativeQuery = true)
+    List<Product> findAllProducts(String nameProduct);
 }
