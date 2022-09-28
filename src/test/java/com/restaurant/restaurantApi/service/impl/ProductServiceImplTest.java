@@ -34,13 +34,11 @@ public class ProductServiceImplTest {
         pizza.setIdProduct(1);
         pizza.setName("Pizza");
         pizza.setImage("Una imagen");
-        pizza.setDescription("Pizza a la piedra");
         pizza.setPrice(500d);
         pizza.setListPedidos(new ArrayList<>());
 
         fanta.setIdProduct(2);
         fanta.setImage("https://superlago.com.ar/wp-content/uploads/2021/01/7790895000454.jpg");
-        fanta.setDescription("Gaseosa fanta mediana");
         fanta.setName("Fanta");
         fanta.setPrice(200d);
 
@@ -53,7 +51,6 @@ public class ProductServiceImplTest {
         when(iProductRepo.save(any(Product.class))).thenReturn(pizza);
         Product product = this.productService.saveProduct(this.pizza);
         assertEquals(product.getImage(),this.pizza.getImage());
-        assertEquals(product.getDescription(),this.pizza.getDescription());
         assertEquals(product.getName(),this.pizza.getName());
         assertEquals(product.getPrice(),this.pizza.getPrice());
         assertEquals(product.getIdProduct(),1);

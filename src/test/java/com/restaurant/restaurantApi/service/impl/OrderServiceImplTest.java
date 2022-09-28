@@ -49,7 +49,6 @@ class OrderServiceImplTest {
         pizza.setIdProduct(1);
         pizza.setName("Pizza");
         pizza.setImage("Una imagen");
-        pizza.setDescription("Pizza a la piedra");
         pizza.setPrice(500d);
         pizza.setListPedidos(new ArrayList<>());
         pedidoPizza.setTotalPrice(500d);
@@ -60,7 +59,6 @@ class OrderServiceImplTest {
         pedidoFanta.setTotalPrice(200d);
         fanta.setIdProduct(2);
         fanta.setImage("https://superlago.com.ar/wp-content/uploads/2021/01/7790895000454.jpg");
-        fanta.setDescription("Gaseosa fanta mediana");
         fanta.setName("Fanta");
         fanta.setPrice(200d);
     }
