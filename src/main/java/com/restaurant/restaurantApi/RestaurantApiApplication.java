@@ -11,8 +11,4 @@ public class RestaurantApiApplication {
 		SpringApplication.run(RestaurantApiApplication.class, args);
 	}
 
-
-
 }
-
-
