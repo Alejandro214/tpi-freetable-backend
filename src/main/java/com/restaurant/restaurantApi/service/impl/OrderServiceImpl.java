@@ -32,8 +32,6 @@ public class OrderServiceImpl implements IOrderService {
         this.updateProductosPedidos(order1);
         return order1;
     }
-
-
     private void updateProductosPedidos(Order order){
         order.getProducts().forEach(product -> {
                     this.iOrderRepo.updateProductosPedidos(product.getIdProduct(),order.getIdOrder(),
@@ -41,8 +39,6 @@ public class OrderServiceImpl implements IOrderService {
                 }
         );
     }
-
-
     @Override
     public List<Order> getAllOrders(Integer idMesa,String statusOrder) {
         Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
@@ -53,9 +49,6 @@ public class OrderServiceImpl implements IOrderService {
         );
         return orders;
     }
-
-
-
 
     @Override
     public void deleteOrder(Integer idOrder) {
@@ -76,10 +69,31 @@ public class OrderServiceImpl implements IOrderService {
         List<Order> orders = this.iOrderRepo.findByMesaAndStatusOrder(mesa,"CONFIRMADO");
         List<Product> productsConfirmados = new ArrayList<>();
         orders.forEach(order -> {
-            productsConfirmados.addAll(order.getProducts());
+           order.getProducts().forEach(product -> {
+               updateProductosConfirmados(productsConfirmados,product);
+           });
+
         });
         return productsConfirmados;
     }
+    private void updateProductosConfirmados(List<Product> productosConfirmados, Product product){
+        if(existProductInProductsConfirmados(productosConfirmados,product)){
+            productosConfirmados.forEach(product1 -> {
+                if(product1.getIdProduct().equals(product.getIdProduct())){
+                    product1.setCantProduct(product1.getCantProduct() + product.getCantProduct());
+                }
+            });
+        }else {
+            productosConfirmados.add(product);
+        }
+    }
+
+    private boolean existProductInProductsConfirmados(List<Product> productosConfirmados,Product product){
+        return  productosConfirmados.stream().anyMatch(product1 -> product1.getIdProduct().equals(product.getIdProduct()));
+    }
+
+
+
 
 
 
