@@ -17,7 +17,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
             " where idOrder = :idOrder and idMesa = :idMesa and id_product = :idProduct ", nativeQuery = true)
     Integer getCantProductByIdMesaAndIdOrder(Integer idProduct, Integer idMesa, Integer idOrder);
 
-    @Query(value = "SELECT p.idProduct,p.name,p.image,p.price,p.description,pp.cantProduct,0 AS clazz_ FROM restaurant_db.product p " +
+    @Query(value = "SELECT p.idProduct,p.name,p.image,p.price,pp.cantProduct,0 AS clazz_ FROM restaurant_db.product p " +
             " INNER JOIN productos_pedidos pp on p.idProduct = pp.id_product " +
             " WHERE pp.id_order = :idOrder ",nativeQuery = true)
     List<Product> findAllProductsByIdOrder(Integer idOrder);

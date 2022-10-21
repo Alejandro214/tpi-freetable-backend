@@ -4,6 +4,7 @@ CREATE TABLE `table_order` (
   `totalPrice` double NOT NULL,
   `idMesa` int,
   `dateOrder` VARCHAR(45) NOT NULL,
+  `statusOrder` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idOrder`)
 )
 

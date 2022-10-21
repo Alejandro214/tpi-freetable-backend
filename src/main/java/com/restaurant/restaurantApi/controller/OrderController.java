@@ -6,6 +6,7 @@ import com.restaurant.restaurantApi.exception.DeleteOrderException;
 import com.restaurant.restaurantApi.exception.GetAllOrdersByIdMesaException;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
 import com.restaurant.restaurantApi.model.Order;
+import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,10 +36,10 @@ public class OrderController {
         }
     }
     @ApiOperation(value = "Retorna los todos pedidos",notes = "Dado un idMesa, retorna todos los pedidos que se realizaron en la mesa con dicho idMesa")
-    @GetMapping("getAllOrders/{idMesa}")
-    public ResponseEntity<List<Order>> getAllOrders(@PathVariable("idMesa") Integer idMesa){
+    @GetMapping("getAllOrders/{idMesa}/{statusOrder}")
+    public ResponseEntity<List<Order>> getAllOrders(@PathVariable("idMesa") Integer idMesa, @PathVariable("statusOrder") String statusOrder){
         try {
-            return new ResponseEntity<>(this.iOrderService.getAllOrders(idMesa), HttpStatus.OK);
+            return new ResponseEntity<>(this.iOrderService.getAllOrders(idMesa,statusOrder), HttpStatus.OK);
         }catch (Exception e){
             throw new GetAllOrdersByIdMesaException(ExceptionMessage.GER_ALL_ORDERS_BY_MESA_EXCEPTION_.getValue());
         }
@@ -55,5 +56,14 @@ public class OrderController {
 
         }
     }
+
+    @ApiOperation(value = "Retorna el pedido confirmado que pertenece al idMesa",notes = "Dado un idMesa, retorna el pedido que pertenece a esa mesa con dicho idMesa")
+    @GetMapping("getOrderConfirmado/{idMesa}")
+    public ResponseEntity< List<Product>> getOrderConfirmado(@PathVariable("idMesa") Integer idMesa){
+            return new ResponseEntity<>(this.iOrderService.getOrderConfirmado(idMesa), HttpStatus.OK);
+    }
+
+
+
 
 }

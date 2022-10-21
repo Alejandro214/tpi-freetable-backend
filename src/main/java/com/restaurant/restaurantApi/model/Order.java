@@ -36,6 +36,8 @@ public class Order {
 
     private String dateOrder;
 
+    private String statusOrder;
+
 
     public void deleteMesa(){
         this.mesa = null;
