@@ -29,4 +29,8 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
             "   WHERE p.name LIKE %:nameProduct% " +
             "   LIMIT 5 ",nativeQuery = true)
     List<Product> findAllProducts(String nameProduct);
+
+    @Query(value="  SELECT pp.cantProduct FROM restaurant_db.productos_pedidos pp " +
+                 "   WHERE pp.id_order = :idOrder and pp.id_product =:idProduct ",nativeQuery = true)
+    Integer getCantProductByIdMesaAndIdProduct(Integer idProduct, Integer idOrder);
 }

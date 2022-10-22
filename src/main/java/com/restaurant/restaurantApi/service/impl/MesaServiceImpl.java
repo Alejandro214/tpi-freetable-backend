@@ -43,11 +43,7 @@ public class MesaServiceImpl implements IMesaService {
         Mesa mesa = this.getMesaById(idMesa);
         if(orderService.existsByMesaAndStatusOrder(mesa,"CONFIRMADO")){
             Order updateOrder = this.orderService.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
-            List<Product> productsConfirmados = updateOrder.getProducts();
-            updateOrder.getProducts().forEach(product -> {
-                updateProductosConfirmados(productsConfirmados,product);
-            });
-            updateOrder.setProducts(productsConfirmados);
+            updateOrder.setProducts(order.getProducts());
             this.orderService.saveOrder(updateOrder);
             return this.iMesaRepo.save(mesa);
         }
@@ -58,7 +54,7 @@ public class MesaServiceImpl implements IMesaService {
     }
 
 
-    private void updateProductosConfirmados(List<Product> productosConfirmados, Product product){
+  /*  private void updateProductosConfirmados(List<Product> productosConfirmados, Product product){
         if(existProductInProductsConfirmados(productosConfirmados,product)){
             productosConfirmados.forEach(product1 -> {
                 if(product1.getIdProduct().equals(product.getIdProduct())){
@@ -73,6 +69,8 @@ public class MesaServiceImpl implements IMesaService {
     private boolean existProductInProductsConfirmados(List<Product> productosConfirmados,Product product){
         return  productosConfirmados.stream().anyMatch(product1 -> product1.getIdProduct().equals(product.getIdProduct()));
     }
+   
+   */
 
     @Override
     public Mesa changeEstadoMesa(Integer idMesa,String newEstadoMesa) {

@@ -43,4 +43,8 @@ public class Mesa {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    public void deleteOrder(Order order){
+        this.listPedidos.remove(order);
+    }
 }

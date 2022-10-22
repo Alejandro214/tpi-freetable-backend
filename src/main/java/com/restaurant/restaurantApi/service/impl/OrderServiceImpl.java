@@ -2,7 +2,6 @@ package com.restaurant.restaurantApi.service.impl;
 
 import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
-import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IMesaRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
@@ -10,7 +9,6 @@ import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,6 +39,7 @@ public class OrderServiceImpl implements IOrderService {
                         this.iOrderRepo.saveProductosPedidos(product.getIdProduct(),order.getIdOrder(),
                                 product.getCantProduct());
                     }
+                    product.setCantProduct(1);
                 }
         );
     }
@@ -71,7 +70,17 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Order getOrderConfirmado(Integer idMesa) {
         Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
+        Order pedidoConfirmado = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
+        if (pedidoConfirmado== null)
+            return null;
+        pedidoConfirmado.getProducts().forEach(product -> {
+            product.setCantProduct(this.getCantProductByIdMesaAndIdProduct(product.getIdProduct(),pedidoConfirmado.getIdOrder()));
+        });
         return this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
+    }
+
+    private Integer getCantProductByIdMesaAndIdProduct(Integer idProduct, Integer idOrder){
+        return this.productRepo.getCantProductByIdMesaAndIdProduct(idProduct,idOrder);
     }
 
     @Override
@@ -82,6 +91,20 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Order findOrderByMesaAndStatusOrder(Mesa mesa, String statusOrder) {
         return this.iOrderRepo.findByMesaAndStatusOrder(mesa,statusOrder);
+    }
+
+    @Override
+    public Order updateOrderStatusByMesa(Integer idMesa) {
+        Mesa mesa = this.iMesaRepo.findById(idMesa).get();
+        Order order = this.iOrderRepo.findByMesaAndStatusOrder(mesa,"CONFIRMADO");
+        order.setStatusOrder("PAGADO");
+        return this.iOrderRepo.save(order);
+
+    }
+
+    @Override
+    public void deleteOrder(Order order) {
+        this.iOrderRepo.delete(order);
     }
 
 

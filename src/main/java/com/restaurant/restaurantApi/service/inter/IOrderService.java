@@ -23,4 +23,8 @@ public interface IOrderService {
 
      Order findOrderByMesaAndStatusOrder(Mesa mesa, String statusOrder);
 
+     Order updateOrderStatusByMesa(Integer idMesa);
+
+     void deleteOrder(Order order);
+
 }

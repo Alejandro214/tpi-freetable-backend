@@ -63,6 +63,10 @@ public class OrderController {
     public ResponseEntity<Order> getOrderConfirmado(@PathVariable("idMesa") Integer idMesa){
             return new ResponseEntity<>(this.iOrderService.getOrderConfirmado(idMesa), HttpStatus.OK);
     }
+    @PutMapping("updateOrderStatusByMesa/{idMesa}")
+    public ResponseEntity<Order> updateOrderStatusByMesa(@PathVariable("idMesa") Integer idMesa){
+        return new ResponseEntity<>(this.iOrderService.updateOrderStatusByMesa(idMesa), HttpStatus.OK);
+    }
 
 
 
