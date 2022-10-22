@@ -34,8 +34,13 @@ public class OrderServiceImpl implements IOrderService {
     }
     private void updateProductosPedidos(Order order){
         order.getProducts().forEach(product -> {
-                    this.iOrderRepo.updateProductosPedidos(product.getIdProduct(),order.getIdOrder(),
-                            product.getCantProduct());
+                    if(this.iOrderRepo.existProductoPedido(order.getIdOrder(),product.getIdProduct()).equals(1)){
+                        this.iOrderRepo.updateProductosPedidos(product.getCantProduct(),product.getIdProduct(),order.getIdOrder());
+                    }
+                    else{
+                        this.iOrderRepo.saveProductosPedidos(product.getIdProduct(),order.getIdOrder(),
+                                product.getCantProduct());
+                    }
                 }
         );
     }
@@ -64,39 +69,20 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<Product> getOrderConfirmado(Integer idMesa) {
+    public Order getOrderConfirmado(Integer idMesa) {
         Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
-        List<Order> orders = this.iOrderRepo.findByMesaAndStatusOrder(mesa,"CONFIRMADO");
-        List<Product> productsConfirmados = new ArrayList<>();
-        orders.forEach(order -> {
-           order.getProducts().forEach(product -> {
-               updateProductosConfirmados(productsConfirmados,product);
-           });
-
-        });
-        return productsConfirmados;
-    }
-    private void updateProductosConfirmados(List<Product> productosConfirmados, Product product){
-        if(existProductInProductsConfirmados(productosConfirmados,product)){
-            productosConfirmados.forEach(product1 -> {
-                if(product1.getIdProduct().equals(product.getIdProduct())){
-                    product1.setCantProduct(product1.getCantProduct() + product.getCantProduct());
-                }
-            });
-        }else {
-            productosConfirmados.add(product);
-        }
+        return this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
     }
 
-    private boolean existProductInProductsConfirmados(List<Product> productosConfirmados,Product product){
-        return  productosConfirmados.stream().anyMatch(product1 -> product1.getIdProduct().equals(product.getIdProduct()));
+    @Override
+    public  Boolean existsByMesaAndStatusOrder(Mesa mesa,String statusOrder){
+        return this.iOrderRepo.existsByMesaAndStatusOrder(mesa,statusOrder);
     }
 
-
-
-
-
-
+    @Override
+    public Order findOrderByMesaAndStatusOrder(Mesa mesa, String statusOrder) {
+        return this.iOrderRepo.findByMesaAndStatusOrder(mesa,statusOrder);
+    }
 
 
 }

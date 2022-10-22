@@ -10,6 +10,7 @@ import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +60,7 @@ public class OrderController {
 
     @ApiOperation(value = "Retorna el pedido confirmado que pertenece al idMesa",notes = "Dado un idMesa, retorna el pedido que pertenece a esa mesa con dicho idMesa")
     @GetMapping("getOrderConfirmado/{idMesa}")
-    public ResponseEntity< List<Product>> getOrderConfirmado(@PathVariable("idMesa") Integer idMesa){
+    public ResponseEntity<Order> getOrderConfirmado(@PathVariable("idMesa") Integer idMesa){
             return new ResponseEntity<>(this.iOrderService.getOrderConfirmado(idMesa), HttpStatus.OK);
     }
 

@@ -1,7 +1,9 @@
 package com.restaurant.restaurantApi.service.inter;
 
+import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.model.Product;
+import org.aspectj.weaver.ast.Or;
 
 import java.util.List;
 
@@ -15,9 +17,10 @@ public interface IOrderService {
 
      Order getOrderById(Integer idOrder);
 
-     List<Product> getOrderConfirmado(Integer idMesa);
+     Order getOrderConfirmado(Integer idMesa);
 
+     Boolean existsByMesaAndStatusOrder(Mesa mesa, String statusOrder);
 
-
+     Order findOrderByMesaAndStatusOrder(Mesa mesa, String statusOrder);
 
 }

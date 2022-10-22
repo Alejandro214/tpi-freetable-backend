@@ -3,6 +3,7 @@ package com.restaurant.restaurantApi.service.impl;
 
 import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
+import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IMesaRepo;
 import com.restaurant.restaurantApi.service.inter.IMesaService;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
@@ -40,10 +41,37 @@ public class MesaServiceImpl implements IMesaService {
     @Override
     public Mesa addOrderByIdMesa(Integer idMesa, Order order) {
         Mesa mesa = this.getMesaById(idMesa);
+        if(orderService.existsByMesaAndStatusOrder(mesa,"CONFIRMADO")){
+            Order updateOrder = this.orderService.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
+            List<Product> productsConfirmados = updateOrder.getProducts();
+            updateOrder.getProducts().forEach(product -> {
+                updateProductosConfirmados(productsConfirmados,product);
+            });
+            updateOrder.setProducts(productsConfirmados);
+            this.orderService.saveOrder(updateOrder);
+            return this.iMesaRepo.save(mesa);
+        }
         order.setMesa(mesa);
         Order order1 = this.orderService.saveOrder(order);
         mesa.addOrder(order1);
         return this.iMesaRepo.save(mesa);
+    }
+
+
+    private void updateProductosConfirmados(List<Product> productosConfirmados, Product product){
+        if(existProductInProductsConfirmados(productosConfirmados,product)){
+            productosConfirmados.forEach(product1 -> {
+                if(product1.getIdProduct().equals(product.getIdProduct())){
+                    product1.setCantProduct(product1.getCantProduct() + product.getCantProduct());
+                }
+            });
+        }else {
+            productosConfirmados.add(product);
+        }
+    }
+
+    private boolean existProductInProductsConfirmados(List<Product> productosConfirmados,Product product){
+        return  productosConfirmados.stream().anyMatch(product1 -> product1.getIdProduct().equals(product.getIdProduct()));
     }
 
     @Override
