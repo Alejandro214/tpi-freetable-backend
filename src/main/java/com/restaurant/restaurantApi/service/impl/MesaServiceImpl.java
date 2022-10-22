@@ -69,7 +69,7 @@ public class MesaServiceImpl implements IMesaService {
     private boolean existProductInProductsConfirmados(List<Product> productosConfirmados,Product product){
         return  productosConfirmados.stream().anyMatch(product1 -> product1.getIdProduct().equals(product.getIdProduct()));
     }
-   
+
    */
 
     @Override
