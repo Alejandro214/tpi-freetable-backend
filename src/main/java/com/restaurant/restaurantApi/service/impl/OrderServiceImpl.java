@@ -69,7 +69,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order getOrderConfirmado(Integer idMesa) {
-        Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
+        Mesa mesa          = this.iMesaRepo.findById(idMesa).orElse(null);
         if(mesa==null)
             return null;
         Order pedidoConfirmado = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
