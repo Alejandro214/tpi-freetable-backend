@@ -53,25 +53,6 @@ public class MesaServiceImpl implements IMesaService {
         return this.iMesaRepo.save(mesa);
     }
 
-
-  /*  private void updateProductosConfirmados(List<Product> productosConfirmados, Product product){
-        if(existProductInProductsConfirmados(productosConfirmados,product)){
-            productosConfirmados.forEach(product1 -> {
-                if(product1.getIdProduct().equals(product.getIdProduct())){
-                    product1.setCantProduct(product1.getCantProduct() + product.getCantProduct());
-                }
-            });
-        }else {
-            productosConfirmados.add(product);
-        }
-    }
-
-    private boolean existProductInProductsConfirmados(List<Product> productosConfirmados,Product product){
-        return  productosConfirmados.stream().anyMatch(product1 -> product1.getIdProduct().equals(product.getIdProduct()));
-    }
-
-   */
-
     @Override
     public Mesa changeEstadoMesa(Integer idMesa,String newEstadoMesa) {
         Mesa mesa = this.getMesaById(idMesa);
