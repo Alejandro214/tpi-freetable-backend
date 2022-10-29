@@ -78,10 +78,10 @@ public class MesaController {
 
     @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
     @ApiOperation("Dado un idMesa y una newPosition, actualiza la posicion de la mesa con dicho idMesa")
-    public ResponseEntity<String> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
+    public ResponseEntity<Mesa> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
                                                      @PathVariable("newPosition") Integer position){
         this.iMesaService.updatePositionMesa( idMesa, position);
-        return new ResponseEntity<>("Se ha actualizado la posicion de la mesa",HttpStatus.OK);
+        return new ResponseEntity<>(this.iMesaService.updatePositionMesa( idMesa, position),HttpStatus.OK);
     }
 
 
