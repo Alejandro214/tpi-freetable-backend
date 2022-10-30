@@ -6,11 +6,9 @@ import com.restaurant.restaurantApi.exception.DeleteOrderException;
 import com.restaurant.restaurantApi.exception.GetAllOrdersByIdMesaException;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
 import com.restaurant.restaurantApi.model.Order;
-import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,10 +35,10 @@ public class OrderController {
         }
     }
     @ApiOperation(value = "Retorna los todos pedidos",notes = "Dado un idMesa, retorna todos los pedidos que se realizaron en la mesa con dicho idMesa")
-    @GetMapping("getAllOrders/{idMesa}/{statusOrder}")
-    public ResponseEntity<List<Order>> getAllOrders(@PathVariable("idMesa") Integer idMesa, @PathVariable("statusOrder") String statusOrder){
+    @GetMapping("getAllOrdersPagados/{idMesa}")
+    public ResponseEntity<List<Order>> getAllOrdersPagados(@PathVariable("idMesa") Integer idMesa){
         try {
-            return new ResponseEntity<>(this.iOrderService.getAllOrders(idMesa,statusOrder), HttpStatus.OK);
+            return new ResponseEntity<>(this.iOrderService.getAllOrdersPagados(idMesa), HttpStatus.OK);
         }catch (Exception e){
             throw new GetAllOrdersByIdMesaException(ExceptionMessage.GER_ALL_ORDERS_BY_MESA_EXCEPTION_.getValue());
         }
@@ -61,11 +59,11 @@ public class OrderController {
     @ApiOperation(value = "Retorna el pedido confirmado que pertenece al idMesa",notes = "Dado un idMesa, retorna el pedido que pertenece a esa mesa con dicho idMesa")
     @GetMapping("getOrderConfirmado/{idMesa}")
     public ResponseEntity<Order> getOrderConfirmado(@PathVariable("idMesa") Integer idMesa){
-            return new ResponseEntity<>(this.iOrderService.getOrderConfirmado(idMesa), HttpStatus.OK);
+            return new ResponseEntity<>(this.iOrderService.getPedidoConfirmadoByIdMesa(idMesa), HttpStatus.OK);
     }
-    @PutMapping("updateOrderStatusByMesa/{idMesa}")
-    public ResponseEntity<Order> updateOrderStatusByMesa(@PathVariable("idMesa") Integer idMesa){
-        return new ResponseEntity<>(this.iOrderService.updateOrderStatusByMesa(idMesa), HttpStatus.OK);
+    @PutMapping("pagarPedidoByMesaIdMesa/{idMesa}")
+    public ResponseEntity<Order> pagarPedidoByMesaIdMesa(@PathVariable("idMesa") Integer idMesa){
+        return new ResponseEntity<>(this.iOrderService.pagarPedidoByMesaIdMesa(idMesa), HttpStatus.OK);
     }
 
 

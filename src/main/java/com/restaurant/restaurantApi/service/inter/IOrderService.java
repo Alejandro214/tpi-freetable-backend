@@ -11,19 +11,19 @@ public interface IOrderService {
 
      Order saveOrder(Order order);
 
-     List<Order> getAllOrders(Integer idMesa,String statusOrder);
+     List<Order> getAllOrdersPagados(Integer idMesa);
 
      void deleteOrder(Integer idOrder);
 
      Order getOrderById(Integer idOrder);
 
-     Order getOrderConfirmado(Integer idMesa);
+     Order getPedidoConfirmadoByIdMesa(Integer idMesa);
 
      Boolean existsByMesaAndStatusOrder(Mesa mesa, String statusOrder);
 
      Order findOrderByMesaAndStatusOrder(Mesa mesa, String statusOrder);
 
-     Order updateOrderStatusByMesa(Integer idMesa);
+     Order pagarPedidoByMesaIdMesa(Integer idMesa);
 
      void deleteOrder(Order order);
 

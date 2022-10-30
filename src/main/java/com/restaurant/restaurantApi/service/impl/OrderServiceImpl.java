@@ -44,9 +44,9 @@ public class OrderServiceImpl implements IOrderService {
         );
     }
     @Override
-    public List<Order> getAllOrders(Integer idMesa,String statusOrder) {
+    public List<Order> getAllOrdersPagados(Integer idMesa) {
         Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
-        List<Order> orders = this.iOrderRepo.findAllByMesaAndStatusOrder(mesa,statusOrder);
+        List<Order> orders = this.iOrderRepo.findAllByMesaAndStatusOrder(mesa,"PAGADO");
         orders.forEach(order -> {
                      order.setProducts(this.productRepo.findAllProductsByIdOrder(order.getIdOrder()));
                 }
@@ -68,17 +68,15 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public Order getOrderConfirmado(Integer idMesa) {
+    public Order getPedidoConfirmadoByIdMesa(Integer idMesa) {
         Mesa mesa          = this.iMesaRepo.findById(idMesa).orElse(null);
-        if(mesa==null)
-            return null;
         Order pedidoConfirmado = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
-        if (pedidoConfirmado== null)
-            return null;
-        pedidoConfirmado.getProducts().forEach(product -> {
-            product.setCantProduct(this.getCantProductByIdMesaAndIdProduct(product.getIdProduct(),pedidoConfirmado.getIdOrder()));
-        });
-        return this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
+        if(pedidoConfirmado != null) {
+            pedidoConfirmado.getProducts().forEach(product -> {
+                product.setCantProduct(this.getCantProductByIdMesaAndIdProduct(product.getIdProduct(), pedidoConfirmado.getIdOrder()));
+            });
+        }
+        return  pedidoConfirmado;
     }
 
     private Integer getCantProductByIdMesaAndIdProduct(Integer idProduct, Integer idOrder){
@@ -90,19 +88,26 @@ public class OrderServiceImpl implements IOrderService {
         return this.iOrderRepo.existsByMesaAndStatusOrder(mesa,statusOrder);
     }
 
+    public Order updateOrder(Mesa mesa, Order order){
+        Order updateOrder = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
+        updateOrder.setProducts(order.getProducts());
+        return this.saveOrder(updateOrder);
+    }
+
     @Override
     public Order findOrderByMesaAndStatusOrder(Mesa mesa, String statusOrder) {
         return this.iOrderRepo.findByMesaAndStatusOrder(mesa,statusOrder);
     }
 
     @Override
-    public Order updateOrderStatusByMesa(Integer idMesa) {
+    public Order pagarPedidoByMesaIdMesa(Integer idMesa) {
         Mesa mesa = this.iMesaRepo.findById(idMesa).get();
         Order order = this.iOrderRepo.findByMesaAndStatusOrder(mesa,"CONFIRMADO");
         order.setStatusOrder("PAGADO");
         return this.iOrderRepo.save(order);
 
     }
+
 
     @Override
     public void deleteOrder(Order order) {

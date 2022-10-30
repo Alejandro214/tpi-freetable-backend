@@ -45,11 +45,11 @@ public class MesaServiceImpl implements IMesaService {
             Order updateOrder = this.orderService.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
             updateOrder.setProducts(order.getProducts());
             this.orderService.saveOrder(updateOrder);
-            return this.iMesaRepo.save(mesa);
+        }else {
+            order.setMesa(mesa);
+            Order order1 = this.orderService.saveOrder(order);
+            mesa.addOrder(order1);
         }
-        order.setMesa(mesa);
-        Order order1 = this.orderService.saveOrder(order);
-        mesa.addOrder(order1);
         return this.iMesaRepo.save(mesa);
     }
 

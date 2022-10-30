@@ -60,7 +60,6 @@ public class ProductController {
         }
     }
 
-
     @GetMapping("getProductByName/{nameProduct}")
     @ApiOperation("Retorna el producto con el nombre que recibe")
     public ResponseEntity<Product> getProductByName(@PathVariable("nameProduct") String nameProduct){
