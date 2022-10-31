@@ -29,7 +29,6 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public List<Product> filterProductByName(String name) {
-        List<Product> products = (List<Product>) this.iProductRepo.findAll();
         return this.iProductRepo.findAllProducts(name);
     }
 

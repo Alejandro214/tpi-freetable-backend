@@ -69,7 +69,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order getPedidoConfirmadoByIdMesa(Integer idMesa) {
-        Mesa mesa          = this.iMesaRepo.findById(idMesa).orElse(null);
+        Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
         Order pedidoConfirmado = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
         if(pedidoConfirmado != null) {
             pedidoConfirmado.getProducts().forEach(product -> {
@@ -87,10 +87,17 @@ public class OrderServiceImpl implements IOrderService {
     public  Boolean existsByMesaAndStatusOrder(Mesa mesa,String statusOrder){
         return this.iOrderRepo.existsByMesaAndStatusOrder(mesa,statusOrder);
     }
-
+    @Override
     public Order updateOrder(Mesa mesa, Order order){
-        Order updateOrder = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
-        updateOrder.setProducts(order.getProducts());
+        Order updateOrder;
+        if(this.existsByMesaAndStatusOrder(mesa,"CONFIRMADO")){
+            updateOrder = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
+            updateOrder.setProducts(order.getProducts());
+        }else {
+            order.setMesa(mesa);
+            updateOrder = this.saveOrder(order);
+            mesa.addOrder(updateOrder);
+        }
         return this.saveOrder(updateOrder);
     }
 

@@ -26,8 +26,6 @@ public class MesaServiceImpl implements IMesaService {
         return this.iMesaRepo.save(mesa);
     }
 
-
-
     @Override
     public Mesa getMesaById(Integer idMesa) {
         return this.iMesaRepo.findById(idMesa).get();
@@ -41,15 +39,7 @@ public class MesaServiceImpl implements IMesaService {
     @Override
     public Mesa addOrderByIdMesa(Integer idMesa, Order order) {
         Mesa mesa = this.getMesaById(idMesa);
-        if(orderService.existsByMesaAndStatusOrder(mesa,"CONFIRMADO")){
-            Order updateOrder = this.orderService.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
-            updateOrder.setProducts(order.getProducts());
-            this.orderService.saveOrder(updateOrder);
-        }else {
-            order.setMesa(mesa);
-            Order order1 = this.orderService.saveOrder(order);
-            mesa.addOrder(order1);
-        }
+        this.orderService.updateOrder(mesa,order);
         return this.iMesaRepo.save(mesa);
     }
 

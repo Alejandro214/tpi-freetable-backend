@@ -27,4 +27,6 @@ public interface IOrderService {
 
      void deleteOrder(Order order);
 
+     Order updateOrder(Mesa mesa, Order order);
+
 }
