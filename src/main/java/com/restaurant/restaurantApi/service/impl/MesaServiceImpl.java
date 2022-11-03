@@ -61,4 +61,23 @@ public class MesaServiceImpl implements IMesaService {
         mesa.setPositionMesa(position);
         return this.saveMesa(mesa);
     }
+
+    @Override
+    public Mesa juntarMesas(Integer idMesaUno, Integer idMesaDos) {
+        Mesa mesa  = this.getMesaById(idMesaUno);
+        Mesa mesa1 = this.getMesaById(idMesaDos);
+        Mesa dobleMesa = new Mesa();
+        dobleMesa.setPositionMesa(mesa.getPositionMesa());
+        dobleMesa.setEstadoMesa(mesa.getEstadoMesa());
+        Mesa mesaSave = this.saveMesa(dobleMesa);
+        List<Order> orderList = mesa.getListPedidos();
+        orderList.addAll(mesa1.getListPedidos());
+        orderList.forEach(order -> {
+            order.setMesa(mesaSave);
+            this.orderService.saveOrder(order);
+        });
+        deleteMesaById(idMesaUno);
+        deleteMesaById(idMesaDos);
+        return this.getMesaById(mesaSave.getIdMesa());
+    }
 }

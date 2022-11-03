@@ -13,4 +13,5 @@ public interface IMesaService {
     Mesa changeEstadoMesa(Integer idMesa,String newEstadoMesa);
     void deleteMesaById(Integer idMesa);
     Mesa  updatePositionMesa(Integer idMesa,Integer position);
+    Mesa juntarMesas(Integer idMesaUno,Integer idMesaDos);
 }
