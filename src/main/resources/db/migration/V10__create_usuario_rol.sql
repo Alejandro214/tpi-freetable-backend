@@ -19,5 +19,6 @@ CREATE TABLE `usuario` (
                            `nombre_usuario` varchar(45) NOT NULL,
                            `password` varchar(500) NOT NULL,
                            `rol_id` varchar(45) NOT NULL,
+                           `imageData_idImage` varchar(45) ,
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

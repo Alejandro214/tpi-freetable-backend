@@ -1,6 +1,7 @@
 package com.restaurant.restaurantApi.security.entity;
 
 
+import com.restaurant.restaurantApi.model.ImageData;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -29,6 +30,10 @@ public class Usuario {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="imageData_idImage", referencedColumnName = "idImage")
+    private ImageData imageData;
 
     public Usuario(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String email, @NotNull String password) {
         this.nombre = nombre;

@@ -30,7 +30,6 @@ public class ImageDataController {
     @GetMapping("/{fileName}")
     public ResponseEntity<?> downloadImage(@PathVariable String fileName){
         byte[] imageData=imageService.downloadImage(fileName);
-       // return new ResponseEntity<>()
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
 
     }
