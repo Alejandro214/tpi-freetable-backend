@@ -32,15 +32,9 @@ class OrderServiceImplTest {
 
     @Mock
     private IMesaRepo mesaRepo;
-
-
     private Product pizza = new Product();
-
     private Product fanta = new Product();
-
     Order pedidoPizza = new Order();
-
-    Order pedidoFanta = new Order();
 
 
     @BeforeEach

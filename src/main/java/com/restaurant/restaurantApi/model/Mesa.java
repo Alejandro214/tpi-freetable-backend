@@ -38,13 +38,8 @@ public class Mesa {
         Mesa mesa = (Mesa) o;
         return idMesa != null && Objects.equals(idMesa, mesa.idMesa);
     }
-
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    public void deleteOrder(Order order){
-        this.listPedidos.remove(order);
     }
 }

@@ -1,5 +1,4 @@
 package com.restaurant.restaurantApi.service.impl;
-
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,13 +8,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 public class ProductServiceImplTest {
 
@@ -46,16 +41,6 @@ public class ProductServiceImplTest {
 
     }
 
-    @Test
-    void save_product_pizza() {
-        when(iProductRepo.save(any(Product.class))).thenReturn(pizza);
-        Product product = this.productService.saveProduct(this.pizza);
-        assertEquals(product.getImage(),this.pizza.getImage());
-        assertEquals(product.getName(),this.pizza.getName());
-        assertEquals(product.getPrice(),this.pizza.getPrice());
-        assertEquals(product.getIdProduct(),1);
-
-    }
 
     @Test
     void filter_Product_By_Name() {
