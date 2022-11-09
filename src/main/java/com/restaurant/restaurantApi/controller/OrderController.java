@@ -35,10 +35,11 @@ public class OrderController {
         }
     }
     @ApiOperation(value = "Retorna los todos pedidos",notes = "Dado un idMesa, retorna todos los pedidos que se realizaron en la mesa con dicho idMesa")
-    @GetMapping("getAllOrdersPagados/{idMesa}")
-    public ResponseEntity<List<Order>> getAllOrdersPagados(@PathVariable("idMesa") Integer idMesa){
+    @GetMapping("getAllOrdersPagados/{idMesa}/{from}/{to}")
+    public ResponseEntity<List<Order>> getAllOrdersPagados(@PathVariable("idMesa") Integer idMesa,@PathVariable(value = "from")String from,
+                                                           @PathVariable(value = "to") String to){
         try {
-            return new ResponseEntity<>(this.iOrderService.getAllOrdersPagados(idMesa), HttpStatus.OK);
+            return new ResponseEntity<>(this.iOrderService.getAllOrdersPagados(idMesa,from,to), HttpStatus.OK);
         }catch (Exception e){
             throw new GetAllOrdersByIdMesaException(ExceptionMessage.GER_ALL_ORDERS_BY_MESA_EXCEPTION_.getValue());
         }

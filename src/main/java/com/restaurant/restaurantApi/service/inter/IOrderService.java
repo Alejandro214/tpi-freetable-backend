@@ -11,7 +11,7 @@ public interface IOrderService {
 
      Order saveOrder(Order order);
 
-     List<Order> getAllOrdersPagados(Integer idMesa);
+     List<Order> getAllOrdersPagados(Integer idMesa,String from, String to);
 
      void deleteOrder(Integer idOrder);
 

@@ -15,7 +15,9 @@ public interface IOrderRepo extends CrudRepository<Order, Integer> {
             " WHERE id_order = :idOrder ",nativeQuery = true)
     void deleteOrderProductosPedidos(Integer idOrder);
 
-    List<Order> findAllByMesaAndStatusOrder(Mesa idMesa,String statusOrder);
+    @Query(value="SELECT * FROM restaurant_db.table_order as tb " +
+                 "WHERE tb.idMesa = :idMesa AND tb.dateOrder BETWEEN :desde AND :hasta AND tb.statusOrder = 'PAGADO' ",nativeQuery = true)
+    List<Order> findAllByMesaAndStatusOrder(Integer idMesa,String desde,String hasta);
 
 
     @Modifying

@@ -84,6 +84,14 @@ public class MesaController {
         return new ResponseEntity<>(this.iMesaService.updatePositionMesa( idMesa, position),HttpStatus.OK);
     }
 
+    @PostMapping("juntarMesas/{idMesaUno}/{idMesaDos}")
+    public ResponseEntity<Mesa> juntarMesas(@PathVariable("idMesaUno")Integer idMesaUno,
+                                            @PathVariable("idMesaDos") Integer idMesaDos){
+        Mesa mesa = this.iMesaService.juntarMesas(idMesaUno
+        ,idMesaDos);
+        return new ResponseEntity<>(mesa,HttpStatus.OK);
+    }
+
 
 
 

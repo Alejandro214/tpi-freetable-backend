@@ -9,6 +9,8 @@ import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,14 +46,19 @@ public class OrderServiceImpl implements IOrderService {
         );
     }
     @Override
-    public List<Order> getAllOrdersPagados(Integer idMesa) {
-        Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
-        List<Order> orders = this.iOrderRepo.findAllByMesaAndStatusOrder(mesa,"PAGADO");
+    public List<Order> getAllOrdersPagados(Integer idMesa,String from, String to) {
+        List<Order> orders = this.iOrderRepo.findAllByMesaAndStatusOrder(idMesa,from,to);
         orders.forEach(order -> {
                      order.setProducts(this.productRepo.findAllProductsByIdOrder(order.getIdOrder()));
                 }
         );
         return orders;
+    }
+
+    private String getDateNow(){
+        String pattern = "dd-MM-yyyy";
+        String dateInString =new SimpleDateFormat(pattern).format(new Date());
+        return dateInString;
     }
 
     @Override
