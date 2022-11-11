@@ -23,6 +23,8 @@ public class ImageData {
     @Column(name = "imagedata",length = 1000)
     private byte[] imageData;
 
+    private String username;
+
     public String getName() {
         return name;
     }
