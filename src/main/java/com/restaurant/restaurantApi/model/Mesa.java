@@ -27,6 +27,8 @@ public class Mesa {
 
     private Integer positionMesa;
 
+    private Integer numeroMesa;
+
     public void addOrder(Order order){
         this.listPedidos.add(order);
     }
