@@ -13,6 +13,5 @@ public class SettingUser {
     private Integer idSettingUser;
     private String nombreUsuario;
     private Integer cantMesas = 10;
-
-
+    private String imagenData;
 }
