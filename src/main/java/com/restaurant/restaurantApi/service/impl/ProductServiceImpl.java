@@ -10,7 +10,6 @@ import java.util.List;
 
 
 @Service
-@Data
 public class ProductServiceImpl implements IProductService {
 
     @Autowired

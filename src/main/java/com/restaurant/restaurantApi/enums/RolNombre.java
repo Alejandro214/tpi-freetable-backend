@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.security.enums;
+package com.restaurant.restaurantApi.enums;
 
 public enum RolNombre {
     ROLE_ADMIN,

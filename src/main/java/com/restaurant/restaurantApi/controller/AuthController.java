@@ -1,16 +1,16 @@
-package com.restaurant.restaurantApi.security.controller;
+package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.dto.Mensaje;
-import com.restaurant.restaurantApi.security.dto.JwtDto;
-import com.restaurant.restaurantApi.security.dto.LoginUsuario;
-import com.restaurant.restaurantApi.security.dto.NuevoUsuario;
-import com.restaurant.restaurantApi.security.entity.Rol;
-import com.restaurant.restaurantApi.security.entity.Usuario;
-import com.restaurant.restaurantApi.security.entity.UsuarioPrincipal;
-import com.restaurant.restaurantApi.security.enums.RolNombre;
-import com.restaurant.restaurantApi.security.jwt.JwtProvider;
-import com.restaurant.restaurantApi.security.service.RolService;
-import com.restaurant.restaurantApi.security.service.UsuarioService;
+import com.restaurant.restaurantApi.dto.JwtDto;
+import com.restaurant.restaurantApi.dto.LoginUsuario;
+import com.restaurant.restaurantApi.dto.NuevoUsuario;
+import com.restaurant.restaurantApi.model.Rol;
+import com.restaurant.restaurantApi.model.Usuario;
+import com.restaurant.restaurantApi.model.UsuarioPrincipal;
+import com.restaurant.restaurantApi.enums.RolNombre;
+import com.restaurant.restaurantApi.jwt.JwtProvider;
+import com.restaurant.restaurantApi.service.impl.RolService;
+import com.restaurant.restaurantApi.service.impl.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/auth")

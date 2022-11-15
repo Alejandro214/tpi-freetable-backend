@@ -1,6 +1,6 @@
-package com.restaurant.restaurantApi.security.repository;
+package com.restaurant.restaurantApi.repo;
 
-import com.restaurant.restaurantApi.security.entity.Usuario;
+import com.restaurant.restaurantApi.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

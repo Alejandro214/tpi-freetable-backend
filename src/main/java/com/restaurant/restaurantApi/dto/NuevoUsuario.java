@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.security.dto;
+package com.restaurant.restaurantApi.dto;
 
 import lombok.Data;
 

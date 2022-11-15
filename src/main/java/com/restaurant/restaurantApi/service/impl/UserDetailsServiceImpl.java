@@ -1,14 +1,14 @@
-package com.restaurant.restaurantApi.security.service;
+package com.restaurant.restaurantApi.service.impl;
 
-import com.restaurant.restaurantApi.security.entity.Usuario;
-import com.restaurant.restaurantApi.security.entity.UsuarioPrincipal;
+import com.restaurant.restaurantApi.model.Usuario;
+import com.restaurant.restaurantApi.model.UsuarioPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UsuarioService usuarioService;

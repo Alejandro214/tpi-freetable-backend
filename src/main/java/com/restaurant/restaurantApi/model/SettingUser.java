@@ -11,10 +11,8 @@ public class SettingUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSettingUser;
-    private Integer idUser;
-    @ManyToOne
-    @JoinColumn(name = "image_data_id_image")
-    private ImageData imageData;
+    private String nombreUsuario;
+    private Integer cantMesas = 10;
 
 
 }

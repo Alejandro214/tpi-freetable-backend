@@ -1,10 +1,6 @@
-package com.restaurant.restaurantApi.security.dto;
+package com.restaurant.restaurantApi.dto;
 
-import com.restaurant.restaurantApi.security.entity.Rol;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
 
 @Data
 public class JwtDto {

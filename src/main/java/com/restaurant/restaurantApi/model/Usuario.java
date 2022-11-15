@@ -1,13 +1,10 @@
-package com.restaurant.restaurantApi.security.entity;
+package com.restaurant.restaurantApi.model;
 
 
-import com.restaurant.restaurantApi.model.ImageData;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity

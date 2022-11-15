@@ -1,8 +1,8 @@
-package com.restaurant.restaurantApi.security.service;
+package com.restaurant.restaurantApi.service.impl;
 
-import com.restaurant.restaurantApi.security.entity.Rol;
-import com.restaurant.restaurantApi.security.enums.RolNombre;
-import com.restaurant.restaurantApi.security.repository.RolRepository;
+import com.restaurant.restaurantApi.model.Rol;
+import com.restaurant.restaurantApi.enums.RolNombre;
+import com.restaurant.restaurantApi.repo.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

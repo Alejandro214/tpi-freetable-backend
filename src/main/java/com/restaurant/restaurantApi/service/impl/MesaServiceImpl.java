@@ -69,6 +69,7 @@ public class MesaServiceImpl implements IMesaService {
         Mesa dobleMesa = new Mesa();
         dobleMesa.setPositionMesa(mesa.getPositionMesa());
         dobleMesa.setEstadoMesa(mesa.getEstadoMesa());
+        dobleMesa.setNumeroMesa(mesa.getNumeroMesa());
         Mesa mesaSave = this.saveMesa(dobleMesa);
         List<Order> orderList = mesa.getListPedidos();
         orderList.addAll(mesa1.getListPedidos());

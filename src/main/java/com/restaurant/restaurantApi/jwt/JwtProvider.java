@@ -1,6 +1,6 @@
-package com.restaurant.restaurantApi.security.jwt;
+package com.restaurant.restaurantApi.jwt;
 
-import com.restaurant.restaurantApi.security.entity.UsuarioPrincipal;
+import com.restaurant.restaurantApi.model.UsuarioPrincipal;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

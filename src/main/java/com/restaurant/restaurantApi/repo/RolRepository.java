@@ -1,7 +1,7 @@
-package com.restaurant.restaurantApi.security.repository;
+package com.restaurant.restaurantApi.repo;
 
-import com.restaurant.restaurantApi.security.entity.Rol;
-import com.restaurant.restaurantApi.security.enums.RolNombre;
+import com.restaurant.restaurantApi.model.Rol;
+import com.restaurant.restaurantApi.enums.RolNombre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

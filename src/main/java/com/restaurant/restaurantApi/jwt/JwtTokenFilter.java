@@ -1,6 +1,6 @@
-package com.restaurant.restaurantApi.security.jwt;
+package com.restaurant.restaurantApi.jwt;
 
-import com.restaurant.restaurantApi.security.service.UserDetailsServiceImpl;
+import com.restaurant.restaurantApi.service.impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

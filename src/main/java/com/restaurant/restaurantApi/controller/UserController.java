@@ -1,7 +1,7 @@
 package com.restaurant.restaurantApi.controller;
 
-import com.restaurant.restaurantApi.security.entity.Usuario;
-import com.restaurant.restaurantApi.security.service.UsuarioService;
+import com.restaurant.restaurantApi.model.Usuario;
+import com.restaurant.restaurantApi.service.impl.UsuarioService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
-package com.restaurant.restaurantApi.security.entity;
+package com.restaurant.restaurantApi.model;
 
-import com.restaurant.restaurantApi.security.enums.RolNombre;
+import com.restaurant.restaurantApi.enums.RolNombre;
 import lombok.Data;
 
 import javax.persistence.*;
