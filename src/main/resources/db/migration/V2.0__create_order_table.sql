@@ -6,5 +6,9 @@ CREATE TABLE table_order (
   dateOrder VARCHAR(45) NOT NULL,
   statusOrder VARCHAR(45) NOT NULL,
   PRIMARY KEY (idOrder)
-)
+);
+
+INSERT INTO table_order (totalPrice,idMesa,dateOrder,statusOrder) VALUES (300.0,1,'18-11-2022 14:00','CONFIRMADO');
+INSERT INTO table_order (totalPrice,idMesa,dateOrder,statusOrder) VALUES (300.0,1,'18-11-2022 14:00','PAGADO');
+
 

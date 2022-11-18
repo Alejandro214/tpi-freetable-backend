@@ -29,4 +29,6 @@ public interface IOrderService {
 
      Order updateOrder(Mesa mesa, Order order);
 
+     void deleteOrders(List<Order> orders);
+
 }

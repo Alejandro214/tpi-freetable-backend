@@ -1,5 +1,6 @@
 package com.restaurant.restaurantApi.service.impl;
 
+import com.restaurant.restaurantApi.jwt.JwtProvider;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,15 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private JwtProvider jwtProvider;
+
     private String token;
 
 
     @BeforeEach
     public void setUp() {
-
+        this.token = this.jwtProvider.generateTokenByUsername("admin");
     }
 
 

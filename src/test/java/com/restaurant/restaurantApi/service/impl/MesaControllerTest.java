@@ -1,4 +1,5 @@
 package com.restaurant.restaurantApi.service.impl;
+import com.restaurant.restaurantApi.dto.LoginUsuario;
 import com.restaurant.restaurantApi.enums.RolNombre;
 import com.restaurant.restaurantApi.jwt.JwtProvider;
 import com.restaurant.restaurantApi.model.*;
@@ -42,6 +43,7 @@ public class MesaControllerTest {
 
     @BeforeEach
     public void setUp() {
+        this.token = this.jwtProvider.generateTokenByUsername("admin");
     }
 
     @Test
@@ -67,7 +69,7 @@ public class MesaControllerTest {
 
     @Test
     public void findAllMesas() throws Exception {
-        this.mockMvc.perform(get("/mesa/findAllMesas").header("Authorization", "Bearer " + "token"))
+        this.mockMvc.perform(get("/mesa/findAllMesas").header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(4)));
     }
@@ -117,8 +119,6 @@ public class MesaControllerTest {
 
         this.mockMvc.perform(put("/mesa/updatePositionMesa/2/10").header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
-                 /*       .content("{\"idMesa\":2,\"listPedidos\":[],\"estadoMesa\":\"No Disponible\"," +
-                                "\"positionMesa\":4,\"numeroMesa\":25}"))*/
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.idMesa").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.estadoMesa").value("Reservada"))

@@ -29,8 +29,8 @@ public class JwtProvider {
                 .compact();
     }
 
-    public String generateTokenByUserPrincipal(UsuarioPrincipal usuarioPrincipal){
-        return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
+    public String generateTokenByUsername(String username){
+        return Jwts.builder().setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret)

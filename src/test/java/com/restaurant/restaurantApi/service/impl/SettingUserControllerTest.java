@@ -1,6 +1,8 @@
 package com.restaurant.restaurantApi.service.impl;
 
 
+import com.restaurant.restaurantApi.jwt.JwtProvider;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -25,7 +27,16 @@ public class SettingUserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private JwtProvider jwtProvider;
+
     private String token;
+
+
+    @BeforeEach
+    public void setUp() {
+        this.token = this.jwtProvider.generateTokenByUsername("admin");
+    }
 
     @Test
     public void getSettingByUsername() throws Exception {

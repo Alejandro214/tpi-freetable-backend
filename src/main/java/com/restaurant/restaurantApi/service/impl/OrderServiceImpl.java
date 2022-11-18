@@ -65,8 +65,8 @@ public class OrderServiceImpl implements IOrderService {
     public void deleteOrder(Integer idOrder) {
         Order order = this.getOrderById(idOrder);
         order.deleteMesa();
-        this.iOrderRepo.delete(order);
         this.iOrderRepo.deleteOrderProductosPedidos(idOrder);
+        this.iOrderRepo.delete(order);
     }
 
     @Override
@@ -120,6 +120,13 @@ public class OrderServiceImpl implements IOrderService {
         order.setStatusOrder("PAGADO");
         return this.iOrderRepo.save(order);
 
+    }
+
+    @Override
+    public void deleteOrders(List<Order> orders){
+        orders.forEach(order -> {
+            this.deleteOrder(order.getIdOrder());
+        });
     }
 
 
