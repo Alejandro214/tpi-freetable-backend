@@ -8,7 +8,7 @@ CREATE TABLE mesa (
   PRIMARY KEY (idMesa)
 ) ;
 
-INSERT INTO mesa (estadoMesa,positionMesa,numeroMesa) VALUES ('No disponible', 1, 1);
+INSERT INTO mesa (estadoMesa,positionMesa,numeroMesa) VALUES ('No Disponible', 1, 1);
 INSERT INTO mesa (estadoMesa,positionMesa,numeroMesa) VALUES ('Reservada', 2, 2);
 INSERT INTO mesa (estadoMesa,positionMesa,numeroMesa) VALUES ('Disponible', 3, 3);
 INSERT INTO mesa (estadoMesa,positionMesa,numeroMesa) VALUES ('Ocupada', 4, 4);

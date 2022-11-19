@@ -20,7 +20,7 @@ import java.util.Objects;
 @Table(name = "product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idProduct")
     private Integer idProduct;
     private String name;

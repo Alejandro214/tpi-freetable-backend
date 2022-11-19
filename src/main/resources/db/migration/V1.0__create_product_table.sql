@@ -8,6 +8,8 @@ CREATE TABLE product (
   PRIMARY KEY (idProduct)
 );
 
+
+
 INSERT INTO product VALUES (18,'Papas Fritas','https://cukme.com/wp-content/uploads/2021/05/Origen-de-las-papas-fitas-1.jpg',300,1),
 (19,'Pizza','https://media.lascalientesdelsur.co/upload/2020/11/Buen-apetito-Superintendencia-de-Electricidad-compra-429-mil-pesos-de-pizzas.jpg',600,1),
 (20,'Fanta','https://superlago.com.ar/wp-content/uploads/2021/01/7790895000454.jpg',200,1),

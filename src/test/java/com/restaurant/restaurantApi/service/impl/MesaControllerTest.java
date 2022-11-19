@@ -61,8 +61,8 @@ public class MesaControllerTest {
                         .header("Authorization", "Bearer " + token)).andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.idMesa").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.estadoMesa").value("No disponible"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.idMesa").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.estadoMesa").value("No Disponible"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.numeroMesa").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.positionMesa").value(1));
     }
