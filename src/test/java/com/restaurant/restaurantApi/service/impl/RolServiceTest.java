@@ -1,9 +1,8 @@
-package com.restaurant.restaurantApi.service.impl.service;
+package com.restaurant.restaurantApi.service.impl;
 
+import com.restaurant.restaurantApi.RolService;
 import com.restaurant.restaurantApi.enums.RolNombre;
 import com.restaurant.restaurantApi.model.Rol;
-import com.restaurant.restaurantApi.model.SettingUser;
-import com.restaurant.restaurantApi.service.impl.RolService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

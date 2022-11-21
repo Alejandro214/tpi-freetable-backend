@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.service.impl.service;
+package com.restaurant.restaurantApi.service.impl;
 
 
 import com.restaurant.restaurantApi.enums.RolNombre;

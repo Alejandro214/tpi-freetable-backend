@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.service.impl.controller;
+package com.restaurant.restaurantApi.controller;
 
 
 import com.restaurant.restaurantApi.jwt.JwtProvider;

@@ -1,10 +1,10 @@
-package com.restaurant.restaurantApi.service.impl.controller;
+package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.enums.RolNombre;
 import com.restaurant.restaurantApi.model.Rol;
 import com.restaurant.restaurantApi.model.Usuario;
-import com.restaurant.restaurantApi.service.impl.RolService;
-import com.restaurant.restaurantApi.service.impl.UsuarioService;
+import com.restaurant.restaurantApi.RolService;
+import com.restaurant.restaurantApi.UsuarioService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

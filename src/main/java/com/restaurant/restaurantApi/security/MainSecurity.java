@@ -2,10 +2,9 @@ package com.restaurant.restaurantApi.security;
 
 import com.restaurant.restaurantApi.jwt.JwtEntryPoint;
 import com.restaurant.restaurantApi.jwt.JwtTokenFilter;
-import com.restaurant.restaurantApi.service.impl.UserDetailsServiceImpl;
+import com.restaurant.restaurantApi.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.service.impl;
+package com.restaurant.restaurantApi;
 
 import com.restaurant.restaurantApi.model.SettingUser;
 import com.restaurant.restaurantApi.model.Usuario;
