@@ -28,7 +28,7 @@ public class MesaServiceImpl implements IMesaService {
 
     @Override
     public Mesa getMesaById(Integer idMesa) {
-        return this.iMesaRepo.findById(idMesa).get();
+        return this.iMesaRepo.findById(idMesa).orElse(null);
     }
 
     @Override
@@ -50,17 +50,14 @@ public class MesaServiceImpl implements IMesaService {
         return this.saveMesa(mesa);
     }
 
-
-    public void validateState(String estadoMesa){
-       // List<String> estados = [Dispo]
-    }
-
     @Override
     public void deleteMesaById(Integer idMesa) {
         Mesa mesa = this.getMesaById(idMesa);
         List<Order> orders = mesa.getListPedidos();
-        this.orderService.deleteOrders(orders);
-        this.iMesaRepo.deleteById(idMesa);
+        if(orders.size() > 0) {
+            this.orderService.deleteOrders(orders);
+            this.iMesaRepo.deleteById(idMesa);
+        }
     }
 
     @Override
