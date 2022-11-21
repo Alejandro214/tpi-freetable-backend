@@ -14,7 +14,11 @@ jobs:
       - run:
           name: Run tests and collect coverage
           command: mvn -B test
-    
+      - run:
+          name: Upload CodeCov.io Data
+          command: bash <(curl -s https://codecov.io/bash) -F unittests
+          when: always # Uploads code coverage results, pass or fail
+
 
 workflow:
   version: 2.1
