@@ -18,7 +18,6 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      - codecov/upload:
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
@@ -33,6 +32,3 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
-language: java
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
