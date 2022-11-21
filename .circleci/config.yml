@@ -28,6 +28,7 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      - codecov/upload
       - store_artifacts:
            path: target/site/jacoco/index.html
 workflows:
