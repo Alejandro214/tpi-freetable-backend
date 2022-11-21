@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,6 +28,7 @@ public class Order {
     private List<Product> products = new ArrayList<>();
 
     @Column(name = "totalPrice")
+    @NotNull
     private Double totalPrice;
 
     @JoinColumn(name="idMesa",referencedColumnName = "idMesa")
@@ -34,8 +37,10 @@ public class Order {
     @ToString.Exclude
     private Mesa mesa;
 
+    @NotBlank
     private String dateOrder;
 
+    @NotBlank
     private String statusOrder;
 
 

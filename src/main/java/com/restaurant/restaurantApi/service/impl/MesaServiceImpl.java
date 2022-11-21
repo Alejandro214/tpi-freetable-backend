@@ -50,6 +50,11 @@ public class MesaServiceImpl implements IMesaService {
         return this.saveMesa(mesa);
     }
 
+
+    public void validateState(String estadoMesa){
+       // List<String> estados = [Dispo]
+    }
+
     @Override
     public void deleteMesaById(Integer idMesa) {
         Mesa mesa = this.getMesaById(idMesa);

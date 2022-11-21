@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.service.impl;
+package com.restaurant.restaurantApi.service.impl.controller;
 
 import com.restaurant.restaurantApi.jwt.JwtProvider;
 import org.hamcrest.Matchers;
@@ -38,7 +38,7 @@ public class ProductControllerTest {
 
 
     @Test
-    public void filterProductByName() throws Exception {
+    public void buscar_una_producto_por_el_nombre() throws Exception {
         this.mockMvc.perform(get("/product/getFilterProductByName/papas").header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
@@ -47,4 +47,12 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].image").value("https://www.cucinare.tv/wp-content/uploads/2018/11/Pastel-de-papas.jpg"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].price").value(400d));
     }
+
+    @Test
+    public void error_token_no_enviado_al_intentar_buscar_una_producto_por_el_nombre() throws Exception {
+        this.mockMvc.perform(get("/product/getFilterProductByName/papas"))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    }
+
+
 }

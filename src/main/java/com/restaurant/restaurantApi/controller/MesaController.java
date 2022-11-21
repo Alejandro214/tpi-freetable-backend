@@ -1,6 +1,7 @@
 package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.common.ExceptionMessage;
+import com.restaurant.restaurantApi.dto.Mensaje;
 import com.restaurant.restaurantApi.exception.*;
 import com.restaurant.restaurantApi.model.*;
 import com.restaurant.restaurantApi.service.inter.*;
@@ -9,8 +10,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +27,9 @@ public class MesaController {
 
     @ApiOperation(value = "Dada un mesa, la guarda en la base")
     @PostMapping("saveMesa")
-    public ResponseEntity<Mesa> saveMesa(@RequestBody Mesa mesa){
+    public ResponseEntity<Mesa> saveMesa(@Valid @RequestBody Mesa mesa, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
         try {
             return new ResponseEntity<>(this.iMesaService.saveMesa(mesa), HttpStatus.OK);
         }catch (Exception e) {
@@ -54,7 +59,9 @@ public class MesaController {
 
     @ApiOperation(value = "Dado un idMesa y un pedido, agrega el pedido a la mesa con dicho idMesa y retorna la mesa con el pedido agregado")
     @PutMapping("addOrderMesa/{idMesa}")
-    public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa,@RequestBody Order order){
+    public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa,@Valid @RequestBody Order order,BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
         try {
             Mesa mesa = this.iMesaService.addOrderByIdMesa(idMesa,order);
             return new ResponseEntity<>(mesa,HttpStatus.OK);

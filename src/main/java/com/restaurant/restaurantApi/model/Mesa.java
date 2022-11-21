@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,9 +26,12 @@ public class Mesa {
 
     private String estadoMesa = "Disponible";
 
+    @NotNull
     private Integer positionMesa;
 
+    @NotNull
     private Integer numeroMesa;
+
 
     public void addOrder(Order order){
         this.listPedidos.add(order);

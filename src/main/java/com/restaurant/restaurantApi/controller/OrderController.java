@@ -2,6 +2,7 @@ package com.restaurant.restaurantApi.controller;
 
 
 import com.restaurant.restaurantApi.common.ExceptionMessage;
+import com.restaurant.restaurantApi.dto.Mensaje;
 import com.restaurant.restaurantApi.exception.DeleteOrderException;
 import com.restaurant.restaurantApi.exception.GetAllOrdersByIdMesaException;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
@@ -12,8 +13,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +30,9 @@ public class OrderController {
 
     @ApiOperation(value = "Create a new order",notes = "Dado un order, lo guarda en la base")
     @PostMapping("saveOrder")
-    public ResponseEntity<Order> saveOrder(@RequestBody Order order){
+    public ResponseEntity<Order> saveOrder(@Valid @RequestBody Order order, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
         try {
             return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
         }catch (Exception e){

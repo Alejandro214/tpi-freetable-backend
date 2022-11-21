@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi.service.impl;
+package com.restaurant.restaurantApi.service.impl.controller;
 
 
 import com.restaurant.restaurantApi.jwt.JwtProvider;
@@ -39,7 +39,7 @@ public class SettingUserControllerTest {
     }
 
     @Test
-    public void getSettingByUsername() throws Exception {
+    public void buscar_configuracion_del_usuario_por_username() throws Exception {
         this.mockMvc.perform(get("/setting/getSettingByUsername/admin").header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.idSettingUser").value(1))
@@ -48,7 +48,13 @@ public class SettingUserControllerTest {
     }
 
     @Test
-    public void saveSettingUser() throws Exception {
+    public void error_token_no_enviado_al_intentar_buscar_configuracion_del_usuario_por_username() throws Exception {
+        this.mockMvc.perform(get("/setting/getSettingByUsername/admin"))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+    }
+
+    @Test
+    public void guardar_configuracion_de_usuario() throws Exception {
         this.mockMvc.perform(post("/setting/saveSettingUser").header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"nombreUsuario\":\"mariobros\",\"cantMesas\":16}"))
@@ -56,6 +62,23 @@ public class SettingUserControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.idSettingUser").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nombreUsuario").value("mariobros"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.cantMesas").value(16));
+    }
+
+    @Test
+    public void bad_request_campos_invalidos_al_intentar_guardar_configuracion_de_usuario() throws Exception {
+        this.mockMvc.perform(post("/setting/saveSettingUser").header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"ErrornombreUsuario\":\"mariobros\",\"cantMesas\":16}"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mensaje").value("Error, campos invalidos"));
+    }
+
+    @Test
+    public void error_token_no_enviado_al_intentar_guardar_configuracion_de_usuario() throws Exception {
+        this.mockMvc.perform(post("/setting/saveSettingUser")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nombreUsuario\":\"mariobros\",\"cantMesas\":16}"))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
 
 }
