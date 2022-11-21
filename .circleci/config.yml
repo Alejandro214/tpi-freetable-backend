@@ -26,8 +26,9 @@ jobs:
           command: mvn -B -DskipTests clean package
       # Then run your tests!
       - run:
-          name: Test
-          command: mvn test
+          name: Run tests and collect coverage
+          command: mvn -B test
+            - codecov/upload
       - store_artifacts:
            path: target/site/jacoco/index.html
 workflows:
