@@ -62,14 +62,6 @@ public class UsuarioPrincipal implements UserDetails {
         return true;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
     public String getNombreUsuario() {
         return nombreUsuario;
     }

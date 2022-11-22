@@ -38,18 +38,7 @@ public class Product {
     private List<Order> listPedidos = new ArrayList<>();
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Product product = (Product) o;
-        return idProduct != null && Objects.equals(idProduct, product.idProduct);
-    }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 
 
 }
