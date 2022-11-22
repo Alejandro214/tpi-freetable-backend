@@ -7,10 +7,7 @@ public enum ExceptionMessage {
     SAVE_ORDER_ERROR("¡Ocurrio un error al guardar el pedido!"),
     DELETE_ORDER_EXCEPTION("¡Error no se pudo eliminar la order!"),
     SAVE_PRODUCT_EXCEPTION("¡Ocurrio un errror al intentar guardar el producto!"),
-    SEARCH_PRODUCT_EXCEPTION("¡Error al intentar el producto!"),
-    GET_ALL_PRODUCTS_EXCEPTION("¡Error al intentar obtener todos las productos"),
     SAVE_MESA_EXCEPTION("Ocurrio un error al intentar guardar la mesa!"),
-    GET_MESA_BY_ID_EXCEPTION("¡Ocurrio un error al intentar buscar la mesa con dicho id!"),
     ADD_ORDER_BY_ID_MESA_EXCEPTION("¡Ocurrio un error al intentar agregar el pedido al la mesa con dicho id!"),
     UPDATE_ORDER_EXCEPTION("¡Ocurrio un error al intentar updatear el pedido!");
 

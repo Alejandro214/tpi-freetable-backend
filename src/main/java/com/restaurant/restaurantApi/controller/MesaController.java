@@ -40,11 +40,7 @@ public class MesaController {
     @ApiOperation(value = "Dado un idMesa, retorna la mesa con dicho idMesa")
     @GetMapping("getMesaById/{idMesa}")
     public  ResponseEntity<Mesa> getMesaById(@PathVariable("idMesa") Integer idMesa){
-        try {
             return new ResponseEntity<>(this.iMesaService.getMesaById(idMesa),HttpStatus.OK);
-        }catch (Exception e) {
-            throw new GetMesaByIdException(ExceptionMessage.GET_MESA_BY_ID_EXCEPTION.getValue());
-        }
     }
 
     @ApiOperation(value = "Retorna todas las mesas actuales que tiene el restaurante")

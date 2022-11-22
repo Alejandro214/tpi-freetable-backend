@@ -14,7 +14,4 @@ public class JwtDto {
         this.nombreUsuario = nombreUsuario;
         this.rol = rol;
     }
-
-    public JwtDto() {
-    }
 }
