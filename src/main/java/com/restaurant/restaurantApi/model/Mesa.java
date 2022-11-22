@@ -20,7 +20,7 @@ public class Mesa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMesa;
 
-    @OneToMany(mappedBy = "mesa",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mesa",fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Order> listPedidos = new ArrayList<>();
 

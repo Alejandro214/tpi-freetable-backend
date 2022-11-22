@@ -166,7 +166,7 @@ public class MesaControllerTest {
 
     @Test
     public void borrar_una_mesa_por_id() throws Exception {
-        this.mockMvc.perform(delete("/mesa/deleteMesaById/1").header("Authorization", "Bearer " + token))
+        this.mockMvc.perform(delete("/mesa/deleteMesaById/4").header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 

@@ -23,7 +23,7 @@ public class Order {
     @Column(name="idOrder")
     private Integer idOrder;
 
-    @ManyToMany(mappedBy = "listPedidos",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "listPedidos",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Product> products = new ArrayList<>();
 

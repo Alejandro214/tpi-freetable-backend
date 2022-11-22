@@ -54,10 +54,9 @@ public class MesaServiceImpl implements IMesaService {
     public void deleteMesaById(Integer idMesa) {
         Mesa mesa = this.getMesaById(idMesa);
         List<Order> orders = mesa.getListPedidos();
-        if(orders.size() > 0) {
-            this.orderService.deleteOrders(orders);
-            this.iMesaRepo.deleteById(idMesa);
-        }
+        this.orderService.deleteOrders(orders);
+        this.iMesaRepo.deleteById(idMesa);
+
     }
 
     @Override
