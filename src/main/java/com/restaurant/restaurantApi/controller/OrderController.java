@@ -4,7 +4,6 @@ package com.restaurant.restaurantApi.controller;
 import com.restaurant.restaurantApi.common.ExceptionMessage;
 import com.restaurant.restaurantApi.dto.Mensaje;
 import com.restaurant.restaurantApi.exception.DeleteOrderException;
-import com.restaurant.restaurantApi.exception.GetAllOrdersByIdMesaException;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
@@ -43,11 +42,8 @@ public class OrderController {
     @GetMapping("getAllOrdersPagados/{idMesa}/{from}/{to}")
     public ResponseEntity<List<Order>> getAllOrdersPagados(@PathVariable("idMesa") Integer idMesa,@PathVariable(value = "from")String from,
                                                            @PathVariable(value = "to") String to){
-        try {
             return new ResponseEntity<>(this.iOrderService.getAllOrdersPagados(idMesa,from,to), HttpStatus.OK);
-        }catch (Exception e){
-            throw new GetAllOrdersByIdMesaException(ExceptionMessage.GER_ALL_ORDERS_BY_MESA_EXCEPTION_.getValue());
-        }
+
     }
 
     @ApiOperation(value= "Dado un idOrder, elimina el pedido con dicho idOrder")

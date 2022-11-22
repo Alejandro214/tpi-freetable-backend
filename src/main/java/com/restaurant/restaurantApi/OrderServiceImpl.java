@@ -8,9 +8,6 @@ import com.restaurant.restaurantApi.repo.IProductRepo;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -55,11 +52,6 @@ public class OrderServiceImpl implements IOrderService {
         return orders;
     }
 
-    private String getDateNow(){
-        String pattern = "dd-MM-yyyy";
-        String dateInString =new SimpleDateFormat(pattern).format(new Date());
-        return dateInString;
-    }
 
     @Override
     public void deleteOrder(Integer idOrder) {

@@ -50,11 +50,7 @@ public class MesaController {
     @ApiOperation(value = "Retorna todas las mesas actuales que tiene el restaurante")
     @GetMapping("findAllMesas")
     public ResponseEntity<List<Mesa>> findAllMesa(){
-        try {
-            return new ResponseEntity<>(this.iMesaService.findAllMesas(),HttpStatus.OK);
-        }catch (Exception e) {
-            throw new FindAllMesaException(ExceptionMessage.FIND_ALL_MESAS_EXCEPTION.getValue());
-        }
+        return new ResponseEntity<>(this.iMesaService.findAllMesas(),HttpStatus.OK);
     }
 
     @ApiOperation(value = "Dado un idMesa y un pedido, agrega el pedido a la mesa con dicho idMesa y retorna la mesa con el pedido agregado")

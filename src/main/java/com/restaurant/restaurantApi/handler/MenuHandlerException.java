@@ -2,8 +2,6 @@ package com.restaurant.restaurantApi.handler;
 
 import com.restaurant.restaurantApi.exception.ControllerHandlerExceptionResponse;
 import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
-import com.restaurant.restaurantApi.exception.SaveProductBadResquestException;
-import com.restaurant.restaurantApi.exception.SearchProductException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,18 +26,5 @@ public class MenuHandlerException {
         ControllerHandlerExceptionResponse response = new ControllerHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.BAD_REQUEST, LocalDateTime.now());
         return new ResponseEntity<>(response, response.getStatus());
     }
-
-    @ExceptionHandler(SaveProductBadResquestException.class)
-    public ResponseEntity<Object> handleSaveProductBadResquestException(Exception e,WebRequest request){
-        ControllerHandlerExceptionResponse response = new ControllerHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.NOT_FOUND, LocalDateTime.now());
-        return new ResponseEntity<>(response, response.getStatus());
-    }
-
-    @ExceptionHandler(SearchProductException.class)
-    public ResponseEntity<Object> handleSearchProductException(Exception e,WebRequest request){
-        ControllerHandlerExceptionResponse response = new ControllerHandlerExceptionResponse(e.getMessage(),request.getDescription(false), HttpStatus.NOT_FOUND, LocalDateTime.now());
-        return new ResponseEntity<>(response, response.getStatus());
-    }
-
 
 }

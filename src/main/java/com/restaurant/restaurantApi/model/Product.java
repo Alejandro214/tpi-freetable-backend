@@ -6,6 +6,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,8 +25,13 @@ public class Product {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idProduct")
     private Integer idProduct;
+    @NotNull
+    @NotBlank
     private String name;
+    @NotNull
+    @NotBlank
     private String image;
+    @NotNull
     private Double price;
     private Integer cantProduct;
 
