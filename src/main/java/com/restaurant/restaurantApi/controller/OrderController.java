@@ -1,10 +1,7 @@
 package com.restaurant.restaurantApi.controller;
 
 
-import com.restaurant.restaurantApi.common.ExceptionMessage;
 import com.restaurant.restaurantApi.dto.Mensaje;
-import com.restaurant.restaurantApi.exception.DeleteOrderException;
-import com.restaurant.restaurantApi.exception.SaveOrderBadRequestException;
 import com.restaurant.restaurantApi.model.Order;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import io.swagger.annotations.Api;
@@ -32,11 +29,7 @@ public class OrderController {
     public ResponseEntity<Order> saveOrder(@Valid @RequestBody Order order, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-        try {
-            return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
-        }catch (Exception e){
-            throw new SaveOrderBadRequestException(ExceptionMessage.SAVE_ORDER_ERROR.getValue());
-        }
+        return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
     }
     @ApiOperation(value = "Retorna los todos pedidos",notes = "Dado un idMesa, retorna todos los pedidos que se realizaron en la mesa con dicho idMesa")
     @GetMapping("getAllOrdersPagados/{idMesa}/{from}/{to}")
@@ -49,13 +42,8 @@ public class OrderController {
     @ApiOperation(value= "Dado un idOrder, elimina el pedido con dicho idOrder")
     @DeleteMapping("deleteOrder/{idOrder}")
     public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
-        try {
             this.iOrderService.deleteOrder(idOrder);
             return new ResponseEntity<>("Se a eliminado el pedido", HttpStatus.OK);
-        }catch (Exception e){
-            throw new DeleteOrderException(ExceptionMessage.DELETE_ORDER_EXCEPTION.getValue());
-
-        }
     }
 
     @ApiOperation(value = "Retorna el pedido confirmado que pertenece al idMesa",notes = "Dado un idMesa, retorna el pedido que pertenece a esa mesa con dicho idMesa")

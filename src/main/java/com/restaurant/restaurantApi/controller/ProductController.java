@@ -1,21 +1,15 @@
 package com.restaurant.restaurantApi.controller;
 
-import com.restaurant.restaurantApi.common.ExceptionMessage;
-import com.restaurant.restaurantApi.exception.*;
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.service.inter.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("product")

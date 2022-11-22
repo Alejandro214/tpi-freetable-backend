@@ -1,8 +1,6 @@
 package com.restaurant.restaurantApi.controller;
 
-import com.restaurant.restaurantApi.common.ExceptionMessage;
 import com.restaurant.restaurantApi.dto.Mensaje;
-import com.restaurant.restaurantApi.exception.*;
 import com.restaurant.restaurantApi.model.*;
 import com.restaurant.restaurantApi.service.inter.*;
 import io.swagger.annotations.Api;
@@ -30,11 +28,8 @@ public class MesaController {
     public ResponseEntity<Mesa> saveMesa(@Valid @RequestBody Mesa mesa, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-        try {
             return new ResponseEntity<>(this.iMesaService.saveMesa(mesa), HttpStatus.OK);
-        }catch (Exception e) {
-            throw new SaveMesaException(ExceptionMessage.SAVE_MESA_EXCEPTION.getValue());
-        }
+
     }
 
     @ApiOperation(value = "Dado un idMesa, retorna la mesa con dicho idMesa")
@@ -54,12 +49,9 @@ public class MesaController {
     public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa,@Valid @RequestBody Order order,BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-        try {
             Mesa mesa = this.iMesaService.addOrderByIdMesa(idMesa,order);
             return new ResponseEntity<>(mesa,HttpStatus.OK);
-        }catch (Exception e) {
-            throw new AddOrderByIdMesaException(ExceptionMessage.ADD_ORDER_BY_ID_MESA_EXCEPTION.getValue());
-        }
+
     }
     @PutMapping("changeEstadoMensa/{idMesa}/{newEstadoMesa}")
     @ApiOperation("Dada un idMesa y un newEstadoMesa, actualiza el estado de esta mesa, y retorna la mesa con el estado actualizado")

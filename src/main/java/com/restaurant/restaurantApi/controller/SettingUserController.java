@@ -1,13 +1,9 @@
 package com.restaurant.restaurantApi.controller;
 
-import com.restaurant.restaurantApi.common.ExceptionMessage;
 import com.restaurant.restaurantApi.dto.Mensaje;
-import com.restaurant.restaurantApi.exception.SaveMesaException;
-import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.SettingUser;
 import com.restaurant.restaurantApi.service.inter.ISettingUserService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
