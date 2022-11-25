@@ -1,6 +1,10 @@
 package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.jwt.JwtProvider;
+import com.restaurant.restaurantApi.model.Mesa;
+import com.restaurant.restaurantApi.model.Order;
+import com.restaurant.restaurantApi.service.inter.IMesaService;
+import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +36,21 @@ public class OrderControllerTest {
     private String token;
 
 
+    @Autowired
+    private IOrderService orderService;
+
+
+
+
+
     @BeforeEach
     public void setUp() {
         this.token = this.jwtProvider.generateTokenByUsername("admin");
+        Order order = new com.restaurant.restaurantApi.model.Order();
+        order.setDateOrder("25-11-2022 14:00");
+        order.setStatusOrder("PAGADO");
+        order.setTotalPrice(100d);
+        this.orderService.saveOrder(order);
     }
 
 

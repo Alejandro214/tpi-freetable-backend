@@ -1,6 +1,9 @@
 package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.jwt.JwtProvider;
+import com.restaurant.restaurantApi.model.Product;
+import com.restaurant.restaurantApi.repo.IProductRepo;
+import com.restaurant.restaurantApi.service.inter.IProductService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,22 +33,31 @@ public class ProductControllerTest {
 
     private String token;
 
+    @Autowired
+    private IProductRepo iProductRepo;
+
 
     @BeforeEach
     public void setUp() {
         this.token = this.jwtProvider.generateTokenByUsername("admin");
+        Product product = new Product();
+        product.setPrice(1000d);
+        product.setName("productTest");
+        product.setImage("imagenTest");
+        product.setCantProduct(1);
+        this.iProductRepo.save(product);
     }
 
 
     @Test
     public void buscar_una_producto_por_el_nombre() throws Exception {
-        this.mockMvc.perform(get("/product/getFilterProductByName/papas").header("Authorization", "Bearer " + token))
+        this.mockMvc.perform(get("/product/getFilterProductByName/productTest").header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].idProduct").value(49))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value("Pastel de papas"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].image").value("https://www.cucinare.tv/wp-content/uploads/2018/11/Pastel-de-papas.jpg"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].price").value(400d));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].idProduct").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value("productTest"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].image").value("imagenTest"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].price").value(1000d));
     }
 
     @Test

@@ -2,6 +2,9 @@ package com.restaurant.restaurantApi.controller;
 
 
 import com.restaurant.restaurantApi.jwt.JwtProvider;
+import com.restaurant.restaurantApi.model.SettingUser;
+import com.restaurant.restaurantApi.repo.ISettingUserRepo;
+import com.restaurant.restaurantApi.service.inter.ISettingUserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,18 +36,30 @@ public class SettingUserControllerTest {
     private String token;
 
 
+    @Autowired
+    private ISettingUserService settingUserService;
+
+
     @BeforeEach
     public void setUp() {
+
         this.token = this.jwtProvider.generateTokenByUsername("admin");
+
+        SettingUser settingUser = new SettingUser();
+        settingUser.setImagenData("imagenData");
+        settingUser.setNombreUsuario("testPrueba");
+        settingUser.setCantMesas(20);
+        this.settingUserService.saveSettingUser(settingUser);
     }
 
     @Test
     public void buscar_configuracion_del_usuario_por_username() throws Exception {
-        this.mockMvc.perform(get("/setting/getSettingByUsername/admin").header("Authorization", "Bearer " + token))
+        this.mockMvc.perform(get("/setting/getSettingByUsername/testPrueba").header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.idSettingUser").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.nombreUsuario").value("admin"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.cantMesas").value(10));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.idSettingUser").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nombreUsuario").value("testPrueba"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.cantMesas").value(20))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.imagenData").value("imagenData"));
     }
 
     @Test
@@ -59,7 +74,7 @@ public class SettingUserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"nombreUsuario\":\"mariobros\",\"cantMesas\":16}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.idSettingUser").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.idSettingUser").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nombreUsuario").value("mariobros"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.cantMesas").value(16));
     }
