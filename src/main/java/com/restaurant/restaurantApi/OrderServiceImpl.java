@@ -94,12 +94,13 @@ public class OrderServiceImpl implements IOrderService {
         if(this.existsByMesaAndStatusOrder(mesa,"CONFIRMADO")){
             updateOrder = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
             updateOrder.setProducts(order.getProducts());
+            updateOrder = this.saveOrder(updateOrder);
         }else {
             order.setMesa(mesa);
             updateOrder = this.saveOrder(order);
             mesa.addOrder(updateOrder);
         }
-        return this.saveOrder(updateOrder);
+        return updateOrder;
     }
 
     @Override
