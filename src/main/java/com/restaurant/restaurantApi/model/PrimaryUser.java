@@ -7,14 +7,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 @Data
-public class UsuarioPrincipal implements UserDetails {
+public class PrimaryUser implements UserDetails {
     private String nombre;
     private String nombreUsuario;
     private String email;
     private String password;
     private Rol rol;
 
-    public UsuarioPrincipal(String nombre, String nombreUsuario, String email, String password, Rol rol) {
+    public PrimaryUser(String nombre, String nombreUsuario, String email, String password, Rol rol) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
@@ -22,8 +22,8 @@ public class UsuarioPrincipal implements UserDetails {
         this.rol = rol;
     }
 
-    public static UsuarioPrincipal build(Usuario usuario){
-        return new UsuarioPrincipal(usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(), usuario.getPassword(), usuario.getRol());
+    public static PrimaryUser build(User user){
+        return new PrimaryUser(user.getNombre(), user.getNombreUsuario(), user.getEmail(), user.getPassword(), user.getRol());
     }
 
 

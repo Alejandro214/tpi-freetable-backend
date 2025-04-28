@@ -1,6 +1,6 @@
 package com.restaurant.restaurantApi.jwt;
 
-import com.restaurant.restaurantApi.model.UsuarioPrincipal;
+import com.restaurant.restaurantApi.model.PrimaryUser;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +21,10 @@ public class JwtProvider {
     private int expiration;
 
     public String generateToken(Authentication authentication){
-        UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
-        return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
+        PrimaryUser primaryUser = (PrimaryUser) authentication.getPrincipal();
+        return Jwts.builder().setSubject(primaryUser.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + expiration * 1000))
+                .setExpiration(new Date(new Date().getTime() + expiration * 1000L))
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
@@ -32,18 +32,23 @@ public class JwtProvider {
     public String generateTokenByUsername(String username){
         return Jwts.builder().setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + expiration * 1000))
+                .setExpiration(new Date(new Date().getTime() + expiration * 1000L))
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
     public String getNombreUsuarioFromToken(String token){
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
+        Claims claims = Jwts.parser()
+                .setSigningKey(secret)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
     }
 
     public boolean validateToken(String token){
         try {
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            this.getNombreUsuarioFromToken(token);
             return true;
         }catch (MalformedJwtException e){
             logger.error("token mal formado");

@@ -1,10 +1,9 @@
-package com.restaurant.restaurantApi;
+package com.restaurant.restaurantApi.service.impl;
 
 
 import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
-import com.restaurant.restaurantApi.model.Product;
-import com.restaurant.restaurantApi.repo.IMesaRepo;
+import com.restaurant.restaurantApi.repo.ITableRepo;
 import com.restaurant.restaurantApi.service.inter.IMesaService;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,35 +15,35 @@ import java.util.List;
 public class MesaServiceImpl implements IMesaService {
 
     @Autowired
-    private IMesaRepo iMesaRepo;
+    private ITableRepo iTableRepo;
 
     @Autowired
     private IOrderService orderService;
 
     @Override
     public Mesa saveMesa(Mesa mesa) {
-        return this.iMesaRepo.save(mesa);
+        return this.iTableRepo.save(mesa);
     }
 
     @Override
     public Mesa getMesaById(Integer idMesa) {
-        return this.iMesaRepo.findById(idMesa).orElse(null);
+        return this.iTableRepo.findById(idMesa).orElse(null);
     }
 
     @Override
     public List<Mesa> findAllMesas() {
-        return (List<Mesa>) this.iMesaRepo.findAll();
+        return (List<Mesa>) this.iTableRepo.findAll();
     }
 
     @Override
     public Mesa addOrderByIdMesa(Integer idMesa, Order order) {
         Mesa mesa = this.getMesaById(idMesa);
         this.orderService.updateOrder(mesa,order);
-        return this.iMesaRepo.save(mesa);
+        return this.iTableRepo.save(mesa);
     }
 
     @Override
-    public Mesa changeEstadoMesa(Integer idMesa,String newEstadoMesa) {
+    public Mesa changeEstadoMesa(Integer idMesa, String newEstadoMesa) {
         Mesa mesa = this.getMesaById(idMesa);
         mesa.setEstadoMesa(newEstadoMesa);
         return this.saveMesa(mesa);
@@ -55,12 +54,12 @@ public class MesaServiceImpl implements IMesaService {
         Mesa mesa = this.getMesaById(idMesa);
         List<Order> orders = mesa.getListPedidos();
         this.orderService.deleteOrders(orders);
-        this.iMesaRepo.deleteById(idMesa);
+        this.iTableRepo.deleteById(idMesa);
 
     }
 
     @Override
-    public Mesa updatePositionMesa(Integer idMesa,Integer position) {
+    public Mesa updatePositionMesa(Integer idMesa, Integer position) {
         Mesa mesa = this.getMesaById(idMesa);
         mesa.setPositionMesa(position);
         return this.saveMesa(mesa);
@@ -68,7 +67,7 @@ public class MesaServiceImpl implements IMesaService {
 
     @Override
     public Mesa juntarMesas(Integer idMesaUno, Integer idMesaDos) {
-        Mesa mesa  = this.getMesaById(idMesaUno);
+        Mesa mesa = this.getMesaById(idMesaUno);
         Mesa mesa1 = this.getMesaById(idMesaDos);
         Mesa dobleMesa = new Mesa();
         dobleMesa.setPositionMesa(mesa.getPositionMesa());

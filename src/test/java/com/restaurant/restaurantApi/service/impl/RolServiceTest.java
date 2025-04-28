@@ -1,6 +1,6 @@
 package com.restaurant.restaurantApi.service.impl;
 
-import com.restaurant.restaurantApi.RolService;
+import com.restaurant.restaurantApi.service.inter.RolService;
 import com.restaurant.restaurantApi.enums.RolNombre;
 import com.restaurant.restaurantApi.model.Rol;
 import org.junit.jupiter.api.Test;

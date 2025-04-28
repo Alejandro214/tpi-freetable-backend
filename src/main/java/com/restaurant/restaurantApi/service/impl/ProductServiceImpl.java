@@ -1,4 +1,4 @@
-package com.restaurant.restaurantApi;
+package com.restaurant.restaurantApi.service.impl;
 
 import com.restaurant.restaurantApi.model.Product;
 import com.restaurant.restaurantApi.repo.IProductRepo;

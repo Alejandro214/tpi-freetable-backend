@@ -5,12 +5,13 @@ import com.restaurant.restaurantApi.dto.JwtDto;
 import com.restaurant.restaurantApi.dto.LoginUsuario;
 import com.restaurant.restaurantApi.dto.NuevoUsuario;
 import com.restaurant.restaurantApi.model.Rol;
-import com.restaurant.restaurantApi.model.Usuario;
-import com.restaurant.restaurantApi.model.UsuarioPrincipal;
+import com.restaurant.restaurantApi.model.User;
+import com.restaurant.restaurantApi.model.PrimaryUser;
 import com.restaurant.restaurantApi.enums.RolNombre;
 import com.restaurant.restaurantApi.jwt.JwtProvider;
-import com.restaurant.restaurantApi.RolService;
-import com.restaurant.restaurantApi.UsuarioService;
+import com.restaurant.restaurantApi.service.inter.RolService;
+import com.restaurant.restaurantApi.service.impl.UsuarioServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
@@ -36,7 +36,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceImpl usuarioServiceImpl;
 
     @Autowired
     RolService rolService;
@@ -48,12 +48,12 @@ public class AuthController {
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-        if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
+        if(usuarioServiceImpl.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
             return new ResponseEntity(new Mensaje("Error, ese username ya existe"), HttpStatus.BAD_REQUEST);
-        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
+        if(usuarioServiceImpl.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("Error, ese email ya existe"), HttpStatus.BAD_REQUEST);
-        Usuario usuario =
-                new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(),
+        User user =
+                new User(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(),
                         passwordEncoder.encode(nuevoUsuario.getPassword()));
         Rol rol = rolService.getByRolNombre(RolNombre.ROLE_USER).get() ;
         if(nuevoUsuario.getRol().equals("ROLE_ADMIN")){
@@ -62,8 +62,8 @@ public class AuthController {
         if(nuevoUsuario.getRol().equals(("ROLE_SOPORTE"))){
             rol = rolService.getByRolNombre(RolNombre.ROLE_SOPORTE).get();
         }
-        usuario.setRol(rol);
-        usuarioService.save(usuario);
+        user.setRol(rol);
+        usuarioServiceImpl.save(user);
         return new ResponseEntity(new Mensaje("usuario guardado"), HttpStatus.CREATED);
     }
 
@@ -75,8 +75,8 @@ public class AuthController {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateToken(authentication);
-        UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
-        JwtDto jwtDto = new JwtDto(jwt, usuarioPrincipal.getUsername(), usuarioPrincipal.getRol().getRolNombre().toString());
+        PrimaryUser primaryUser = (PrimaryUser) authentication.getPrincipal();
+        JwtDto jwtDto = new JwtDto(jwt, primaryUser.getUsername(), primaryUser.getRol().getRolNombre().toString());
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 }

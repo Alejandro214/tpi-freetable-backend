@@ -1,15 +1,14 @@
 package com.restaurant.restaurantApi.model;
 
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
 @Data
-public class Usuario {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -28,13 +27,13 @@ public class Usuario {
     private Rol rol;
 
 
-    public Usuario(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String email, @NotNull String password) {
+    public User(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String email, @NotNull String password) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
         this.password = password;
     }
 
-    public Usuario() {
+    public User() {
     }
 }

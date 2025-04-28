@@ -38,7 +38,7 @@ public interface IOrderRepo extends CrudRepository<Order, Integer> {
     Integer existProductoPedido(Integer idOrder,Integer idProduct);
 
 
-    Boolean existsByMesaAndStatusOrder(Mesa mesa,String statusOrder);
+    Boolean existsByMesaAndStatusOrder(Mesa mesa, String statusOrder);
 
-    Order findByMesaAndStatusOrder(Mesa mesa,String statusOrder);
+    Order findByMesaAndStatusOrder(Mesa mesa, String statusOrder);
 }

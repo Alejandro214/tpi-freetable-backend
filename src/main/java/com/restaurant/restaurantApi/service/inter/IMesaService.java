@@ -10,8 +10,8 @@ public interface IMesaService {
     Mesa getMesaById(Integer idMesa);
     List<Mesa> findAllMesas();
     Mesa addOrderByIdMesa(Integer idMesa, Order order);
-    Mesa changeEstadoMesa(Integer idMesa,String newEstadoMesa);
+    Mesa changeEstadoMesa(Integer idMesa, String newEstadoMesa);
     void deleteMesaById(Integer idMesa);
-    Mesa  updatePositionMesa(Integer idMesa,Integer position);
-    Mesa juntarMesas(Integer idMesaUno,Integer idMesaDos);
+    Mesa updatePositionMesa(Integer idMesa, Integer position);
+    Mesa juntarMesas(Integer idMesaUno, Integer idMesaDos);
 }

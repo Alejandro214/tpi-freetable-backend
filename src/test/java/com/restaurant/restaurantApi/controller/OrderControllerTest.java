@@ -1,9 +1,7 @@
 package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.jwt.JwtProvider;
-import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
-import com.restaurant.restaurantApi.service.inter.IMesaService;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

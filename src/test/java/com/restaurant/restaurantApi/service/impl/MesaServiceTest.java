@@ -75,11 +75,11 @@ public class MesaServiceTest {
         order.setProducts(List.of(this.productService.filterProductByName("papas").get(0)));
         Mesa mesaConPedido = this.iMesaService.addOrderByIdMesa(1,order);
         assertNotNull(mesaConPedido.getIdMesa());
-        assertEquals("No Disponible",mesaConPedido.getEstadoMesa());
-        assertEquals(1,mesaConPedido.getNumeroMesa());
-        assertEquals(1,mesaConPedido.getPositionMesa());
-        assertEquals(4,mesaConPedido.getListPedidos().size());
-        assertEquals("Papas Fritas",mesaConPedido.getListPedidos().get(0).getProducts().get(0).getName());
+        assertEquals("No Disponible", mesaConPedido.getEstadoMesa());
+        assertEquals(1, mesaConPedido.getNumeroMesa());
+        assertEquals(1, mesaConPedido.getPositionMesa());
+        assertEquals(4, mesaConPedido.getListPedidos().size());
+        assertEquals("Papas Fritas", mesaConPedido.getListPedidos().get(0).getProducts().get(0).getName());
     }
 
     @Test
@@ -133,9 +133,9 @@ public class MesaServiceTest {
         mesa1.setPositionMesa(10);
         mesa1.setEstadoMesa("Disponible");
         mesa1.setNumeroMesa(10);
-        Mesa mesa1Guardada  = this.iMesaService.saveMesa(mesa);
-        Mesa mesa2Guardada  = this.iMesaService.saveMesa(mesa1);
-        Mesa mesaJuntas = this.iMesaService.juntarMesas(mesa1Guardada.getIdMesa(),mesa2Guardada.getIdMesa());
+        Mesa mesa1Guardada = this.iMesaService.saveMesa(mesa);
+        Mesa mesa2Guardada = this.iMesaService.saveMesa(mesa1);
+        Mesa mesaJuntas = this.iMesaService.juntarMesas(mesa1Guardada.getIdMesa(), mesa2Guardada.getIdMesa());
         assertNotNull(mesaJuntas.getIdMesa());
         assertEquals("Disponible", mesaJuntas.getEstadoMesa());
         assertEquals(9, mesaJuntas.getPositionMesa());

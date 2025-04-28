@@ -2,9 +2,9 @@ package com.restaurant.restaurantApi.controller;
 
 import com.restaurant.restaurantApi.enums.RolNombre;
 import com.restaurant.restaurantApi.model.Rol;
-import com.restaurant.restaurantApi.model.Usuario;
-import com.restaurant.restaurantApi.RolService;
-import com.restaurant.restaurantApi.UsuarioService;
+import com.restaurant.restaurantApi.model.User;
+import com.restaurant.restaurantApi.service.inter.RolService;
+import com.restaurant.restaurantApi.service.impl.UsuarioServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +36,15 @@ public class AuthControllerTest {
     RolService rolService;
 
     @Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceImpl usuarioServiceImpl;
 
     @BeforeEach
     public void setUp(){
-        Usuario usuario = new Usuario("userTest", "userTest123","usertest@gmail.com",
+        User user = new User("userTest", "userTest123","usertest@gmail.com",
                 passwordEncoder.encode("12345"));
         Rol rol = new Rol(RolNombre.ROLE_ADMIN) ;
-        usuario.setRol(rol);
-        usuarioService.save(usuario);
+        user.setRol(rol);
+        usuarioServiceImpl.save(user);
     }
 
 

@@ -1,8 +1,8 @@
-package com.restaurant.restaurantApi;
+package com.restaurant.restaurantApi.service.impl;
 
 import com.restaurant.restaurantApi.model.Mesa;
 import com.restaurant.restaurantApi.model.Order;
-import com.restaurant.restaurantApi.repo.IMesaRepo;
+import com.restaurant.restaurantApi.repo.ITableRepo;
 import com.restaurant.restaurantApi.repo.IOrderRepo;
 import com.restaurant.restaurantApi.repo.IProductRepo;
 import com.restaurant.restaurantApi.service.inter.IOrderService;
@@ -17,7 +17,7 @@ public class OrderServiceImpl implements IOrderService {
     private IOrderRepo iOrderRepo;
 
     @Autowired
-    private IMesaRepo iMesaRepo;
+    private ITableRepo iTableRepo;
 
     @Autowired
     private IProductRepo productRepo;
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order getPedidoConfirmadoByIdMesa(Integer idMesa) {
-        Mesa mesa          = this.iMesaRepo.findById(idMesa).get();
+        Mesa mesa = this.iTableRepo.findById(idMesa).get();
         Order pedidoConfirmado = this.findOrderByMesaAndStatusOrder(mesa,"CONFIRMADO");
         if(pedidoConfirmado != null) {
             pedidoConfirmado.getProducts().forEach(product -> {
@@ -85,7 +85,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public  Boolean existsByMesaAndStatusOrder(Mesa mesa,String statusOrder){
+    public  Boolean existsByMesaAndStatusOrder(Mesa mesa, String statusOrder){
         return this.iOrderRepo.existsByMesaAndStatusOrder(mesa,statusOrder);
     }
     @Override
@@ -110,7 +110,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order pagarPedidoByMesaIdMesa(Integer idMesa) {
-        Mesa mesa = this.iMesaRepo.findById(idMesa).get();
+        Mesa mesa = this.iTableRepo.findById(idMesa).get();
         Order order = this.iOrderRepo.findByMesaAndStatusOrder(mesa,"CONFIRMADO");
         order.setStatusOrder("PAGADO");
         return this.iOrderRepo.save(order);
