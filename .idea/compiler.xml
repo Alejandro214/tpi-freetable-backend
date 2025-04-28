@@ -24,7 +24,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="restaurantApi" target="1.8" />
-      <module name="tpi-restaurant-proyectoFinal" target="9" />
+      <module name="tpi-restaurant-proyectoFinal" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
