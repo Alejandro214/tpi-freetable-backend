@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "product")
 public class Product {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProduct")
     private Integer idProduct;
     @NotNull
@@ -33,17 +33,22 @@ public class Product {
     private Double price;
     private Integer cantProduct;
 
-    @ManyToMany
-    @JoinTable(
-            name = "productos_pedidos",
-            joinColumns = @JoinColumn(name = "id_product",referencedColumnName = "idProduct"),
-            inverseJoinColumns = @JoinColumn(name = "id_order",referencedColumnName = "idOrder"))
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     @JsonIgnore
     @ToString.Exclude
     private List<Order> listPedidos = new ArrayList<>();
 
+    public void addPedido(Order order) {
+        if (!this.listPedidos.contains(order)) {
+            this.listPedidos.add(order);
+            order.getProducts().add(this);
+        }
+    }
 
-
-
-
+    public void removePedido(Order order) {
+        if (this.listPedidos.contains(order)) {
+            this.listPedidos.remove(order);
+            order.getProducts().remove(this);
+        }
+    }
 }

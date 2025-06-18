@@ -21,18 +21,24 @@ public class Order {
     @Column(name="idOrder")
     private Integer idOrder;
 
-    @ManyToMany(mappedBy = "listPedidos",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "productos_pedidos",
+            joinColumns = @JoinColumn(name = "id_order", referencedColumnName = "idOrder"),
+            inverseJoinColumns = @JoinColumn(name = "id_product", referencedColumnName = "idProduct")
+    )
     @ToString.Exclude
     private List<Product> products = new ArrayList<>();
+
+
+
 
     @Column(name = "totalPrice")
     @NotNull
     private Double totalPrice;
 
-    @JoinColumn(name="idMesa",referencedColumnName = "idMesa")
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idMesa")
     private Mesa mesa;
 
     @NotBlank
@@ -44,6 +50,17 @@ public class Order {
 
     public void deleteMesa(){
         this.mesa = null;
+    }
+
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+        product.getListPedidos().add(this);
+    }
+
+    public void removeProduct(Product product) {
+        this.products.remove(product);
+        product.getListPedidos().remove(this);
     }
 
 

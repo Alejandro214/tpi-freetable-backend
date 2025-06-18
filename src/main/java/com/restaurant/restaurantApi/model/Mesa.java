@@ -17,8 +17,7 @@ public class Mesa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMesa;
 
-    @OneToMany(mappedBy = "mesa",fetch = FetchType.EAGER)
-    @ToString.Exclude
+    @OneToMany(mappedBy = "mesa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> listPedidos = new ArrayList<>();
 
     private String estadoMesa = "Disponible";
@@ -32,6 +31,7 @@ public class Mesa {
 
     public void addOrder(Order order){
         this.listPedidos.add(order);
+        order.setMesa(this);
     }
 
 }
