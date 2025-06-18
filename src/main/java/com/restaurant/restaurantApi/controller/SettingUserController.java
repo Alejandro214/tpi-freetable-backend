@@ -21,16 +21,19 @@ public class SettingUserController {
     @Autowired
     private ISettingUserService iSettingUserService;
 
-    @GetMapping("getSettingByUsername/{username}")
-    public ResponseEntity<SettingUser> getSettingByUsername(@PathVariable String username){
-        return new ResponseEntity<>(this.iSettingUserService.findByUsername(username), HttpStatus.OK);
+    @GetMapping("/settings/{username}")
+    public ResponseEntity<SettingUser> getSettingByUsername(@PathVariable String username) {
+        SettingUser settingUser = iSettingUserService.findByUsername(username);
+        return ResponseEntity.ok(settingUser);
     }
 
-    @PostMapping("saveSettingUser")
-    public ResponseEntity<SettingUser> saveSettingUser(@Valid  @RequestBody SettingUser settingUser, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(this.iSettingUserService.saveSettingUser(settingUser), HttpStatus.OK);
-
+    @PostMapping("/settings")
+    public ResponseEntity<?> saveSettingUser(@Valid @RequestBody SettingUser settingUser, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(new Mensaje("Error, campos inválidos"));
+        }
+        SettingUser savedSetting = iSettingUserService.saveSettingUser(settingUser);
+        return ResponseEntity.ok(savedSetting);
     }
+
 }

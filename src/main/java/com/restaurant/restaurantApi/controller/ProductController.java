@@ -22,10 +22,14 @@ public class ProductController {
     @Autowired
     private IProductService iProductService;
 
-    @Operation(description = "Retorna paginas que tengan esa palabra en su nombre", method = "Retorna todos los productos que contengan al menos esa letra o palabra en su nombre")
-    @GetMapping("getFilterProductByName/{name}")
-    public ResponseEntity<List<Product>> filterProductByName(@PathVariable("name") String name){
-            return new ResponseEntity<>(this.iProductService.filterProductByName(name),HttpStatus.OK);
-
+    @Operation(
+            summary = "Buscar productos por nombre",
+            description = "Retorna una lista de productos que contienen la palabra o letra indicada en su nombre."
+    )
+    @GetMapping("/products")
+    public ResponseEntity<List<Product>> filterProductsByName(@RequestParam("name") String name) {
+        List<Product> filteredProducts = iProductService.filterProductByName(name);
+        return ResponseEntity.ok(filteredProducts);
     }
+
 }

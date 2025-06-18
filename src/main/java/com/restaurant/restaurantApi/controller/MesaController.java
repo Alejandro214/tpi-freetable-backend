@@ -23,64 +23,66 @@ public class MesaController {
     @Autowired
     private IMesaService iMesaService;
 
-    @Operation(description = "Dada un mesa, la guarda en la base")
-    @PostMapping("saveMesa")
-    public ResponseEntity<Mesa> saveMesa(@Valid @RequestBody Mesa mesa, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(this.iMesaService.saveMesa(mesa), HttpStatus.OK);
-
+    @Operation(summary = "Crear una mesa", description = "Guarda una nueva mesa en la base de datos.")
+    @PostMapping("/mesas")
+    public ResponseEntity<?> saveMesa(@Valid @RequestBody Mesa mesa, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(new Mensaje("Error, campos inválidos"));
+        }
+        Mesa savedMesa = iMesaService.saveMesa(mesa);
+        return ResponseEntity.ok(savedMesa);
     }
 
-    @Operation(description = "Dado un idMesa, retorna la mesa con dicho idMesa")
-    @GetMapping("getMesaById/{idMesa}")
-    public  ResponseEntity<Mesa> getMesaById(@PathVariable("idMesa") Integer idMesa){
-            return new ResponseEntity<>(this.iMesaService.getMesaById(idMesa),HttpStatus.OK);
+    @Operation(summary = "Obtener mesa por ID", description = "Retorna la mesa que corresponde al idMesa indicado.")
+    @GetMapping("/mesas/{idMesa}")
+    public ResponseEntity<Mesa> getMesaById(@PathVariable Integer idMesa) {
+        Mesa mesa = iMesaService.getMesaById(idMesa);
+        return ResponseEntity.ok(mesa);
     }
 
-    @Operation(description = "Retorna todas las mesas actuales que tiene el restaurante")
-    @GetMapping("findAllMesas")
-    public ResponseEntity<List<Mesa>> findAllMesa(){
-        return new ResponseEntity<>(this.iMesaService.findAllMesas(),HttpStatus.OK);
+    @Operation(summary = "Listar todas las mesas", description = "Retorna todas las mesas actuales del restaurante.")
+    @GetMapping("/mesas")
+    public ResponseEntity<List<Mesa>> findAllMesas() {
+        List<Mesa> mesas = iMesaService.findAllMesas();
+        return ResponseEntity.ok(mesas);
     }
 
-    @Operation(description = "Dado un idMesa y un pedido, agrega el pedido a la mesa con dicho idMesa y retorna la mesa con el pedido agregado")
-    @PutMapping("addOrderMesa/{idMesa}")
-    public ResponseEntity<Mesa> addOrderByIdMesa(@PathVariable("idMesa") Integer idMesa, @Valid @RequestBody Order order, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-            Mesa mesa = this.iMesaService.addOrderByIdMesa(idMesa,order);
-            return new ResponseEntity<>(mesa,HttpStatus.OK);
-
-    }
-    @PutMapping("changeEstadoMensa/{idMesa}/{newEstadoMesa}")
-    @Operation(description ="Dada un idMesa y un newEstadoMesa, actualiza el estado de esta mesa, y retorna la mesa con el estado actualizado")
-    public ResponseEntity<Mesa> changeEstadoMesa(@PathVariable("idMesa") Integer idMesa,
-                                                 @PathVariable("newEstadoMesa") String newEstadoMesa) {
-        Mesa mesa = this.iMesaService.changeEstadoMesa(idMesa,newEstadoMesa);
-        return new ResponseEntity<>(mesa,HttpStatus.OK);
-    }
-    @DeleteMapping("deleteMesaById/{idMesa}")
-    @Operation( description = "Dado un idMesa, elimmina la mesa con dicho idMesa")
-    public ResponseEntity<String> deleteMesaById(@PathVariable("idMesa") Integer idMesa){
-        this.iMesaService.deleteMesaById(idMesa);
-        return new ResponseEntity<>("Se ha eliminado la mesa con dicho id",HttpStatus.OK);
+    @Operation(summary = "Agregar pedido a mesa", description = "Agrega un pedido a la mesa indicada y retorna la mesa actualizada.")
+    @PutMapping("/mesas/{idMesa}/orders")
+    public ResponseEntity<?> addOrderByIdMesa(@PathVariable Integer idMesa, @Valid @RequestBody Order order, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(new Mensaje("Error, campos inválidos"));
+        }
+        Mesa mesa = iMesaService.addOrderByIdMesa(idMesa, order);
+        return ResponseEntity.ok(mesa);
     }
 
-    @PutMapping("updatePositionMesa/{idMesa}/{newPosition}")
-    @Operation(description = "Dado un idMesa y una newPosition, actualiza la posicion de la mesa con dicho idMesa")
-    public ResponseEntity<Mesa> updatePositionMesa(@PathVariable("idMesa") Integer idMesa,
-                                                   @PathVariable("newPosition") Integer position){
-        this.iMesaService.updatePositionMesa( idMesa, position);
-        return new ResponseEntity<>(this.iMesaService.updatePositionMesa( idMesa, position),HttpStatus.OK);
+    @Operation(summary = "Cambiar estado de mesa", description = "Actualiza el estado de la mesa indicada y retorna la mesa actualizada.")
+    @PutMapping("/mesas/{idMesa}/estado/{newEstadoMesa}")
+    public ResponseEntity<Mesa> changeEstadoMesa(@PathVariable Integer idMesa, @PathVariable String newEstadoMesa) {
+        Mesa mesa = iMesaService.changeEstadoMesa(idMesa, newEstadoMesa);
+        return ResponseEntity.ok(mesa);
     }
 
-    @PostMapping("juntarMesas/{idMesaUno}/{idMesaDos}")
-    public ResponseEntity<Mesa> juntarMesas(@PathVariable("idMesaUno")Integer idMesaUno,
-                                            @PathVariable("idMesaDos") Integer idMesaDos){
-        Mesa mesa = this.iMesaService.juntarMesas(idMesaUno
-        ,idMesaDos);
-        return new ResponseEntity<>(mesa,HttpStatus.OK);
+    @Operation(summary = "Eliminar mesa por ID", description = "Elimina la mesa que corresponde al idMesa indicado.")
+    @DeleteMapping("/mesas/{idMesa}")
+    public ResponseEntity<Mensaje> deleteMesaById(@PathVariable Integer idMesa) {
+        iMesaService.deleteMesaById(idMesa);
+        return ResponseEntity.ok(new Mensaje("Se ha eliminado la mesa con dicho id"));
+    }
+
+    @Operation(summary = "Actualizar posición de mesa", description = "Actualiza la posición de la mesa indicada y retorna la mesa actualizada.")
+    @PutMapping("/mesas/{idMesa}/posicion/{newPosition}")
+    public ResponseEntity<Mesa> updatePositionMesa(@PathVariable Integer idMesa, @PathVariable Integer newPosition) {
+        Mesa updatedMesa = iMesaService.updatePositionMesa(idMesa, newPosition);
+        return ResponseEntity.ok(updatedMesa);
+    }
+
+    @Operation(summary = "Juntar dos mesas", description = "Une dos mesas y retorna la mesa resultante.")
+    @PostMapping("/mesas/juntar/{idMesaUno}/{idMesaDos}")
+    public ResponseEntity<Mesa> juntarMesas(@PathVariable Integer idMesaUno, @PathVariable Integer idMesaDos) {
+        Mesa mesa = iMesaService.juntarMesas(idMesaUno, idMesaDos);
+        return ResponseEntity.ok(mesa);
     }
 
 

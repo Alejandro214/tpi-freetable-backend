@@ -24,38 +24,62 @@ public class OrderController {
     @Autowired
     private IOrderService iOrderService;
 
-    @Operation(description = "Create a new order",method = "Dado un order, lo guarda en la base")
-    @PostMapping("saveOrder")
-    public ResponseEntity<Order> saveOrder(@Valid @RequestBody Order order, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("Error, campos invalidos"), HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(this.iOrderService.saveOrder(order), HttpStatus.OK);
-    }
-    @Operation(description = "Retorna los todos pedidos",method = "Dado un idMesa, retorna todos los pedidos que se realizaron en la mesa con dicho idMesa")
-    @GetMapping("getAllOrdersPagados/{idMesa}/{from}/{to}")
-    public ResponseEntity<List<Order>> getAllOrdersPagados(@PathVariable("idMesa") Integer idMesa,@PathVariable(value = "from")String from,
-                                                           @PathVariable(value = "to") String to){
-            return new ResponseEntity<>(this.iOrderService.getAllOrdersPagados(idMesa,from,to), HttpStatus.OK);
-
+    @Operation(
+            summary = "Crear un nuevo pedido",
+            description = "Guarda un nuevo pedido en la base de datos dado un objeto Order válido."
+    )
+    @PostMapping("/orders")
+    public ResponseEntity<?> saveOrder(@Valid @RequestBody Order order, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(new Mensaje("Error, campos inválidos"));
+        }
+        Order savedOrder = iOrderService.saveOrder(order);
+        return ResponseEntity.ok(savedOrder);
     }
 
-    @Operation(description= "Dado un idOrder, elimina el pedido con dicho idOrder")
-    @DeleteMapping("deleteOrder/{idOrder}")
-    public ResponseEntity<String> deleteOrder(@PathVariable("idOrder") Integer idOrder){
-            this.iOrderService.deleteOrder(idOrder);
-            return new ResponseEntity<>("Se a eliminado el pedido", HttpStatus.OK);
+    @Operation(
+            summary = "Listar pedidos pagados por mesa en un rango de fechas",
+            description = "Retorna todos los pedidos pagados realizados en la mesa indicada entre las fechas 'from' y 'to'."
+    )
+    @GetMapping("/orders/paid/{idMesa}")
+    public ResponseEntity<List<Order>> getAllOrdersPagados(
+            @PathVariable Integer idMesa,
+            @RequestParam String from,
+            @RequestParam String to) {
+        List<Order> orders = iOrderService.getAllOrdersPagados(idMesa, from, to);
+        return ResponseEntity.ok(orders);
     }
 
-    @Operation(description = "Retorna el pedido confirmado que pertenece al idMesa",method = "Dado un idMesa, retorna el pedido que pertenece a esa mesa con dicho idMesa")
-    @GetMapping("getOrderConfirmado/{idMesa}")
-    public ResponseEntity<Order> getOrderConfirmado(@PathVariable("idMesa") Integer idMesa){
-            return new ResponseEntity<>(this.iOrderService.getPedidoConfirmadoByIdMesa(idMesa), HttpStatus.OK);
+    @Operation(
+            summary = "Eliminar pedido por ID",
+            description = "Elimina el pedido que corresponde al idOrder indicado."
+    )
+    @DeleteMapping("/orders/{idOrder}")
+    public ResponseEntity<Mensaje> deleteOrder(@PathVariable Integer idOrder) {
+        iOrderService.deleteOrder(idOrder);
+        return ResponseEntity.ok(new Mensaje("Se ha eliminado el pedido"));
     }
 
-    @PutMapping("pagarPedidoByMesaIdMesa/{idMesa}")
-    public ResponseEntity<Order> pagarPedidoByMesaIdMesa(@PathVariable("idMesa") Integer idMesa){
-        return new ResponseEntity<>(this.iOrderService.pagarPedidoByMesaIdMesa(idMesa), HttpStatus.OK);
+    @Operation(
+            summary = "Obtener pedido confirmado por ID de mesa",
+            description = "Retorna el pedido confirmado asociado al idMesa indicado."
+    )
+    @GetMapping("/orders/confirmed/{idMesa}")
+    public ResponseEntity<Order> getOrderConfirmado(@PathVariable Integer idMesa) {
+        Order order = iOrderService.getPedidoConfirmadoByIdMesa(idMesa);
+        return ResponseEntity.ok(order);
     }
+
+    @Operation(
+            summary = "Pagar pedido por ID de mesa",
+            description = "Marca como pagado el pedido asociado al idMesa indicado."
+    )
+    @PutMapping("/orders/pay/{idMesa}")
+    public ResponseEntity<Order> pagarPedidoByMesaIdMesa(@PathVariable Integer idMesa) {
+        Order paidOrder = iOrderService.pagarPedidoByMesaIdMesa(idMesa);
+        return ResponseEntity.ok(paidOrder);
+    }
+
 
 
 
